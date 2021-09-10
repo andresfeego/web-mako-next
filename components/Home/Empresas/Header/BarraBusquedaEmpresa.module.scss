@@ -1,0 +1,147 @@
+.barraBusqueda{
+    background-color: $primary;
+    min-height: 3vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    
+}
+
+.panelBusqueda{
+    padding: 0.3vw 9vw;
+    display: flex;
+    align-items: center;
+}
+
+
+.panelResultados{
+    background-color: #fff;
+    transition: all 0.6s ease 0.2s;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+   
+    -webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.5); 
+    box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.5);
+}
+
+
+.logoMako{
+    height: 2.5vw;
+    cursor: pointer;
+}
+
+
+.barra{
+    width: 30%;
+    height: 1.6vw;
+    background-color:  #fff;
+    margin-left: 1vw;
+    border-radius: 1.5em;
+    position: relative;
+    display: block;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+}
+
+.botonBuscar{
+    border: solid 1px transparent;
+    width: 2vw;
+    height: 2vw;
+    font-size: 3.1em;
+    color: #474747;
+    right: -1em;
+    top: -0.1em;
+    position: absolute;
+    vertical-align: center;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease 0s;
+    cursor: pointer;
+}
+
+.botonBuscar:hover{
+    border: solid 1px $primaryDark;
+    width: 1em;
+    height: 1em;
+}
+
+
+.botonBuscar:active{
+    border: solid 1px $secondary;
+    width: 1em;
+    height: 1em;
+}
+
+.buscar{
+    height: 100%;
+    width: 90%;
+    margin: auto;
+    border: none;
+    color: $gray2;
+    font-size: 1em;
+}
+
+.buscar:focus{
+    outline: none;
+}
+
+// busuqueda ciudad
+
+.busquedaCiudad{
+    width: 25%;
+    height: 1.6vw;
+    background-color:  #fff;
+    border-radius: 1.5em;
+    position: relative;
+    display: block;
+    text-align: center;
+    margin-left: 3vw;
+}
+
+.buscarCiudad{
+height: 100%;
+width: 90%;
+margin: auto;
+border: none;
+color: $gray2;
+font-size: 0.9em;
+}
+
+.buscarCiudad:focus{
+outline: none;
+}
+
+.autocompletado{
+    background-color: #fff;
+    min-height: 6vw;
+    margin-top: 0.3vw;
+    border-radius: 10px;
+    max-height: 20vw;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    width: fit-content;
+    min-width: 100%;
+-webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89); 
+box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89);
+
+}
+
+.ciudad{
+    font-size: 0.5em;
+    height: 1vw;
+    text-align: left;
+    margin: 0.4vw 0.4vw 0.1vw 0.4vw;
+    border-bottom: solid 1px $gray0;
+    cursor: pointer;
+}
+
+.empresaPeque{
+    font-size: 12px;
+}

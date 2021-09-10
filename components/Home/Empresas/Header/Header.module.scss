@@ -1,0 +1,59 @@
+.header{
+    background-color: $secondary;
+    height: 10vw;
+    padding: 0 24vw 0 18vw;
+    display: flex;
+    position: relative;
+    z-index: -1;
+    
+    -webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.5); 
+    box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.5);
+}
+
+.logo{
+    background-color: $gray1;
+    height: 10vw;
+    width: 10vw;
+}
+
+.logo img{
+    width: 100%;
+    height: 100%;
+}
+
+.info{
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo{
+    flex: 1;
+    padding: 1vw;
+
+}
+
+.titulo h1{
+    font-size: 2.5em;
+}
+
+.titulo h3{
+    margin-bottom: 0.5vw;
+    font-size: 1.5em;
+    color: $gray4;
+}
+
+
+.titulo p{
+    color: $gray3;
+}
+
+.iconos{
+    justify-self: flex-end;
+    padding-bottom: 1vw;
+}
+
+.iconos span{
+    margin: 1vw;
+}

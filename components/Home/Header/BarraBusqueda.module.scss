@@ -1,0 +1,58 @@
+
+.barra{
+    width: 50%;
+    height: 3em;
+    background-color:  #fff;
+    margin-top: 1vw;
+    border-radius: 1.5em;
+    position: relative;
+    display: block;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+}
+
+.botonBuscar{
+    border: solid 1px transparent;
+    width: 1em;
+    height: 1em;
+    font-size: 3.1em;
+    color: #474747;
+    right: -1.2em;
+    top: -0.1em;
+    position: absolute;
+    vertical-align: center;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease 0s;
+    cursor: pointer;
+}
+
+.botonBuscar:hover{
+    border: solid 1px $primaryDark;
+    width: 1em;
+    height: 1em;
+}
+
+
+.botonBuscar:active{
+    border: solid 1px $secondary;
+    width: 1em;
+    height: 1em;
+}
+
+.buscar{
+    height: 100%;
+    width: 90%;
+    margin: auto;
+    border: none;
+    color: $gray2;
+    font-size: 1.3em;
+}
+
+.buscar:focus{
+    outline: none;
+}
+

@@ -1,0 +1,48 @@
+ .Header{
+  height: 14vw;
+  width: 100%;
+  background-color: $primary;
+  display: flex;
+  position: relative;
+  z-index: 10;
+  
+  -webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.5); 
+  box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.5);
+} 
+
+ .contenido{
+  width: 57%;
+  height: 100%;
+  margin-left: 15vw; 
+}
+
+ .slide{
+  width: 30%;
+  height: 19vw;
+  right: 2vw;
+  position: absolute;
+} 
+
+.tituloMako {
+  display: flex;
+  width: 15vw;
+  height: 100%;
+  flex-direction: column;
+  position: absolute;
+  font-size: 0.5em;
+  align-items: center;
+  margin-top: 0.8vw;
+  cursor: pointer;
+}
+
+.tituloMako>.makoNombre{
+  display: none;
+}
+
+.tituloMako .imgMakoLogo{
+  width: 150px;
+}
+
+  .fondoHeader{
+      visibility: hidden;
+  }
