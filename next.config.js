@@ -14,7 +14,7 @@ module.exports = {
     webpack5: true,
   },
   env: {
-    HOST_NAME: 'http://localhost:3020/responseMako',
-    //HOST_NAME: 'https://feegosystem.com:8443/responseMako',
+    //HOST_NAME: 'http://localhost:3020/responseMako',
+    HOST_NAME: 'https://feegosystem.com:8443/responseMako',
   }
 }
