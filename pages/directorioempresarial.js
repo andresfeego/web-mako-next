@@ -10,7 +10,7 @@ import Filtros from "../components/Home/Contenido/Filtros";
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
-    const response = await fetch('http://localhost:3020/responseMako/empresas',
+    const response = await fetch(process.env.HOST_NAME + '/empresas',
         {
             method: 'POST',
             headers: {
@@ -55,14 +55,14 @@ export async function getServerSideProps(ctx) {
     console.log("serversidepropsindex")
     var props = { props: {} }
 
-    const resSlides = await fetch('http://localhost:3020/responseMako/slides')
+    const resSlides = await fetch(process.env.HOST_NAME + '/slides')
     const slidesJson = await resSlides.json()
     props.props = { slides: slidesJson }
 
     const empresas = await getEmpresas("", "", 0)
     props.props = { slides: slidesJson, empresas: empresas }
 
-    const response = await fetch('http://localhost:3020/responseMako/listaMunicipios')
+    const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
     const responseJson = await response.json()
     props.props = { slides: slidesJson, empresas: empresas, municipios: responseJson }
 

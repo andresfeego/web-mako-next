@@ -7,7 +7,7 @@ import Empresa from './Empresa'
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
-    const response = await fetch('http://localhost:3020/responseMako/empresas',
+    const response = await fetch(process.env.HOST_NAME + '/empresas',
         {
             method: 'POST',
             headers: {

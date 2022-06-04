@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
-    const response = await fetch('http://localhost:3020/responseMako/empresas',
+    const response = await fetch(process.env.HOST_NAME + '/empresas',
         {
             method: 'POST',
             headers: {
@@ -68,21 +68,21 @@ export async function getServerSideProps(ctx) {
 
 
 
-    const resEmpresa = await fetch('http://localhost:3020/responseMako/empresas/' + ctx.query.id)
+    const resEmpresa = await fetch(process.env.HOST_NAME + '/empresas/' + ctx.query.id)
     const empresaJson = await resEmpresa.json()
     props.props = { empresa: empresaJson[0] }
 
 
 
 
-    const response = await fetch('http://localhost:3020/responseMako/listaMunicipios')
+    const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
     const responseJson = await response.json()
     props.props = { empresa: empresaJson[0], municipios: responseJson }
 
     const empresas = await getEmpresas("", "", 0)
     props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: empresas }
 
-    const resSlidesEmpresa = await fetch('http://localhost:3020/responseMako/empresas/imagenesSlide/' + ctx.query.id)
+    const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + ctx.query.id)
     const slidesEmpresaJson = await resSlidesEmpresa.json()
     props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: empresas, slides: slidesEmpresaJson }
 

@@ -16,7 +16,7 @@ const SlideEmpresa = ({ empresa, slides }) => {
 
 
     useEffect(async () => {
-        const resSlidesEmpresa = await fetch('http://localhost:3020/responseMako/empresas/imagenesSlide/' + empresa.codigo)
+        const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + empresa.codigo)
         const slidesEmpresaJson = await resSlidesEmpresa.json()
         setImageSlider(slidesEmpresaJson)
         setCategoria(empresa.categoria)
