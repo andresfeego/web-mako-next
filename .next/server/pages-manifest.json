@@ -1,6 +1,7 @@
 {
   "/_app": "pages/_app.js",
+  "/directorioempresarial": "pages/directorioempresarial.js",
+  "/empresas/[ciudad]/[nombre]/[id]": "pages/empresas/[ciudad]/[nombre]/[id].js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/directorioempresarial": "pages/directorioempresarial.js"
+  "/_document": "pages/_document.js"
 }
