@@ -46,6 +46,21 @@ function categoriaReducer(state='',action){
     }
 }
 
+function idComercioReducer(state='',action){
+    switch (action.type) {
+        case 'SET_IDCOMERCIO':  
+            return action.idComercio;
+        
+        case 'CLEAR_IDCOMERCIO': 
+            return '';
+    
+
+        default:
+            return state;
+    }
+}
+
+
 function lblCategoriaReducer(state='',action){
     switch (action.type) {
         case 'SET_LBLCATEGORIA':  
@@ -65,6 +80,7 @@ let rootReducer = combineReducers({
     busqueda: busquedaReducer,
     ciudad: ciudadReducer,
     categoria: categoriaReducer,
+    idComercio: idComercioReducer,
     lblCategoria: lblCategoriaReducer
 });
 

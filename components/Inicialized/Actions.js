@@ -60,3 +60,16 @@ export const clearlblCategoria = ()=>{
         type: 'CLEAR_LBLCATEGORIA'
     }
 }
+
+export const saveIdComercio = (auxi)=>{
+    return{
+        type: 'SET_IDCOMERCIO',
+        idComercio:auxi
+    }
+}
+
+export const clearIdComercio = ()=>{
+    return{
+        type: 'CLEAR_IDCOMERCIO'
+    }
+}

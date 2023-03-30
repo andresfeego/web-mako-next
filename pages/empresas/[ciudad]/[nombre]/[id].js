@@ -67,7 +67,7 @@ export async function getServerSideProps(ctx) {
     var props = { props: {} }
 
 
-
+    console.log("getnin")
     const resEmpresa = await fetch(process.env.HOST_NAME + '/empresas/' + ctx.query.id)
     const empresaJson = await resEmpresa.json()
     props.props = { empresa: empresaJson[0] }

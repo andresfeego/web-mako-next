@@ -1,0 +1,132 @@
+
+.inactivo{
+  color: red !important;
+}
+
+.perfilCero{
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fondoEmpresa{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  position: absolute;
+}
+
+.empresa{
+  height: 20vw;
+  width: 40vw;
+  background-color: #fff;
+  z-index: 100000;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.close::before{
+content: 'X';
+position: absolute;
+top: 0.5vw;
+right: 0.5vw;
+width: 1.5vw;
+height: 1.5vw;
+display: flex;
+align-items: center;
+justify-content: center;
+color: $gray3;
+cursor: pointer;
+z-index: 1;
+border-radius: 50%;
+border: solid 1px $gray3;
+}
+
+.headerEmpresa{
+  background-color: $primary;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  position: relative;
+}
+
+.headerEmpresa>.logo{
+  height: 100%;
+}
+
+.headerEmpresa>.logo>img{
+  height: 100%;
+}
+
+.headerEmpresa>.textHeader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.iconos{
+  position: absolute;
+  right: 0.5vw;
+  bottom: 0.5vw;
+  display: flex;
+
+}
+
+.iconos>span{
+  margin-left: 0.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.info{
+  background-color: antiquewhite;
+  height: 100%;
+  position: relative;
+}
+
+.info>.textInfo{
+  background-color: aqua;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+}
+
+.info>.mapa{
+  background-color: aquamarine;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 2vw;
+  bottom: -13vw;
+  border: solid 1px $primary;
+
+  -webkit-transition: all .3s ease-in-out;
+-moz-transition:    all .3s ease-in-out;
+-o-transition:      all .3s ease-in-out;
+-ms-transition:     all .3s ease-in-out;
+transition:         all .3s ease-in-out;
+
+}
+
+.info>.mapaAbierto{
+  bottom: -0vw !important;
+  border-radius: 0 !important;
+}
+
+.abrirmapa{
+  margin: auto;
+  width: 6vw;
+  background-color: aqua;
+  text-align: center;
+}
