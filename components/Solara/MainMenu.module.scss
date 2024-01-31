@@ -1,0 +1,40 @@
+.mainMenu{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 150px;
+}
+
+.button{
+    background-color: $white0;
+    padding: 16px;
+    display: flex;
+    min-width: 127px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid $gray1;
+    margin-right: 16px;
+    cursor: pointer;
+    
+    transition: all 0.5s ease 0s;
+}
+
+.button:hover{
+    transform: scale(1.02);
+    -webkit-box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.74); 
+    box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.74);
+}
+
+.icon{
+    font-size: 60px !important;
+    color: $gray2;
+    margin-bottom: 8px;
+}
+
+.iconMenu{
+    display: none;
+}

@@ -1,15 +1,17 @@
 import styles from "./Empresa.module.scss"
 import Link from 'next/link';
 import { MaysPrimera } from '../../Inicialized/GlobalFunctions'
-import { connect } from 'react-redux'
-import { saveIdComercio } from '../../Inicialized/Actions';
+import { useDataContext, useSetDataContext } from "../../Inicialized/DataProvider";
 
 
 
 const Empresa = (props) => {
+    const data = useDataContext();
+    const setData = useSetDataContext();
+
     const empresa = props.empresa
     function ver(codigo) {
-        props.saveIdComercio(codigo);
+        setData({search: {...data.search, idComercio: codigo}})
     }
 
     const urllogo = 'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo;
@@ -18,14 +20,16 @@ const Empresa = (props) => {
     return (
         <div className={styles.Empresa} >
             { empresa.tipo ==  0 ?
-                    <div className={styles.logoEmpresa} onClick={() => ver(empresa.codigo)} style={{ border: '2px solid ', borderColor: empresa.color }}>
+                <Link href={'/' + empresa.codigo} >
+                    <a className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
                         <img loading="lazy" src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
-                    </div>
+                    </a>
+                </Link>
             :
-            <Link className={styles.Empresa} href={`/empresas/${empresa.nombreMun}_${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '_')}/${empresa.codigo}`} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion + " - Mako directorio empresarial"}>
-                <div className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
+            <Link className={styles.Empresa} href={`/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion + " - Mako directorio empresarial"}>
+                <a className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
                     <img loading="lazy" src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
-                </div>
+                </a>
             </Link>
             }
             <div className={styles.textoEmpresa}>
@@ -43,15 +47,4 @@ String.prototype.toProperCase = function () {
     return this.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
-const mapStateToProps = (state) => {
-    return {
-        idComercio: state.idComercio
-    }
-}
-
-const mapDispatchToProps = {
-    saveIdComercio: saveIdComercio,
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Empresa);
+export default Empresa;

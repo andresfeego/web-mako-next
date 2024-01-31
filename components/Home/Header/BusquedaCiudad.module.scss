@@ -11,13 +11,14 @@
         padding: 0 0em;
     }
 
-    .buscarCiudad{
+.buscarCiudad{
     height: 100%;
     width: 90%;
     margin: auto;
     border: none;
     color: $gray2;
     font-size: 1em;
+    background-color: transparent;
 }
 
 .buscarCiudad:focus{
@@ -112,6 +113,7 @@
         flex-direction: column;
         white-space: nowrap;
         width: fit-content;
+        position: relative;
         min-width: 100%;
     -webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89); 
     box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89);

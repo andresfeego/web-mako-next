@@ -1,8 +1,8 @@
 import styles from "./ListaEmpresas.module.scss";
-import { connect } from 'react-redux'
-import { clearBusqueda } from '../../Inicialized/Actions';
 import { useState, useEffect } from 'react';
 import Empresa from './Empresa'
+import { useDataContext, useSetDataContext } from "../../Inicialized/DataProvider";
+import Cargando from "../../Inicialized/Cargando";
 
 
 async function getEmpresas(busqueda, ciudad, categoria) {
@@ -34,43 +34,38 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 
 
 
-const ListaEmpresas = ({ empresas, busqueda, ciudad, categoria }) => {
+const ListaEmpresas = ({ empresas}) => {
+
+    const data = useDataContext();
+    const setData = useSetDataContext();
+    const [cargando, setCargando] = useState(true);
+
     const [listaEmpresas, setListaEmpresas] = useState(empresas)
 
     useEffect(() => {
-        getEmpresas(busqueda, ciudad, categoria).then((response) => {
+        setCargando(true);
+        getEmpresas(data.search.busqueda, data.search.ciudad, data.search.categoria).then((response) => {
             setListaEmpresas(response); // sets ariaInfo state
+            setCargando(false);
         })
     }
-        , [busqueda, ciudad, categoria]
+        , [data]
     );
 
 
     function renderListaEmpresas(listaempresas) {
         return (
-            listaempresas.map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />)
+            listaEmpresas.length != 0 ? listaempresas.map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />): <span>Sin resultados</span>
+            
         )
     }
 
     return (
         <div className={styles.listaEmpresas}>
-            {renderListaEmpresas(listaEmpresas)}
+            {cargando ? <Cargando/>:renderListaEmpresas(listaEmpresas)}
         </div>
     )
 
 }
 
-const mapStateToProps = (state) => {
-    return {
-        busqueda: state.busqueda,
-        ciudad: state.ciudad,
-        categoria: state.categoria
-    }
-}
-
-const mapDispatchToProps = {
-    clearBusqueda: clearBusqueda
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListaEmpresas);
+export default ListaEmpresas;

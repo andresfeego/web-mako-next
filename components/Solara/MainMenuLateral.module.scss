@@ -1,0 +1,76 @@
+.mainMenu{
+    width: 130px;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 24px;
+    padding-right: 10px;
+    background-color: $grayBlue3;
+    position: absolute;
+    left: -115px;
+    z-index: 10;        
+    -webkit-box-shadow: -1px 5px 15px -1px rgba(0,0,0,0.74); 
+    box-shadow: -1px 5px 15px -1px rgba(0,0,0,0.74);
+    transition: all 0.5s ease 0s;
+}
+
+.button{
+    background-color: $white0;
+    padding: 8px;
+    display: flex;
+    min-width: 80px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid $grayBlue1;
+    transition: all 0.5s ease 0s;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.button:hover{
+    transform: scale(1.02);
+    -webkit-box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.74); 
+    box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.74);
+}
+
+.icon{
+    font-size: 40px !important;
+    color: $grayBlue1;
+    margin-bottom: 4px;
+}
+
+.text{
+    font-size: 12px;
+}
+
+.iconMenu{
+    position: absolute;
+    background-color: $grayBlue4;
+    right: -12px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    color: $grayBlue1;
+    
+    -webkit-box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.74); 
+    box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.74);
+
+}
+.openMenu{
+    top: 12px;
+}
+
+.goHome{
+    top: 44px;
+}
+
+.openState{
+    left: 0px;
+}

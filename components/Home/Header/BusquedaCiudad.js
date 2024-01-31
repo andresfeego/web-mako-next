@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import styles from './BusquedaCiudad.module.scss'
 import BtnSearch from '@material-ui/icons/Search';
 import BtnClose from '@material-ui/icons/Close';
-import { connect } from 'react-redux'
-import { saveCiudad, clearCiudad } from '../../Inicialized/Actions';
 import request from 'superagent';
 import Cargando from '../../Inicialized/Cargando';
 import { MaysPrimera } from '../../Inicialized/GlobalFunctions';
+import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
 
 function getCiudades() {
 
@@ -32,24 +31,27 @@ function getCiudades() {
 
 const BusquedaCiudad = (props) => {
 
+    const data = useDataContext();
+    const setData = useSetDataContext();
+
     var buscarBar
 
     const [listaCiudades, setLC] = useState(props.municipios)
     const [listaCiudadesOriginal, setLCO] = useState(props.municipios)
-    const [busCiudad, setBusCiudad] = useState(props.ciudad)
+    const [busCiudad, setBusCiudad] = useState(data.search.ciudad)
     const [mostrarAuto, setmostrarAuto] = useState(true)
 
 
 
     function onSubmit(ciudad) {
-        props.saveCiudad(ciudad);
+        setData({search: {...data.search, ciudad: ciudad}})
         setBusCiudad(ciudad)
         setmostrarAuto(false)
 
     }
 
     function onClear() {
-        props.clearCiudad();
+        setData({search: {...data.search, ciudad: ''}})
         setBusCiudad('')
     }
 
@@ -113,14 +115,15 @@ const BusquedaCiudad = (props) => {
     }
 
     useEffect(() => {
-        setBusCiudad(props.ciudad)
-    }, [props.ciudad])
+        setBusCiudad(data.search.ciudad)
+        setmostrarAuto(false)
+    }, [data])
 
 
     return (
         <div className={styles.busquedaCiudad}>
             <input type="text" placeholder="En que ciudad lo buscas ?" className={styles.buscarCiudad} onKeyDown={handleKeyDown} name="busCiudad" value={busCiudad} onChange={onChange}></input>
-            {props.ciudad === '' ?
+            {data.search.ciudad === '' ?
                 <div className={styles.botonBuscar} onClick={() => onSubmit()} > <BtnSearch style={{ width: '90%', height: '90%' }} /></div>
                 :
                 <div className={styles.botonBuscar} onClick={() => onClear()} > <BtnClose style={{ width: '85%', height: '85%' }} /></div>
@@ -135,19 +138,5 @@ const BusquedaCiudad = (props) => {
         </div>
     )
 }
-
-
-const mapStateToProps = (state) => {
-    return {
-        ciudad: state.ciudad
-    }
-}
-
-const mapDispatchToProps = {
-    saveCiudad,
-    clearCiudad
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BusquedaCiudad);
+export default BusquedaCiudad;
 

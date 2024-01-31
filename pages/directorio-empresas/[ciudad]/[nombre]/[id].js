@@ -4,9 +4,9 @@ import Head from 'next/head'
 import { MaysPrimera } from '../../../../components/Inicialized/GlobalFunctions'
 import EmpresaTipoUno from "../../../../components/Home/Empresas/EmpresaTipoUno";
 import EmpresaTipoCero from "../../../../components/Home/Empresas/EmpresaTipoCero";
-import { clearBusqueda, clearCiudad, clearlblCategoria, clearCategoria } from '../../../../components/Inicialized/Actions';
-import { connect } from 'react-redux';
 import { useEffect } from 'react'
+import { useDataContext, useSetDataContext, useSetUserContext, useUserContext } from "../../../../components/Inicialized/DataProvider";
+import { search } from "superagent";
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
@@ -34,18 +34,19 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 }
 
 
-const Empresa = ({ empresa, municipios, empresas, clearBusqueda, clearCiudad, slides }) => {
+const Empresa = ({ empresa, municipios, empresas, slides }) => {
 
+    const data = useDataContext();
+    const setData = useSetDataContext();
+   
+    const user = useUserContext();
+    const setUser = useSetUserContext();
+    
 
     const router = useRouter();
     const { id, ciudad } = router.query;
 
-    useEffect(() => {
-        clearBusqueda()
-        clearCiudad()
-    }, [empresa])
-
-    return (
+     return (
         <div>
             <Head>
                 <title>{`${MaysPrimera(empresa.nombre)} - ${MaysPrimera(empresa.nombreMun)} - ${MaysPrimera(empresa.nombreDep)}`}</title>
@@ -53,10 +54,12 @@ const Empresa = ({ empresa, municipios, empresas, clearBusqueda, clearCiudad, sl
             </Head>
 
             {empresa.tipo == 1 ?
-                <EmpresaTipoUno empresa={empresa} municipios={municipios} empresas={empresas} slides={slides} />
+                <EmpresaTipoUno  empresa={empresa} municipios={municipios} empresas={empresas} slides={slides} />
                 :
                 <EmpresaTipoCero empresa={empresa} municipios={municipios} empresas={empresas} />
             }
+            <span onClick={() => setData({ux: {...data.ux, scroll: 5}})}>{data.ux.scroll}</span>
+            
 
         </div>
     )
@@ -92,21 +95,6 @@ export async function getServerSideProps(ctx) {
 
 
 
-const mapStateToProps = (state) => {
-    return {
-        busqueda: state.busqueda,
-        ciudad: state.ciudad,
-        categoria: state.categoria,
-        lblCategoria: state.lblCategoria,
-    }
-}
-
-const mapDispatchToProps = {
-    clearBusqueda: clearBusqueda,
-    clearlblCategoria: clearlblCategoria,
-    clearCategoria: clearCategoria,
-    clearCiudad: clearCiudad
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Empresa);
+export default Empresa;

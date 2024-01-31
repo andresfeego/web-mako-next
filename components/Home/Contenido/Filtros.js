@@ -1,33 +1,39 @@
+import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider'
 import styles from './Filtros.module.scss'
-import { clearBusqueda, clearCiudad, clearlblCategoria, clearCategoria } from '../../Inicialized/Actions';
-import { connect } from 'react-redux';
 
 const Filtros = (props) => {
 
+    const data = useDataContext();
+    const setData = useSetDataContext();
+
     function borrarBusqueda() {
-        props.clearBusqueda()
+        setData({search: {...data.search, busqueda: ''}})
     }
 
     function borrarCiudad() {
-        props.clearCiudad()
+        setData({search: {...data.search, ciudad: ''}})
     }
 
     function borrarCategoria() {
-        props.clearlblCategoria()
-        props.clearCategoria()
+        setData({search: {...data.search, lblCategoria: '', categoria: ''}})
     }
 
 
     function renderFiltros() {
-        if (props.busqueda || props.ciudad || props.categoria) {
+        const busqueda = data.search.busqueda;
+        const ciudad = data.search.ciudad;
+        const categoria = data.search.categoria;
+        const lblCategoria = data.search.lblCategoria;
+
+        if (busqueda || ciudad || categoria) {
             return (
 
                 <div className={styles.filtros}>
 
                     <span>Filtros aplicados:</span>
-                    {props.busqueda && <div className={styles.filtroAplicado}>{props.busqueda} <div className={styles.close} onClick={() => borrarBusqueda()}>X</div></div>}
-                    {props.ciudad && <div className={styles.filtroAplicado}>{props.ciudad} <div className={styles.close} onClick={() => borrarCiudad()}>X</div></div>}
-                    {props.categoria && <div className={styles.filtroAplicado}>{props.lblCategoria} <div className={styles.close} onClick={() => borrarCategoria()}>X</div></div>}
+                    {busqueda && <div className={styles.filtroAplicado}>{busqueda} <div className={styles.close} onClick={() => borrarBusqueda()}>X</div></div>}
+                    {ciudad && <div className={styles.filtroAplicado}>{ciudad} <div className={styles.close} onClick={() => borrarCiudad()}>X</div></div>}
+                    {categoria && <div className={styles.filtroAplicado}>{lblCategoria} <div className={styles.close} onClick={() => borrarCategoria()}>X</div></div>}
                 </div>
             )
         } else {
@@ -41,21 +47,4 @@ const Filtros = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        busqueda: state.busqueda,
-        ciudad: state.ciudad,
-        categoria: state.categoria,
-        lblCategoria: state.lblCategoria,
-    }
-}
-
-const mapDispatchToProps = {
-    clearBusqueda: clearBusqueda,
-    clearlblCategoria: clearlblCategoria,
-    clearCategoria: clearCategoria,
-    clearCiudad: clearCiudad
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filtros);
+export default Filtros;

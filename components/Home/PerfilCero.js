@@ -1,6 +1,4 @@
 import styles from "./PerfilCero.module.scss";
-import { connect } from 'react-redux'
-import { clearIdComercio } from '../Inicialized/Actions';
 import { useState, useEffect } from 'react';
 import Visibility from '@material-ui/icons/Visibility';
 import Loyalty from '@material-ui/icons/Loyalty';
@@ -8,6 +6,23 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Info from '@material-ui/icons/Info';
 import SendToMobileIcon from '@material-ui/icons/MobileFriendly';
 import PhoneForwardedIcon from '@material-ui/icons/Phone';
+import { useDataContext, useSetDataContext } from '../Inicialized/DataProvider'
+import { useRouter } from 'next/router'
+
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'fit-content',
+    height: 'fit-content',
+    backgroundColor: 'transparent'
+  };
+
+
 async function getEmpresa(idComercio) {
 
     const response = await fetch(process.env.HOST_NAME + '/empresas/' + idComercio,
@@ -72,28 +87,31 @@ async function getMails(idComercio) {
 
 
 
-const PerfilCero = (props) => {
+const PerfilCero = ({inactivo, Perfilempresa}) => {
 
-    function cerrar() {
-        props.clearIdComercio();
-    }
+    const data = useDataContext();
+    const setData = useSetDataContext();
 
+    const [open, setOpen] = useState(true);
+    const router = useRouter()
+
+
+    const handleClose = () => {
+        router.push('/some-path')
+    };
+    
     function abrirMapaF(){
         setAbrirMapa(!abrirMapa)
     }
     
-    const idComercio = props.idComercio
+    const idComercio = Perfilempresa.codigo
 
-    const [empresa, setEmpresa] = useState()
+    const [empresa, setEmpresa] = useState(Perfilempresa)
     const [telefonos, setTelefonos] = useState(null)
     const [mails, setMails] = useState()
     const [abrirMapa, setAbrirMapa] = useState(false)
 
     useEffect(() => {
-        getEmpresa(idComercio).then((response) => {
-            setEmpresa(response); // sets ariaInfo state
-        })
-
         getTelefonos(idComercio).then((response) => {
             setTelefonos(response); // sets ariaInfo state
         })
@@ -103,7 +121,7 @@ const PerfilCero = (props) => {
         })
 
     }
-        , [ idComercio ]
+        , [ empresa ]
     );
 
 
@@ -131,7 +149,7 @@ const PerfilCero = (props) => {
     if(empresa){
         
         var inactivo = '';
-        if (props.inactivo) {
+        if (inactivo) {
             inactivo = styles.inactivo;
         }
 
@@ -147,11 +165,18 @@ const PerfilCero = (props) => {
         }
 
         return (
-            <div className={styles.perfilCero + " " +  inactivo}>
-                <div className={styles.fondoEmpresa} />
+            <Modal
+                open={open}
+                onClose={()=> {setOpen(false); router.push('/directorio-empresarial')}}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+            
+                <Box sx={style}>
+                <div className={styles.perfilCero + " " +  inactivo}>
 
                 <div className={styles.empresa}>
-                    <div className={styles.close} onClick={() => cerrar()}/>
+                    <div className={styles.close} onClick={()=> {setOpen(false); router.push('/directorio-empresarial')}}/>
                     <div className={styles.headerEmpresa}>
                         <div className={styles.logo}>
                             <img src={'https://www.feegosystem.com/scrAppServer/images/'+empresa.url_logo} alt="" />
@@ -207,6 +232,10 @@ const PerfilCero = (props) => {
                     </div>
                 </div>
             </div>
+                </Box>
+            </Modal>
+
+            
         )
     
     }else{
@@ -216,15 +245,6 @@ const PerfilCero = (props) => {
     
 }
 
-const mapStateToProps = (state) => {
-    return {
-        idComercio: state.idComercio,
-    }
-}
-
-const mapDispatchToProps = {
-    clearIdComercio: clearIdComercio
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PerfilCero);
+export default PerfilCero;

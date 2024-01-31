@@ -1,0 +1,25 @@
+.listadoResultados{
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: $grayBlue4;
+    border-radius: 10px;
+    position: relative;
+    padding: 40px 8px 20px 8px;
+    height: fit-content;
+    margin-bottom: 24px;
+}
+
+.palabraBuscada{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed $gray3;
+    margin-bottom: 8px;
+}
+
+.recargar{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}

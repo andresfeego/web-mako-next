@@ -1,19 +1,19 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styles from './BusquedaCategoria.module.scss'
-import { saveCategoria, savelblCategoria } from '../../Inicialized/Actions';
+import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
 
 
 const BusquedaCategorias = (props) => {
 
+	const data = useDataContext();
+	const setData = useSetDataContext();
+
 	function cambiaCat(cat, label) {
-		props.saveCategoria(cat);
-		props.savelblCategoria(label);
+		setData({search: {...data.search, categoria: cat, lblCategoria: label}})
 	}
 
 	return (
 		<ul className={styles.BusquedaCategorias}>
-
 
 			<li className={styles.touch} id="makoTouch" onClick={() => cambiaCat(299, 'Asesor MAKO')} >
 				<div className={styles.circulo}>
@@ -192,18 +192,4 @@ const BusquedaCategorias = (props) => {
 
 }
 
-const mapStateToProps = (state) => {
-	return {
-		categoria: state.categoria,
-		lblCategoria: state.lblCategoria
-	}
-}
-
-const mapDispatchToProps = {
-	saveCategoria,
-	savelblCategoria,
-
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BusquedaCategorias);
+export default BusquedaCategorias;

@@ -3,11 +3,10 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import BtnSearch from '@material-ui/icons/Search';
 import BtnClose from '@material-ui/icons/Close';
-import { clearBusqueda, clearCiudad, clearlblCategoria, clearCategoria, saveBusqueda, saveCiudad } from '../../../Inicialized/Actions';
-import { connect } from 'react-redux';
 import { MaysPrimera } from '../../../Inicialized/GlobalFunctions';
 import Cargando from '../../../Inicialized/Cargando';
 import Empresa from '../../Contenido/Empresa';
+import { useDataContext, useSetDataContext } from '../../../Inicialized/DataProvider';
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
@@ -38,25 +37,28 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 
 const BarraBusquedaEmpresa = (props) => {
 
+    const data = useDataContext();
+    const setData = useSetDataContext();
+
     var buscarBar
 
     const [listaCiudades, setLC] = useState(props.municipios)
     const [listaCiudadesOriginal, setLCO] = useState(props.municipios)
-    const [busCiudad, setBusCiudad] = useState(props.ciudad)
+    const [busCiudad, setBusCiudad] = useState(data.search.ciudad)
     const [mostrarAuto, setmostrarAuto] = useState(true)
-    const [listaEmpresas, setListaEmpresas] = useState(props.empresas)
+    const [listaEmpresas, setListaEmpresas] = useState(null)
 
-    const [busquedaB, setBusqueda] = useState(props.busqueda)
+    const [busquedaB, setBusqueda] = useState(data.search.busqueda)
 
     function onSubmitCiudad(ciudad) {
-        props.saveCiudad(ciudad);
+        setData({search: {...data.search, ciudad: ciudad}})
         setBusCiudad(ciudad)
         setmostrarAuto(false)
 
     }
 
     function onClearCiudad() {
-        props.clearCiudad();
+        setData({search: {...data.search, ciudad: ''}})
         setBusCiudad('')
     }
 
@@ -123,11 +125,12 @@ const BarraBusquedaEmpresa = (props) => {
     }
 
     function onSubmit() {
-        props.saveBusqueda(busquedaB);
+        setData({search: {...data.search, busqueda: busquedaB}})
+
     }
 
     function onClear() {
-        props.clearBusqueda();
+        setData({search: {...data.search, busqueda: ''}})
         setBusqueda('')
     }
 
@@ -137,23 +140,17 @@ const BarraBusquedaEmpresa = (props) => {
 
 
     useEffect(() => {
-        setBusqueda(props.busqueda)
-    }, [props.busqueda])
-
-    useEffect(() => {
-        setBusCiudad(props.ciudad)
-    }, [props.ciudad])
-
-    useEffect(() => {
-        getEmpresas(props.busqueda, props.ciudad, 0).then((response) => {
+        setBusqueda(data.search.busqueda)
+        setBusCiudad(data.search.ciudad)
+        setmostrarAuto(false)
+        getEmpresas(data.search.busqueda, data.search.ciudad, 0).then((response) => {
             setListaEmpresas(response); // sets ariaInfo state
         })
-    }
-        , [props.busqueda, props.ciudad]
-    );
+    }, [data])
+
 
     let estiloBuscando = { height: '0.1vw' }
-    if (props.busqueda != '' || props.ciudad != '') {
+    if (data.search.busqueda != '' || data.search.ciudad != '') {
         estiloBuscando = { height: '11vw' }
     }
 
@@ -170,13 +167,15 @@ const BarraBusquedaEmpresa = (props) => {
         <div className={styles.barraBusqueda}>
             <div className={styles.panelBusqueda}>
 
-                <Link href="/directorioempresarial">
-                    <img className={styles.logoMako} src={require('../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png')} alt="Mako directorio comercial" />
+                <Link href="/directorio-empresarial">
+                    <a>
+                        <img className={styles.logoMako} src={require('../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png')} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
+                    </a>
                 </Link>
 
                 <div className={styles.barra}>
                     <input type="text" placeholder="Que buscas ?" className={styles.buscar} onKeyDown={handleKeyDown} value={busquedaB} onChange={onChange}></input>
-                    {props.busqueda === '' ?
+                    {data.search.busqueda === '' ?
                         <div className={styles.botonBuscar} onClick={() => onSubmit()} > <BtnSearch style={{ width: '95%', height: '95%' }} /></div>
                         :
                         <div className={styles.botonBuscar} onClick={() => onClear()} > <BtnClose style={{ width: '90%', height: '90%' }} /></div>
@@ -186,7 +185,7 @@ const BarraBusquedaEmpresa = (props) => {
 
                 <div className={styles.busquedaCiudad}>
                     <input type="text" placeholder="En que ciudad lo buscas ?" className={styles.buscarCiudad} onKeyDown={handleKeyDownCiudad} name="busCiudad" value={busCiudad} onChange={onChangeCiudad}></input>
-                    {props.ciudad === '' ?
+                    {data.search.ciudad === '' ?
                         <div className={styles.botonBuscar} onClick={() => onSubmitCiudad(busCiudad)} > <BtnSearch style={{ width: '90%', height: '90%' }} /></div>
                         :
                         <div className={styles.botonBuscar} onClick={() => onClearCiudad()} > <BtnClose style={{ width: '85%', height: '85%' }} /></div>
@@ -203,7 +202,7 @@ const BarraBusquedaEmpresa = (props) => {
             </div>
 
             <div className={styles.panelResultados} style={estiloBuscando}>
-                {props.busqueda != '' || props.ciudad != '' ?
+                {listaEmpresas != null ?
                     renderListaEmpresas(listaEmpresas)
                     :
                     null
@@ -213,21 +212,5 @@ const BarraBusquedaEmpresa = (props) => {
         </div>
     )
 }
-const mapStateToProps = (state) => {
-    return {
-        busqueda: state.busqueda,
-        ciudad: state.ciudad,
-    }
-}
 
-const mapDispatchToProps = {
-    clearBusqueda: clearBusqueda,
-    clearlblCategoria: clearlblCategoria,
-    clearCategoria: clearCategoria,
-    clearCiudad: clearCiudad,
-    saveBusqueda: saveBusqueda,
-    saveCiudad: saveCiudad,
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BarraBusquedaEmpresa);
+export default BarraBusquedaEmpresa;

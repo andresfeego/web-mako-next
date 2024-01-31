@@ -1,73 +1,14 @@
 import {createStore, combineReducers} from 'redux'
 
-function busquedaReducer(state='',action){
+const auxiusuario = {"id":1057577213,"correo":"andres.feego@gmail.com ","nombre":"Oscar Andres ","apellido":"Manrique","pass":"123456"}
+
+function usuarioReducer(state=[],action){
     switch (action.type) {
-        case 'SET_BUSQUEDA':  
-            return action.busqueda;
+        case 'SET_USUARIO':  
+            return action.usuario;
         
-        case 'CLEAR_BUSQUEDA': 
-            return '';
-    
-
-        default:
-            return state;
-    }
-}
-
-function ciudadReducer(state='',action){
-    switch (action.type) {
-        case 'SET_CIUDAD':  
-            if (action.ciudad != 'Todas') {
-                return action.ciudad;
-            } else {
-                return '';
-            }
-        
-        case 'CLEAR_CIUDAD': 
-            return '';
-    
-
-        default:
-            return state;
-    }
-}
-
-function categoriaReducer(state='',action){
-    switch (action.type) {
-        case 'SET_CATEGORIA':  
-            return action.categoria;
-        
-        case 'CLEAR_CATEGORIA': 
-            return '';
-    
-
-        default:
-            return state;
-    }
-}
-
-function idComercioReducer(state='',action){
-    switch (action.type) {
-        case 'SET_IDCOMERCIO':  
-            return action.idComercio;
-        
-        case 'CLEAR_IDCOMERCIO': 
-            return '';
-    
-
-        default:
-            return state;
-    }
-}
-
-
-function lblCategoriaReducer(state='',action){
-    switch (action.type) {
-        case 'SET_LBLCATEGORIA':  
-            return action.lblCategoria;
-        
-        case 'CLEAR_LBLCATEGORIA': 
-            return '';
+        case 'CLEAR_USUARIO': 
+            return [];
     
 
         default:
@@ -77,11 +18,7 @@ function lblCategoriaReducer(state='',action){
 
 
 let rootReducer = combineReducers({
-    busqueda: busquedaReducer,
-    ciudad: ciudadReducer,
-    categoria: categoriaReducer,
-    idComercio: idComercioReducer,
-    lblCategoria: lblCategoriaReducer
+    usuario: usuarioReducer
 });
 
-export default createStore(rootReducer)
+export default createStore(rootReducer);

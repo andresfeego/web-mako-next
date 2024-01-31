@@ -1,5 +1,5 @@
  .Header{
-  height: 14vw;
+  height: 280px;
   width: 100%;
   background-color: $primary;
   display: flex;
@@ -11,16 +11,18 @@
 } 
 
  .contenido{
-  width: 57%;
+  width: 54%;
   height: 100%;
   margin-left: 15vw; 
+  margin-top: 15px;
 }
 
  .slide{
-  width: 30%;
-  height: 19vw;
-  right: 2vw;
+  width: 33svw;
+  height: 500px;
+  right: 0vw;
   position: absolute;
+  overflow: hidden;
 } 
 
 .tituloMako {
@@ -31,7 +33,7 @@
   position: absolute;
   font-size: 0.5em;
   align-items: center;
-  margin-top: 0.8vw;
+  margin-top: 30px;
   cursor: pointer;
 }
 

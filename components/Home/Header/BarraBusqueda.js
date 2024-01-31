@@ -1,10 +1,9 @@
 
 import styles from './BarraBusqueda.module.scss';
-import { connect } from 'react-redux'
-import { saveBusqueda, clearBusqueda } from '../../Inicialized/Actions';
 import BtnSearch from '@material-ui/icons/Search';
 import BtnClose from '@material-ui/icons/Close';
 import { useState, useEffect } from 'react';
+import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
 
@@ -12,7 +11,10 @@ import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
 
 const BarraBusqueda = (props) => {
-    const [busquedaB, setBusqueda] = useState(props.busqueda)
+    const data = useDataContext();
+    const setData = useSetDataContext();
+
+    const [busquedaB, setBusqueda] = useState(data.search.busqueda)
 
     function handleKeyDown(e) {
         if (e.key === 'Enter') {
@@ -21,12 +23,13 @@ const BarraBusqueda = (props) => {
     }
 
     function onSubmit() {
-        props.saveBusqueda(busquedaB);
+        setData({search: {...data.search, busqueda: busquedaB}})
         EvBiBusqueda('Barra busqueda', busquedaB)
+
     }
 
     function onClear() {
-        props.clearBusqueda();
+        setData({search: {...data.search, busqueda: ''}})
         setBusqueda('')
     }
 
@@ -36,15 +39,15 @@ const BarraBusqueda = (props) => {
 
 
     useEffect(() => {
-        setBusqueda(props.busqueda)
-    }, [props.busqueda])
+        setBusqueda(data.search.busqueda)
+    }, [data])
 
 
     return (
 
         <div className={styles.barra}>
             <input type="text" placeholder="Que buscas ?" className={styles.buscar} onKeyDown={handleKeyDown} value={busquedaB} onChange={onChange}></input>
-            {props.busqueda === '' ?
+            {data.search.busqueda === '' ?
                 <div className={styles.botonBuscar} onClick={() => onSubmit()} > <BtnSearch style={{ width: '95%', height: '95%' }} /></div>
                 :
                 <div className={styles.botonBuscar} onClick={() => onClear()} > <BtnClose style={{ width: '90%', height: '90%' }} /></div>
@@ -54,19 +57,7 @@ const BarraBusqueda = (props) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        busqueda: state.busqueda
-    }
-}
-
-const mapDispatchToProps = {
-    saveBusqueda: saveBusqueda,
-    clearBusqueda: clearBusqueda
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BarraBusqueda);
+export default BarraBusqueda;
 
 
 
