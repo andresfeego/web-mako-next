@@ -5,6 +5,7 @@ import { saveBusqueda, clearBusqueda } from '../../Inicialized/Actions';
 import BtnSearch from '@material-ui/icons/Search';
 import BtnClose from '@material-ui/icons/Close';
 import { useState, useEffect } from 'react';
+import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
 
 
@@ -21,6 +22,7 @@ const BarraBusqueda = (props) => {
 
     function onSubmit() {
         props.saveBusqueda(busquedaB);
+        EvBiBusqueda('Barra busqueda', busquedaB)
     }
 
     function onClear() {
