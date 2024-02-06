@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './BusquedaCategoria.module.scss'
 import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
+import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
 
 const BusquedaCategorias = (props) => {
@@ -9,7 +10,12 @@ const BusquedaCategorias = (props) => {
 	const setData = useSetDataContext();
 
 	function cambiaCat(cat, label) {
+		if (cat != 0) {
+			EvBiBusqueda('Busqueda categoria', cat)
+		}
+		//diferente de cero
 		setData({search: {...data.search, categoria: cat, lblCategoria: label}})
+		
 	}
 
 	return (

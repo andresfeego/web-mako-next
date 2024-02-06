@@ -8,6 +8,7 @@ import PerfilCero from "../components/Home/PerfilCero";
 import { useDataContext, useSetDataContext } from '../components/Inicialized/DataProvider'
 import { MaysPrimera } from '../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
+import { EvBiVisita } from "../components/Inicialized/Bitacora";
 
 
 async function getEmpresas(busqueda, ciudad, categoria) {
@@ -45,9 +46,9 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, empresa, mensaje }) => {
 
     function renderPerfil(tipo) {
-        
+
         if (tipo[0].tipo == 0 || tipo[0].tipo == -1) {
-            
+
             const isInactive = tipo == -1
             return [
                 <PerfilCero inactivo={isInactive} Perfilempresa={empresa} />,
@@ -58,19 +59,25 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
             ]
         }
 
-        
+
     }
 
-    if(mensaje){
+    if (mensaje) {
         nuevoMensaje(tiposAlertas.info, mensaje)
 
     }
 
+    useEffect(() => {
+        if (tipo.length != 0) {
+            EvBiVisita(empresa.codigo)
+        }
+    }, [])
+
     return (
         <div id="contentBody">
-            {tipo.length != 0 ? 
+            {tipo.length != 0 ?
                 renderPerfil(tipo)
-            : 
+                :
                 <Head>
                     <title>.: MAKO :. Directorio empresarial</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -99,39 +106,39 @@ export async function getServerSideProps(ctx) {
     const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
     const responseJson = await response.json()
     props.props = { slides: slidesJson, empresas: empresas, municipios: responseJson }
-    
+
     const codigo = ctx.query.id;
     const resTipo = await fetch(process.env.HOST_NAME + '/tipoEmpresa/' + codigo)
     const tipoJson = await resTipo.json()
 
-    props.props = { slides: slidesJson, empresas: empresas, municipios: responseJson, tipo: tipoJson, codigo: codigo}
+    props.props = { slides: slidesJson, empresas: empresas, municipios: responseJson, tipo: tipoJson, codigo: codigo }
 
     if (tipoJson.length == 0) {
         if (codigo != 'directorio-empresarial') {
-            props.props = {...props.props, mensaje: 'La empresa no existe'}
-         return props
-        }else{
-         return props
+            props.props = { ...props.props, mensaje: 'La empresa no existe' }
+            return props
+        } else {
+            return props
         }
-    }else{
-        const empresa = props.props.empresas.find( ({ codigo }) => codigo === props.props.codigo );
+    } else {
+        const empresa = props.props.empresas.find(({ codigo }) => codigo === props.props.codigo);
         switch (tipoJson[0].tipo) {
             case 0:
             case -1:
-            props.props = { ...props.props, empresa: empresa}
-            break;
+                props.props = { ...props.props, empresa: empresa }
+                break;
             case 1:
                 const urlEmpresa = `/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`
                 return {
                     redirect: {
-                      destination: encodeURI(urlEmpresa),
-                      permanent: false,
+                        destination: encodeURI(urlEmpresa),
+                        permanent: false,
                     },
-                  }
-            break;
+                }
+                break;
 
             default:
-            break;
+                break;
         }
         return props
     }
