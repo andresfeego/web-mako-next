@@ -7,6 +7,7 @@ import EmpresaTipoCero from "../../../../components/Home/Empresas/EmpresaTipoCer
 import { useEffect } from 'react'
 import { useDataContext, useSetDataContext, useSetUserContext, useUserContext } from "../../../../components/Inicialized/DataProvider";
 import { search } from "superagent";
+import { EvBiVisita } from "../../../../components/Inicialized/Bitacora";
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
@@ -45,6 +46,10 @@ const Empresa = ({ empresa, municipios, empresas, slides }) => {
 
     const router = useRouter();
     const { id, ciudad } = router.query;
+
+    useEffect(() => {
+        EvBiVisita(empresa.codigo)
+    }, [])
 
      return (
         <div>

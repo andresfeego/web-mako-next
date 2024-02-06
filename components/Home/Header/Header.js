@@ -4,6 +4,8 @@ import BusquedaCiudad from "./BusquedaCiudad"
 import styles from "./Header.module.scss"
 import SlideHome from "./SlideHome"
 import Link from 'next/link'
+import MenuUsuario from "./MenuUsuario"
+
 
 const Header = ({ slides, municipios}) => {
 
@@ -22,6 +24,7 @@ const Header = ({ slides, municipios}) => {
 
             <div className={styles.contenido}>
                 <BarraBusqueda />
+                <MenuUsuario/>
                 <BusquedaCiudad municipios={municipios} />
                 <BusquedaCategoria />
             </div>

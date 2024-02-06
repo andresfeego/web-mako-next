@@ -6,6 +6,7 @@ import request from 'superagent';
 import Cargando from '../../Inicialized/Cargando';
 import { MaysPrimera } from '../../Inicialized/GlobalFunctions';
 import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
+import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
 function getCiudades() {
 
@@ -44,14 +45,18 @@ const BusquedaCiudad = (props) => {
 
 
     function onSubmit(ciudad) {
-        setData({search: {...data.search, ciudad: ciudad}})
-        setBusCiudad(ciudad)
-        setmostrarAuto(false)
+        function onSubmit(ciudad, id) {
 
+            setData({ search: { ...data.search, ciudad: ciudad } })
+            EvBiBusqueda('Busqueda ciudad', id);
+
+            setBusCiudad(ciudad)
+            setmostrarAuto(false)
+        }
     }
 
     function onClear() {
-        setData({search: {...data.search, ciudad: ''}})
+        setData({ search: { ...data.search, ciudad: '' } })
         setBusCiudad('')
     }
 
