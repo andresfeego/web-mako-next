@@ -48,7 +48,7 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
         
         if (tipo[0].tipo == 0 || tipo[0].tipo == -1) {
             
-            const isInactive = tipo == -1
+            const isInactive = (tipo == -1)
             return [
                 <PerfilCero inactivo={isInactive} Perfilempresa={empresa} />,
                 <Head>
@@ -94,17 +94,17 @@ export async function getServerSideProps(ctx) {
     props.props = { slides: slidesJson }
 
     const empresas = await getEmpresas("", "", 0)
-    props.props = { slides: slidesJson, empresas: empresas }
+    props.props = { ...props.props, empresas: empresas }
 
     const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
     const responseJson = await response.json()
-    props.props = { slides: slidesJson, empresas: empresas, municipios: responseJson }
+    props.props = { ...props.props, municipios: responseJson }
     
     const codigo = ctx.query.id;
     const resTipo = await fetch(process.env.HOST_NAME + '/tipoEmpresa/' + codigo)
     const tipoJson = await resTipo.json()
 
-    props.props = { slides: slidesJson, empresas: empresas, municipios: responseJson, tipo: tipoJson, codigo: codigo}
+    props.props = { ...props.props, tipo: tipoJson, codigo: codigo }
 
     if (tipoJson.length == 0) {
         if (codigo != 'directorio-empresarial') {
