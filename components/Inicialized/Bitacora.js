@@ -81,7 +81,7 @@ export const EvBiBusqueda = (flujo, busqueda) => {
 const saveDb = (data) => {
     return new Promise((resolve, reject) => {
         request
-            .post('http://localhost:3020/api/responseMako/bitacora/nuevoEvento')
+            .post(process.env.HOST_NAME + '/bitacora/nuevoEvento')
             .send(data)
             .set('accept', 'json')
             .end((err, res) => {
