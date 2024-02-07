@@ -26,10 +26,73 @@ async function getEmpresas() {
 
 }
 
+async function getCategorias() {
 
-function generateSitemap(empresas) {
+  const response = await fetch(process.env.HOST_NAME + '/categoriasConEmpresas')
+
+
+
+  if (response.ok) {
+    return await response.json()
+  } else {
+
+    return null
+  }
+
+}
+
+
+async function getCiudades() {
+
+  const response = await fetch(process.env.HOST_NAME + '/ciudadesConEmpresas')
+
+
+
+  if (response.ok) {
+    return await response.json()
+  } else {
+
+    return null
+  }
+
+}
+
+async function getCiuycat() {
+
+  const response = await fetch(process.env.HOST_NAME + '/ciuycatConEmpresas')
+
+
+
+  if (response.ok) {
+    return await response.json()
+  } else {
+
+    return null
+  }
+
+}
+
+function normalizarUrl(texto) {
+
+  texto= texto.toLowerCase().replace(/\s/g, '-')
+  texto= texto.toLowerCase().replace(',', '')
+
+  if (texto.charAt(texto.length - 1) == '-') {
+    texto = texto.slice(0, -1)
+  }
+
+    console.log(texto)
+  return(encodeURI(texto));
+  
+}
+
+
+
+function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, ciuycatConEmpresas) {
   const pages = [
-    { url: '/directorio-empresarial', changefreq: 'monthly', priority: 0.7 },
+    { url: 'https://www.mako.guru/directorio-empresarial', 
+    changefreq: 'monthly', 
+    priority: 0.7 },
   ];
 
   empresas.map(empresa => {
@@ -44,6 +107,50 @@ function generateSitemap(empresas) {
 
 
   });
+
+
+
+  
+    categoriasConEmpresas.map(categoriasConEmpresas => {
+  
+      pages.push(
+        {
+          url: `https://www.mako.guru/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
+          changefreq: 'monthly',
+          priority: 0.7
+        }
+        )
+  
+  
+    });
+
+
+    ciudadesConEmpresas.map(ciudadesConEmpresas => {
+  
+      pages.push(
+        {
+          url: `https://www.mako.guru/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
+          changefreq: 'monthly',
+          priority: 0.7
+        }
+        )
+  
+  
+    });
+    
+    ciuycatConEmpresas.map(ciuycatConEmpresas => {
+      pages.push(
+        {
+          url: `https://www.mako.guru/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
+          changefreq: 'monthly',
+          priority: 0.7
+        }
+        )
+  
+  
+    });
+    
+  
 
 
 
@@ -80,9 +187,14 @@ function withXMLTemplate(content) {
 
 export async function getServerSideProps({ res }) {
 
-  const response = await getEmpresas();
+  const empresas = await getEmpresas();
+  const categorias = await getCategorias();
+  const ciudades = await getCiudades();
+  const ciuycat = await getCiuycat();
+  
 
-  const pages = generateSitemap(response);
+
+  const pages = generateSitemap(empresas, categorias, ciudades, ciuycat);
   const sitemapContent = buildSitemapXml(pages);
 
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate');
