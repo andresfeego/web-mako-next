@@ -82,7 +82,7 @@ function normalizarUrl(texto) {
   }
 
     console.log(texto)
-  return(encodeURI(texto));
+  return((texto));
   
 }
 
