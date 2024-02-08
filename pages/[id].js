@@ -10,7 +10,6 @@ import { MaysPrimera } from '../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
 
-
 async function getEmpresas(busqueda, ciudad, categoria) {
 
     const response = await fetch(process.env.HOST_NAME + '/empresas',
@@ -81,6 +80,7 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
                 <Head>
                     <title>.: MAKO :. Directorio empresarial</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <link rel="icon" href="/favicon.ico"/>
                 </Head>
             }
 

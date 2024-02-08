@@ -21,7 +21,6 @@ import Modal from '@mui/material/Modal';
 import { MaysPrimera } from "../Inicialized/GlobalFunctions";
 import { AddToHomeScreen, Facebook, LocalConvenienceStoreRounded, PaymentSharp, YouTube } from "@material-ui/icons";
 import { Diversity1Rounded, FacebookOutlined, Instagram, Moped } from "@mui/icons-material";
-import Image from "next/image";
 
 const style = {
     position: 'absolute',
@@ -292,7 +291,7 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
                             <div className={styles.close} onClick={() => { setOpen(false); router.push('/directorio-empresarial') }} />
                             <div className={styles.headerEmpresa}>
                                 <div className={styles.logo}>
-                                    <Image src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
+                                    <img src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
                                 </div>
                                 <div className={styles.textHeader}>
                                     <h2>{empresa.nombre}</h2>
@@ -377,9 +376,9 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
                                                 <div className={`${styles.transferencias}`}>
                                                     <span>Aceptamos tranferencias desde: </span>
                                                     <div>
-                                                        {empresa.transBanCol ? <Image src={require('../../scrAppServer/icons/otros/logo_bancolombia.png')} alt="Aceptamos transferencias desde Bancolombia" title="Aceptamos transferencias desde Bancolombia" /> : null}
-                                                        {empresa.transDavi ? <Image src={require('../../scrAppServer/icons/otros/logo_daviplata.png')} alt="Aceptamos transferencias desde Daviplata" title="Aceptamos transferencias desde Daviplata" /> : null}
-                                                        {empresa.transNequi ? <Image src={require('../../scrAppServer/icons/otros/logo_nequi.png')} alt="Aceptamos transferencias desde Nequi" title="Aceptamos transferencias desde Nequi" /> : null}
+                                                        {empresa.transBanCol ? <img src={require('../../scrAppServer/icons/otros/logo_bancolombia.png')} alt="Aceptamos transferencias desde Bancolombia" title="Aceptamos transferencias desde Bancolombia" /> : null}
+                                                        {empresa.transDavi ? <img src={require('../../scrAppServer/icons/otros/logo_daviplata.png')} alt="Aceptamos transferencias desde Daviplata" title="Aceptamos transferencias desde Daviplata" /> : null}
+                                                        {empresa.transNequi ? <img src={require('../../scrAppServer/icons/otros/logo_nequi.png')} alt="Aceptamos transferencias desde Nequi" title="Aceptamos transferencias desde Nequi" /> : null}
                                                     </div>
                                                 </div>
                                             </div>

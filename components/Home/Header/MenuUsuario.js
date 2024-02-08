@@ -26,7 +26,7 @@ const MenuUsuario = (props) => {
 
         <React.Fragment>
 
-            <PersonIcon onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 60 }} />
+            <PersonIcon onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 6 }} />
 
             <Modal
                 open={open}
