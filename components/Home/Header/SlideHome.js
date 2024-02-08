@@ -22,16 +22,14 @@ function Item(props) {
             {props.tipoLink == 1 ?
                 <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: 'url(https://www.feegosystem.com/scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', }} />
                 :
-                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: urlLogo, backgroundSize: 'cover', backgroundPosition: 'center', }} />
+                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: urlLogo, backgroundSize: 'cover', backgroundPosition: 'center', width: 'auto' }} />
             }
             <Link href={urlDestino} >
                 <div className={styles.degradado} />
             </Link>
             <BgElement key={"bg1" + props.idSlide} className="bg" style={{ backgroundImage: urlFondo, backgroundSize: 'cover', backgroundPosition: 'center', }} />
             <div className={styles.textoSlide}>
-                <QueueAnim name="QueueAnim">
-                    <h3 key={"h1" + props.idSlide}>{props.titulo}</h3>
-                </QueueAnim>
+                <QueueAnim name="QueueAnim" key={"h1" + props.idSlide}>{props.titulo}</QueueAnim>
                 <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} name="TweenOne" id="TweenOne">
                     {props.lblCat}
                 </TweenOne>

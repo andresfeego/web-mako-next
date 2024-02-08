@@ -168,9 +168,9 @@ const BarraBusquedaEmpresa = (props) => {
             <div className={styles.panelBusqueda}>
 
                 <Link href="/directorio-empresarial">
-                    <a>
+                    <div>
                         <img className={styles.logoMako} src={require('../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png')} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
-                    </a>
+                    </div>
                 </Link>
 
                 <div className={styles.barra}>

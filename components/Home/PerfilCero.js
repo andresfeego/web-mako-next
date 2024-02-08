@@ -20,7 +20,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { MaysPrimera } from "../Inicialized/GlobalFunctions";
 import { AddToHomeScreen, Facebook, LocalConvenienceStoreRounded, PaymentSharp, YouTube } from "@material-ui/icons";
-import { FacebookOutlined, Instagram, Moped } from "@mui/icons-material";
+import { Diversity1Rounded, FacebookOutlined, Instagram, Moped } from "@mui/icons-material";
+import Image from "next/image";
 
 const style = {
     position: 'absolute',
@@ -137,7 +138,7 @@ async function getHorarios(idComercio) {
 
 
 
-const PerfilCero = ({ inactivo, Perfilempresa }) => {
+const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
 
     const data = useDataContext();
     const setData = useSetDataContext();
@@ -261,7 +262,7 @@ const PerfilCero = ({ inactivo, Perfilempresa }) => {
     if (empresa) {
 
         var inactivo = '';
-        if (inactivo) {
+        if (inactivoEmp) {
             inactivo = styles.inactivo;
         }
 
@@ -291,7 +292,7 @@ const PerfilCero = ({ inactivo, Perfilempresa }) => {
                             <div className={styles.close} onClick={() => { setOpen(false); router.push('/directorio-empresarial') }} />
                             <div className={styles.headerEmpresa}>
                                 <div className={styles.logo}>
-                                    <img src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
+                                    <Image src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
                                 </div>
                                 <div className={styles.textHeader}>
                                     <h2>{empresa.nombre}</h2>
@@ -375,11 +376,11 @@ const PerfilCero = ({ inactivo, Perfilempresa }) => {
                                                 <AddToHomeScreen className={`${styles.infoIcon}`} />
                                                 <div className={`${styles.transferencias}`}>
                                                     <span>Aceptamos tranferencias desde: </span>
-                                                    <section>
-                                                        {empresa.transBanCol ? <img src={require('../../scrAppServer/icons/otros/logo_bancolombia.png')} alt="Aceptamos transferencias desde Bancolombia" title="Aceptamos transferencias desde Bancolombia" /> : null}
-                                                        {empresa.transDavi ? <img src={require('../../scrAppServer/icons/otros/logo_daviplata.png')} alt="Aceptamos transferencias desde Daviplata" title="Aceptamos transferencias desde Daviplata" /> : null}
-                                                        {empresa.transNequi ? <img src={require('../../scrAppServer/icons/otros/logo_nequi.png')} alt="Aceptamos transferencias desde Nequi" title="Aceptamos transferencias desde Nequi" /> : null}
-                                                    </section>
+                                                    <div>
+                                                        {empresa.transBanCol ? <Image src={require('../../scrAppServer/icons/otros/logo_bancolombia.png')} alt="Aceptamos transferencias desde Bancolombia" title="Aceptamos transferencias desde Bancolombia" /> : null}
+                                                        {empresa.transDavi ? <Image src={require('../../scrAppServer/icons/otros/logo_daviplata.png')} alt="Aceptamos transferencias desde Daviplata" title="Aceptamos transferencias desde Daviplata" /> : null}
+                                                        {empresa.transNequi ? <Image src={require('../../scrAppServer/icons/otros/logo_nequi.png')} alt="Aceptamos transferencias desde Nequi" title="Aceptamos transferencias desde Nequi" /> : null}
+                                                    </div>
                                                 </div>
                                             </div>
                                             :

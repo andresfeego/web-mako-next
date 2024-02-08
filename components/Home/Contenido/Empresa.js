@@ -21,15 +21,15 @@ const Empresa = (props) => {
         <div className={styles.Empresa} >
             { empresa.tipo ==  0 ?
                 <Link href={'/' + empresa.codigo} >
-                    <a className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
+                    <div className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
                         <img loading="lazy" src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
-                    </a>
+                    </div>
                 </Link>
             :
             <Link className={styles.Empresa} href={`/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion + " - Mako directorio empresarial"}>
-                <a className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
+                <div className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
                     <img loading="lazy" src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
-                </a>
+                </div>
             </Link>
             }
             <div className={styles.textoEmpresa}>
