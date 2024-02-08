@@ -158,7 +158,7 @@ const PerfilCero = ({ inactivo, Perfilempresa }) => {
 
     const [empresa, setEmpresa] = useState(Perfilempresa)
     const [telefonos, setTelefonos] = useState(null)
-    const [mails, setMails] = useState()
+    const [mails, setMails] = useState(null)
     const [redes, setRedes] = useState(null)
     const [horarios, setHorarios] = useState(null)
     const [abrirMapa, setAbrirMapa] = useState(false)

@@ -10,6 +10,9 @@ module.exports = {
 
 
   },
+  images: {
+    disableStaticImages: true
+  },
   async redirects() {
     return [
       {
@@ -23,8 +26,8 @@ module.exports = {
     webpack5: true,
   },
   env: {
-    //HOST_NAME: 'http://localhost:3020/api/responseMako',
-    HOST_NAME: 'https://feegosystem.com:8443/api/responseMako',
+    HOST_NAME: 'http://localhost:3020/api/responseMako',
+    //HOST_NAME: 'https://feegosystem.com:8443/api/responseMako',
   },
     quiet: true
 }
