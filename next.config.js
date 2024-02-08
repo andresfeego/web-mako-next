@@ -10,6 +10,9 @@ module.exports = {
 
 
   },
+  images: {
+    disableStaticImages: true
+  },
   async redirects() {
     return [
       {
