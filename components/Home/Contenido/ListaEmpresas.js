@@ -55,7 +55,7 @@ const ListaEmpresas = ({ empresas}) => {
 
     function renderListaEmpresas(listaempresas) {
         return (
-            listaEmpresas.length != 0 ? listaempresas.map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />): <span>Sin resultados</span>
+            listaEmpresas.length != 0 ? listaempresas.slice(0, 10).map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />): <span>Sin resultados</span>
             
         )
     }
