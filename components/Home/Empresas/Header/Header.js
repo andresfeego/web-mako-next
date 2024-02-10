@@ -6,6 +6,7 @@ import Info from '@material-ui/icons/Info';
 import SlideEmpresa from './SlideEmpresa';
 import SlideHome from '../../Header/SlideHome'
 import stylesSlide from '../Header/SlideEmpresa.module.scss'
+import Image from 'next/image';
 const Header = ({ empresa, slides }) => {
 
 
@@ -20,7 +21,7 @@ const Header = ({ empresa, slides }) => {
     return (
         <div className={styles.header} style={colorFondo}>
             <div className={styles.logo}>
-                <img src={urllogo} alt={`${empresa.nombre}-${empresa.nombreMun}-${empresa.nombreDep}`} />
+                <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50' src={urllogo} alt={`${empresa.nombre}-${empresa.nombreMun}-${empresa.nombreDep}`} />
             </div>
 
             <div className={styles.info}>

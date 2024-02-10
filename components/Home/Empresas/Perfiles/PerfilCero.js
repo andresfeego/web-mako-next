@@ -22,6 +22,7 @@ import { MaysPrimera } from "../../../Inicialized/GlobalFunctions";
 import { AddToHomeScreen, Facebook, LocalConvenienceStoreRounded, PaymentSharp, YouTube } from "@material-ui/icons";
 import { Diversity1Rounded, FacebookOutlined, Instagram, Moped } from "@mui/icons-material";
 import DatosContacto from "../Contenido/DatosContacto";
+import Image from "next/image";
 
 const style = {
     position: 'absolute',
@@ -73,7 +74,7 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
                             <div className={styles.close} onClick={() => { setOpen(false); router.push('/directorio-empresarial') }} />
                             <div className={styles.headerEmpresa}>
                                 <div className={styles.logo}>
-                                    <img src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
+                                    <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50'  src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
                                 </div>
                                 <div className={styles.textHeader}>
                                     <h2>{empresa.nombre}</h2>
