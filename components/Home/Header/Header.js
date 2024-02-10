@@ -16,7 +16,7 @@ const Header = ({ slides, municipios}) => {
         <div className={styles.Header}>
 
             <div className={styles.tituloMako}>
-                <Link href="/directorio-empresarial">
+                <Link href="/directorio-empresarial" title={`📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆`} >
                     <div>
                         <Image width={0} height={0} sizes="100vw" loading="lazy" quality='40' className={styles.imgMakoLogo}  src={require("../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png")} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
                     </div>
@@ -28,6 +28,7 @@ const Header = ({ slides, municipios}) => {
                 <BarraBusqueda />
                 <MenuUsuario/>
                 <BusquedaCiudad municipios={municipios} />
+                <h2 style={{display: 'none'}}>Categorías</h2>
                 <BusquedaCategoria />
             </div>
 

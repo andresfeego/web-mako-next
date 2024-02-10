@@ -70,14 +70,15 @@
     
 }
 
-.textoEmpresa h3{
+.textoEmpresa h4{
     font-size: 1.4em;
     color: $gray2;
 }
 
-.textoEmpresa h2{
+.textoEmpresa h3{
     overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: $gray3;
+  font-size: 1.5em;
 }

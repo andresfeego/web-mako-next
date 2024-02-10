@@ -24,7 +24,7 @@ function Item(props, styles ) {
                 :
                 <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: urlLogo, backgroundSize: 'cover', backgroundPosition: 'center', width: 'auto' }} />
             }
-            <Link href={urlDestino} >
+            <Link aria-label="Ver más de la categoría" title="Ver más de la categoría" href={urlDestino} >
                 <div className={styles.degradado} />
             </Link>
             <BgElement key={"bg1" + props.idSlide} className="bg" style={{ backgroundImage: urlFondo, backgroundSize: 'cover', backgroundPosition: 'center', }} />

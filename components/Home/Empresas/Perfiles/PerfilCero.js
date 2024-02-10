@@ -78,7 +78,7 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
                                 </div>
                                 <div className={styles.textHeader}>
                                     <h2>{empresa.nombre}</h2>
-                                    <p>{empresa.slogan}</p>
+                                    <h3>{empresa.slogan}</h3>
 
                                     <div className={styles.iconos}>
                                         <span className={styles.vistos} title="Visualizaciones">

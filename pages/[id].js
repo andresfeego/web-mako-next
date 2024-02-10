@@ -42,18 +42,36 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 
 
 
-const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, empresa, mensaje }) => {
+const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
     function renderPerfil(tipo) {
 
         if (tipo[0].tipo == 0 || tipo[0].tipo == -1) {
-            
+
             const isInactive = (tipo == -1)
             return [
                 <PerfilCero inactivo={isInactive} Perfilempresa={empresa} />,
                 <Head>
-                    <title>{`${MaysPrimera(empresa.nombre)} - ${MaysPrimera(empresa.nombreMun)} - ${MaysPrimera(empresa.nombreDep)}`}</title>
+                    <meta charset="utf-8" />
+                    <title>{`Datos de contacto de ${MaysPrimera(empresa.nombre)} - ${MaysPrimera(empresa.nombreMun)} - ${MaysPrimera(empresa.nombreDep)}`}</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <meta name="description" content={empresa.descripcion} />
+                    <meta name="keywords" content={empresa.palabras_clave} />
+                    <link rel="canonical" href={process.env.HOST_NAME_MAKO + empresa.codigo} />
+                    <meta name="robots" content="index, follow" />
+                    <meta name="author" content="www.mako.guru" />
+                    <meta name="audience" content="Everyone" />
+
+                    <meta property="og:title" content={`.: Mako.guru :. Directorio empresarial -  ${empresa.nombre}`} />
+                    <meta property="og:description" content={empresa.descripcion} />
+                    <meta property="og:url" content={process.env.HOST_NAME_MAKO + empresa.codigo} />
+                    <meta property="og:image" content={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} />
+                    <meta property="og:locale" content="es_ES" />
+
+                    <meta name="twitter:title" content={`.: Mako.guru :. Directorio empresarial -  ${empresa.nombre}`} />
+                    <meta name="twitter:description" content={empresa.descripcion} />
+                    <meta name="twitter:image" content={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} />
+                    <meta name="twitter:card" content="summary_large_image" />
                 </Head>
             ]
         }
@@ -66,11 +84,11 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
 
     }
 
-   /*  useEffect(() => {
-        if (tipo.length != 0) {
-            EvBiVisita(empresa.codigo)
-        }
-    }, []) */
+    /*  useEffect(() => {
+         if (tipo.length != 0) {
+             EvBiVisita(empresa.codigo)
+         }
+     }, []) */
 
     return (
         <div id="contentBody">
@@ -80,7 +98,23 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
                 <Head>
                     <title>.: MAKO :. Directorio empresarial</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                    <link rel="icon" href="/favicon.ico"/>
+                    <meta name="description" content="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
+                    <meta name="keywords" content='directorio telefonico, directorio empresarial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja' />
+                    <link rel="canonical" href={process.env.HOST_NAME_MAKO + 'directorio-empresarial'} />
+                    <meta name="robots" content="index, follow" />
+                    <meta name="author" content="www.mako.guru" />
+                    <meta name="audience" content="Everyone" />
+
+                    <meta property="og:title" content={`.: Mako.guru :. Directorio empresarial - un directorio con superpoderes`} />
+                    <meta property="og:description" content='📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆' />
+                    <meta property="og:url" content={process.env.HOST_NAME_MAKO + 'directorio-empresarial'} />
+                    <meta property="og:image" content={require('../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta property="og:locale" content="es_ES" />
+
+                    <meta name="twitter:title" content={`.: Mako.guru :. Directorio empresarial - un directorio con superpoderes`} />
+                    <meta name="twitter:description" content='📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆' />
+                    <meta name="twitter:image" content={require('../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta name="twitter:card" content="summary_large_image" />
                 </Head>
             }
 
@@ -106,7 +140,7 @@ export async function getServerSideProps(ctx) {
     const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
     const responseJson = await response.json()
     props.props = { ...props.props, municipios: responseJson }
-    
+
     const codigo = ctx.query.id;
     const resTipo = await fetch(process.env.HOST_NAME + '/tipoEmpresa/' + codigo)
     const tipoJson = await resTipo.json()

@@ -62,6 +62,7 @@ const ListaEmpresas = ({ empresas}) => {
 
     return (
         <div className={styles.listaEmpresas}>
+            <h2 style={{display: 'none'}}>Listado de empresas</h2>
             {cargando ? <Cargando/>:renderListaEmpresas(listaEmpresas)}
         </div>
     )

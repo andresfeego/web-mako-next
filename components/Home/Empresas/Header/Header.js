@@ -27,7 +27,7 @@ const Header = ({ empresa, slides }) => {
             <div className={styles.info}>
                 <div className={styles.titulo}>
                     <h1>{MaysPrimera(empresa.nombre)}</h1>
-                    <h3>{empresa.slogan}</h3>
+                    <h2>{empresa.slogan}</h2>
                     {/* <p>{empresa.descripcion}</p> */}
                 </div>
 

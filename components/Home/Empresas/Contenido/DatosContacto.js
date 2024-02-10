@@ -177,16 +177,16 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
             <div className={`${styles.telefono}`}>
                 {telefono.tipo == 0 ?
                     <div className={`${styles.rowInfo}`}>
-                        <a href={'tel:' + telefono.telefono}><SendToMobileIcon className={styles.infoIcon} /></a>
+                        <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`}><SendToMobileIcon className={styles.infoIcon} /></a>
                         {telefono.wp == 1 ?
-                            <a target="_blank" href={'https://wa.me/+57' + telefono.telefono + '/?text=Hola te contacto desde tu perfil en  https://www.mako.guru/' + empresa.codigo} > <WhatsAppIcon className={`${styles.whatsapp}`} /> </a>
+                            <a target="_blank" title={`Enviar mensaje de Whatsapp al ${telefono.telefono}`} href={'https://wa.me/+57' + telefono.telefono + '/?text=Hola te contacto desde tu perfil en  https://www.mako.guru/' + empresa.codigo} > <WhatsAppIcon className={`${styles.whatsapp}`} /> </a>
                             :
                             null
                         }
-                        <a href={'tel:' + telefono.telefono} className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono}</a>
+                        <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`}  className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono}</a>
                     </div>
                     :
-                    <a href={'tel:' + telefono.indicativo + telefono.telefono} className={`${styles.rowInfo}`}> <PhoneForwardedIcon className={styles.infoIcon} /> <p className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono} </p></a>
+                    <a href={'tel:' + telefono.indicativo + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`} className={`${styles.rowInfo}`}> <PhoneForwardedIcon className={styles.infoIcon} /> <p className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono} </p></a>
                 }
 
             </div>
@@ -197,7 +197,7 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
     function renderMails(mails) {
         return (mails.map((mail) =>
-            <a target="_blank" href={'mailto:' + mail.correo} className={`${styles.rowInfo}`}> <MailOutlineIcon className={styles.infoIcon} /> {mail.correo} </a>
+            <a target="_blank" href={'mailto:' + mail.correo} title={`Enviar correo a: ${mail.correo}`} className={`${styles.rowInfo}`}> <MailOutlineIcon className={styles.infoIcon} /> {mail.correo} </a>
         )
         )
     }
@@ -227,7 +227,7 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
     function renderRedes(redes) {
         return (redes.map((redSocial) =>
-            <a target="_blank" href={redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()} className={`${styles.rowInfo}`}> {renderIconoRedes(redSocial.descSocial)} <span style={{ textOverflow: "ellipsis" }}>{redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()}</span> </a>
+            <a target="_blank" title={`Visitar el ${redSocial.descSocial} de ${empresa.nombre}`} href={redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()} className={`${styles.rowInfo}`}> {renderIconoRedes(redSocial.descSocial)} <span style={{ textOverflow: "ellipsis" }}>{redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()}</span> </a>
         )
         )
     }
@@ -259,12 +259,20 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
     return (
         <div className={styles.info}>
-            <p className={styles.descripcion}>{empresa.descripcion}</p>
+            {empresa.tipo > 0 ?
+                <h2 className={styles.descripcion}>{empresa.descripcion}</h2>
+                :
+                <h3 className={styles.descripcion}>{empresa.descripcion}</h3>
+            }
             <div className={styles.textInfo}>
                 <div className={styles.textInfoIzq}>
 
                     <span className={`${styles.rowInfo}`}><StorefrontIcon className={styles.infoIcon} /> <span>{empresa.direccion}</span></span>
-                    <span className={`${styles.rowInfo}`}><LocationOnIcon className={styles.infoIcon} /> <span>{MaysPrimera(empresa.nombreMun) + " - " + empresa.nombreDep}</span></span>
+                    {empresa.tipo > 0 ?
+                        <span className={`${styles.rowInfo}`}><LocationOnIcon className={styles.infoIcon} /> <h2>{MaysPrimera(empresa.nombreMun) + " - " + empresa.nombreDep}</h2></span>
+                        :
+                        <span className={`${styles.rowInfo}`}><LocationOnIcon className={styles.infoIcon} /> <h3>{MaysPrimera(empresa.nombreMun) + " - " + empresa.nombreDep}</h3></span>
+                    }
 
                     <div className={styles.telefonos}>
                         {telefonos ?
@@ -282,7 +290,7 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
                     }
 
                     {empresa.pagina_web ?
-                        <a href={empresa.pagina_web} target='_blank' className={`${styles.rowInfo}`}> <LanguageIcon className={`${styles.infoIcon}`} />  {empresa.pagina_web}</a>
+                        <a href={empresa.pagina_web} title={`Pagina Web de ${empresa.nombre}`} target='_blank' className={`${styles.rowInfo}`}> <LanguageIcon className={`${styles.infoIcon}`} />  {empresa.pagina_web}</a>
                         :
                         null
                     }

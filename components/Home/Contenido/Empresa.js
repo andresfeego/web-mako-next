@@ -21,22 +21,22 @@ const Empresa = (props) => {
     return (
         <div className={styles.Empresa} >
             { empresa.tipo ==  0 ?
-                <Link href={'/' + empresa.codigo} >
+                <Link href={'/' + empresa.codigo} className={styles.Empresa} title={empresa.nombre + " Mako directorio empresarial"}>
                     <div className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
-                        <Image priority={true} className={styles.logo} width={0} height={0} sizes="100vw" loading="lazy" quality='50' src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
+                        <Image className={styles.logo} width={0} height={0} sizes="100vw" loading="lazy" quality='50' src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
                     </div>
                 </Link>
             :
             <Link className={styles.Empresa} href={`/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion + " - Mako directorio empresarial"}>
                 <div className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
-                    <Image priority={true} className={styles.logo} width={0} height={0} sizes="100vw" loading="lazy" quality='50' src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
+                    <Image className={styles.logo} width={0} height={0} sizes="100vw" loading="lazy" quality='50' src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
                 </div>
             </Link>
             }
             <div className={styles.textoEmpresa}>
-                <h2 className={styles.razonSocial}>{empresa.nombre.toProperCase()}</h2>
-                <h3 className={styles.ciudad}>{MaysPrimera(empresa.nombreDep) + " - " + MaysPrimera(empresa.nombreMun)}</h3>
-                <h3 className={styles.descripcion}>{MaysPrimera(empresa.slogan)}</h3>
+                <h3 className={styles.razonSocial}>{empresa.nombre.toProperCase()}</h3>
+                <h4 className={styles.ciudad}>{MaysPrimera(empresa.nombreDep) + " - " + MaysPrimera(empresa.nombreMun)}</h4>
+                <h4 className={styles.descripcion}>{MaysPrimera(empresa.slogan)}</h4>
             </div>
         </div>
     )
