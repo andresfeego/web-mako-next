@@ -1,0 +1,265 @@
+
+.inactivo{
+    color: red !important;
+  }
+  
+  .perfilCero{
+    z-index: 1000;
+    position: relative;
+    width: 800px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+  }
+  
+  .fondoEmpresa{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    position: absolute;
+  }
+  
+  .empresa{
+    height: fit-content;
+    width: 40vw;
+    background-color: #fff;
+    z-index: 100000;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 15px;
+  }
+  
+  .close::before{
+  content: 'X';
+  position: absolute;
+  top: 0.5vw;
+  right: 0.5vw;
+  width: 1.5vw;
+  height: 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gray3;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  border: solid 1px $gray3;
+  }
+  
+  .headerEmpresa{
+    background-color: $primary;
+    width: 100%;
+    height: 114px;
+    display: flex;
+    position: relative;
+    border-bottom: solid 1px $primary;
+  }
+  
+  .headerEmpresa>.logo{
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .headerEmpresa>.logo>img{
+    height: 100%;
+  }
+  
+  .headerEmpresa>.textHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .iconos{
+    position: absolute;
+    right: 0.5vw;
+    bottom: 0.5vw;
+    display: flex;
+  
+  }
+  
+  .iconos>span{
+    margin-left: 0.8vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .info{
+    height: 100%;
+    position: relative;
+    padding: 0 68px;
+    text-align: center;
+    margin: 56px auto;
+    padding: 0 10vw 0 1vw;
+    width: 50%;
+  }
+  
+  .descripcion{
+    margin: 16px auto;
+  }
+  
+  .info>.textInfo{
+    height: 100%;
+    margin: auto;
+    display: flex;
+    font-size: 14px;
+    color: $gray2;
+    margin-top: 56px;
+  }
+  
+  .info .textInfo .textInfoIzq{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 8px;
+  }
+  
+  .info .textInfo .textInfoDer{
+    height: 100%;
+    width: 50%;
+  }
+  
+  .info>.mapa{
+    height: 500px;
+    width: 100%;
+    border-radius: 20px;
+    border: solid 1px $primary;
+    margin-top: 58px;
+    position: relative;
+    overflow: hidden;
+    -webkit-transition: all .7s ease-in-out;
+  -moz-transition:    all .7s ease-in-out;
+  -o-transition:      all .7s ease-in-out;
+  -ms-transition:     all .7s ease-in-out;
+  transition:         all .7s ease-in-out;
+  
+  }
+  
+  .info>.mapaAbierto{
+    position: static;
+    width: 100%;
+  }
+  
+  .abrirmapa{
+    margin: auto;
+    width: 6vw;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .infoIcon{
+    border-radius: 50%;
+    padding: 4px;
+    background-color: $secondary;
+    color: $white0;
+  }
+  
+  .rowInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .columnInfo{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .telefono{
+    display: flex;
+    gap: 5px;
+  
+  }
+  .tel{
+    border: solid 1px $gray1;
+    border-radius: 20px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tel span{
+    font-size: 10px;
+  }
+  
+  .whatsapp{
+    background-color: $verdeWP;
+    color: $white0;
+    padding: 4px;
+    border-radius: 50%;
+  }
+  .horario{
+    justify-content: flex-start;
+    text-align: left;
+    flex-direction: row;
+  }
+  
+  .rowInfo:has(.horario),
+  .rowInfo:has(.transferencias){
+    align-items: flex-start;
+  }
+  
+  .horario span:nth-child(1){
+    flex: 1;
+  }
+
+  .horario span:nth-child(2){
+    padding-left: 20px
+  }
+  
+  .horario span:nth-child(3), .horario span:nth-child(4){
+    padding-left: 40px
+  }
+  
+  .transferencias{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transferencias section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .transferencias img{
+    height: 21px;
+    object-fit: contain;
+  }
+
+  .agregarMapa{
+    background-color: $primary;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-top: 100px;
+  }
+
+  
+.contImgTrans{
+  height: fit-content;
+  width: fit-content;
+}
+
+.imgTrans{
+  height: 100%;
+  width: auto;
+}
+  

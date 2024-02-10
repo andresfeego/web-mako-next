@@ -1,6 +1,6 @@
 .Empresa{
     width: 12em;
-    height: 12em;
+    height: 14em;
     margin: 1em 1em 1em 0em;
     transition: all 0.5s ease 0s;
     cursor: pointer;
@@ -46,6 +46,7 @@
 
 .logoEmpresa{
     width: 9em;
+    height: 9em;
     margin: 0.5em auto 0.1em auto;
     border-radius: 50%;
     overflow: hidden;
@@ -55,8 +56,9 @@
     align-items: center;
 }
 
-.logoEmpresa img{
+.logoEmpresa .logo{
     width: 100%;
+    height: auto;
     margin: auto;
     
 }

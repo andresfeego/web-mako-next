@@ -2,6 +2,7 @@ import BarraBusqueda from "./BarraBusqueda"
 import BusquedaCategoria from "./BusquedaCategoria"
 import BusquedaCiudad from "./BusquedaCiudad"
 import styles from "./Header.module.scss"
+import stylesSlides from "./SlideHome.module.scss"
 import SlideHome from "./SlideHome"
 import Link from 'next/link'
 import MenuUsuario from "./MenuUsuario"
@@ -30,7 +31,7 @@ const Header = ({ slides, municipios}) => {
             </div>
 
             <div className={styles.slide}>
-                <SlideHome slides={slides} />
+                <SlideHome slides={slides} styles={stylesSlides} parent={'headerHome'}/>
             </div>
 
         </div>

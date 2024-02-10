@@ -11,7 +11,13 @@ module.exports = {
 
   },
   images: {
-    disableStaticImages: true
+    disableStaticImages: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.feegosystem.com',
+      },
+    ]
   },
   async redirects() {
     return [

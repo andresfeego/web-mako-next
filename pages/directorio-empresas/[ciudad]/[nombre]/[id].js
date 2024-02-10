@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { useDataContext, useSetDataContext, useSetUserContext, useUserContext } from "../../../../components/Inicialized/DataProvider";
 import { search } from "superagent";
 import { EvBiVisita } from "../../../../components/Inicialized/Bitacora";
+import PerfilCero from "../../../../components/Home/Empresas/Perfiles/PerfilCero";
+import PerfilUno from "../../../../components/Home/Empresas/Perfiles/PerfilUno/PerfilUno";
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
@@ -37,36 +39,8 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 
 const Empresa = ({ empresa, municipios, empresas, slides }) => {
 
-    const data = useDataContext();
-    const setData = useSetDataContext();
-   
-    const user = useUserContext();
-    const setUser = useSetUserContext();
-    
-
-    const router = useRouter();
-    const { id, ciudad } = router.query;
-
-    useEffect(() => {
-        EvBiVisita(empresa.codigo)
-    }, [])
-
      return (
-        <div>
-            <Head>
-                <title>{`${MaysPrimera(empresa.nombre)} - ${MaysPrimera(empresa.nombreMun)} - ${MaysPrimera(empresa.nombreDep)}`}</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
-
-            {empresa.tipo == 1 ?
-                <EmpresaTipoUno  empresa={empresa} municipios={municipios} empresas={empresas} slides={slides} />
-                :
-                <EmpresaTipoCero empresa={empresa} municipios={municipios} empresas={empresas} />
-            }
-            <span onClick={() => setData({ux: {...data.ux, scroll: 5}})}>{data.ux.scroll}</span>
-            
-
-        </div>
+        <PerfilUno perfilEmpresa={empresa} municipios={municipios} empresas={empresas} slides={slides}/>
     )
 }
 
@@ -75,7 +49,6 @@ export async function getServerSideProps(ctx) {
     var props = { props: {} }
 
 
-    console.log("getnin")
     const resEmpresa = await fetch(process.env.HOST_NAME + '/empresas/' + ctx.query.id)
     const empresaJson = await resEmpresa.json()
     props.props = { empresa: empresaJson[0] }
@@ -90,7 +63,8 @@ export async function getServerSideProps(ctx) {
     const empresas = await getEmpresas("", "", 0)
     props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: empresas }
 
-    const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + ctx.query.id)
+    /* const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + ctx.query.id) */
+    const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/slides')
     const slidesEmpresaJson = await resSlidesEmpresa.json()
     props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: empresas, slides: slidesEmpresaJson }
 

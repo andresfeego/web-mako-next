@@ -1,0 +1,23 @@
+.location{
+    width: 5px;
+    height: 5px;
+}
+
+.markerLocation{
+    position: absolute;
+    top: -48px;
+    left: -25px;
+}
+
+.iconLocation{
+    font-size: 5em !important;
+    color: $secondary;
+}
+
+.imageLocation{
+    border-radius: 50%;
+    position: absolute;
+    width: 30px;
+    top: 0.7em;
+    left: 1.07em;
+}

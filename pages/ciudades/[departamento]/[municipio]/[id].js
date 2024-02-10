@@ -4,7 +4,7 @@ import ListaEmpresas from "../../../../components/Home/Contenido/ListaEmpresas";
 import request from "superagent";
 import { useState, useEffect } from 'react';
 import Filtros from "../../../../components/Home/Contenido/Filtros";
-import PerfilCero from "../../../../components/Home/PerfilCero";
+import PerfilCero from "../../../../components/Home/Empresas/Perfiles/PerfilCero";
 import { useDataContext, useSetDataContext } from '../../../../components/Inicialized/DataProvider'
 import { MaysPrimera } from '../../../../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../../../../components/Inicialized/Toast';
@@ -115,7 +115,7 @@ export async function getServerSideProps(ctx) {
     const departamento =  ctx.query.departamento;
     const municipio = ctx.query.municipio;
 
-        props.props = { ...props.props, idCiudad: idCiudad, departamento: departamento, municipio: municipio}
+        props.props = { ...props.props, idCiudad: idCiudad, departamento: departamento, municipio: municipio.replace(/\-/g, ' ')}
 
     props.props = { ...props.props, tipo: tipoJson, codigo: codigo }
 

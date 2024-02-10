@@ -7,6 +7,7 @@ import { MaysPrimera } from '../../../Inicialized/GlobalFunctions';
 import Cargando from '../../../Inicialized/Cargando';
 import Empresa from '../../Contenido/Empresa';
 import { useDataContext, useSetDataContext } from '../../../Inicialized/DataProvider';
+import Image from 'next/image';
 
 async function getEmpresas(busqueda, ciudad, categoria) {
 
@@ -169,7 +170,7 @@ const BarraBusquedaEmpresa = (props) => {
 
                 <Link href="/directorio-empresarial">
                     <div>
-                        <img className={styles.logoMako} src={require('../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png')} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
+                        <Image width={0} height={0} sizes="100vw" className={styles.logoMako} src={require('../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png')} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
                     </div>
                 </Link>
 

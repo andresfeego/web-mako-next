@@ -264,9 +264,21 @@
     top: 17px;
     left: 18px;
   }
-  .banner-anim-thumb {
+  .headerHome .banner-anim-thumb {
     position: absolute;
     top: 8em;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .headerEmpresa .banner-anim-thumb {
+    position: absolute;
+    top: 3em;
+    left: 3em;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -312,4 +324,8 @@
     top: 10px;
     left: 10px;
     cursor: pointer;
+}
+
+.MuiBox-root:focus-visible{
+  outline: none;
 }

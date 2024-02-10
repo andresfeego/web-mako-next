@@ -15,12 +15,14 @@ const SlideEmpresa = ({ empresa, slides }) => {
 
 
 
-    useEffect(async () => {
-        const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + empresa.codigo)
-        const slidesEmpresaJson = await resSlidesEmpresa.json()
-        setImageSlider(slidesEmpresaJson)
-        setCategoria(empresa.categoria)
-        setLblCategoria(empresa.lblCategoria)
+    useEffect(() => {
+        return async() =>{
+            const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + empresa.codigo)
+            const slidesEmpresaJson = await resSlidesEmpresa.json()
+            setImageSlider(slidesEmpresaJson)
+            setCategoria(empresa.categoria)
+            setLblCategoria(empresa.lblCategoria)
+        }
     }, [empresa.codigo])
 
     function Item(item) {

@@ -1,4 +1,3 @@
-import styles from "./SlideHome.module.scss"
 import BannerAnim from 'rc-banner-anim';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
@@ -9,7 +8,8 @@ import Link from 'next/link';
 const { Element } = BannerAnim;
 const BgElement = Element.BgElement;
 
-function Item(props) {
+function Item(props, styles ) {
+
     var urlFondo = `url(https://www.feegosystem.com/scrAppServer/images/slides/${props.img})`
     var urlLogo = "url(https://www.feegosystem.com/scrAppServer/images/logos/" + props.descUno + ".png)"
     var urlDestino = `/categorias/${props.descDos}/${props.descUno}`
@@ -38,13 +38,13 @@ function Item(props) {
     )
 }
 
-function createSlides(slides) {
+function createSlides(slides, styles ) {
     var aleatorio = Math.round(Math.random() * 1000);
     return (
         <BannerAnim autoPlay autoPlaySpeed={4000} type="across" id={"rand" + aleatorio} className={styles.contenido}>
 
             {slides.length > 0 ?
-                slides.map((item) => Item(item))
+                slides.map((item) => Item(item, styles ))
                 :
                 null
             }
@@ -54,12 +54,12 @@ function createSlides(slides) {
 }
 
 
-const SlideHome = ({ slides }) => {
+const SlideHome = ({ slides, styles, parent }) => {
 
 
     return (
-        <div className={styles.slide}>
-            {createSlides(slides)}
+        <div className={`${styles.slide} ${parent}`}>
+            {createSlides(slides, styles )}
         </div>
     )
 }

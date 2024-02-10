@@ -4,7 +4,7 @@ import ListaEmpresas from "../../../../../components/Home/Contenido/ListaEmpresa
 import request from "superagent";
 import { useState, useEffect } from 'react';
 import Filtros from "../../../../../components/Home/Contenido/Filtros";
-import PerfilCero from "../../../../../components/Home/PerfilCero";
+import PerfilCero from "../../../../../components/Home/Empresas/Perfiles/PerfilCero";
 import { useDataContext, useSetDataContext } from '../../../../../components/Inicialized/DataProvider'
 import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
@@ -112,7 +112,7 @@ export async function getServerSideProps(ctx) {
     const subcatuno = ctx.query.subcatuno;
     const subcatdos = ctx.query.subcatdos;
 
-        props.props = { ...props.props, idCat: idCat, categoria: categoria, subcatuno: subcatuno, subcatdos: subcatdos }
+        props.props = { ...props.props, idCat: idCat, categoria: categoria, subcatuno: subcatuno, subcatdos: subcatdos.replace( /\-/g, ' ') }
 
     props.props = { ...props.props, tipo: tipoJson, codigo: codigo }
 

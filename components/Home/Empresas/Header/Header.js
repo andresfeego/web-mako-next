@@ -4,7 +4,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import Loyalty from '@material-ui/icons/Loyalty';
 import Info from '@material-ui/icons/Info';
 import SlideEmpresa from './SlideEmpresa';
-
+import SlideHome from '../../Header/SlideHome'
+import stylesSlide from '../Header/SlideEmpresa.module.scss'
 const Header = ({ empresa, slides }) => {
 
 
@@ -26,7 +27,7 @@ const Header = ({ empresa, slides }) => {
                 <div className={styles.titulo}>
                     <h1>{MaysPrimera(empresa.nombre)}</h1>
                     <h3>{empresa.slogan}</h3>
-                    <p>{empresa.descripcion}</p>
+                    {/* <p>{empresa.descripcion}</p> */}
                 </div>
 
                 <div className={styles.iconos}>
@@ -34,19 +35,31 @@ const Header = ({ empresa, slides }) => {
                         <Visibility className="colorVistos" />
                         <span>{empresa.visto}</span>
                     </span>
-                    <span className={styles.infos}>
-                        <Loyalty className="colorPromos" />
-                        <span>{empresa.promos}</span>
-                    </span>
-                    <span className={styles.promos}>
-                        <Info className="colorInfos" />
-                        <span>{empresa.infos}</span>
-                    </span>
+
+                    {empresa.promos ?
+                        <span className={styles.infos}>
+                            <Loyalty className="colorPromos" />
+                            <span>{empresa.promos}</span>
+                        </span>
+                        :
+                        null
+
+                    }
+
+                    {empresa.infos ?
+                        <span className={styles.promos}>
+                            <Info className="colorInfos" />
+                            <span>{empresa.infos}</span>
+                        </span>
+                        :
+                        null
+                    }
                 </div>
 
             </div>
 
-            <SlideEmpresa empresa={empresa} slides={slides} />
+            {/* <SlideEmpresa empresa={empresa} slides={slides} /> */}
+            <SlideHome slides={slides} styles={stylesSlide} parent={'headerEmpresa'} />
 
         </div>
     )

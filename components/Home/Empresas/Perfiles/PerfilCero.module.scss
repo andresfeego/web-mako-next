@@ -140,8 +140,6 @@ border: solid 1px $gray3;
   background-color: $gray3;
   border: solid 1px $primary;
 
-  filter: opacity(0.5);
-
   -webkit-transition: all .7s ease-in-out;
 -moz-transition:    all .7s ease-in-out;
 -o-transition:      all .7s ease-in-out;
@@ -158,9 +156,28 @@ transition:         all .7s ease-in-out;
 
 .abrirmapa{
   margin: auto;
-  width: 6vw;
+  width: 32px;
+  height: 32px;
   text-align: center;
   cursor: pointer;
+  position: absolute;
+  top: -16px;
+  left: 48%;
+  z-index: 10;
+  background-color: $primary;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-transition: all .7s ease-in-out;
+  -moz-transition:    all .7s ease-in-out;
+  -o-transition:      all .7s ease-in-out;
+  -ms-transition:     all .7s ease-in-out;
+  transition:         all .7s ease-in-out;
+}
+
+.info:has(.mapaAbierto) .abrirmapa{
+  top: 16px;
 }
 
 .infoIcon{
@@ -186,7 +203,19 @@ transition:         all .7s ease-in-out;
 .telefono{
   display: flex;
   gap: 5px;
+}
 
+.tel{
+  border: solid 1px $gray1;
+  border-radius: 20px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tel span{
+  font-size: 10px;
 }
 
 .whatsapp{
@@ -226,4 +255,14 @@ transition:         all .7s ease-in-out;
 .transferencias img{
   height: 21px;
   object-fit: contain;
+}
+
+.contImgTrans{
+  height: fit-content;
+  width: fit-content;
+}
+
+.imgTrans{
+  height: 100%;
+  width: auto;
 }

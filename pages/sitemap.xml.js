@@ -75,7 +75,8 @@ async function getCiuycat() {
 function normalizarUrl(texto) {
 
   texto= texto.toLowerCase().replace(/\s/g, '-')
-  texto= texto.toLowerCase().replace(',', '')
+  texto= texto.toLowerCase().replace(/\,/g, '')
+  texto= texto.toLowerCase().replace(/\./g, '')
 
   if (texto.charAt(texto.length - 1) == '-') {
     texto = texto.slice(0, -1)

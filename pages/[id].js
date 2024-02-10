@@ -4,7 +4,7 @@ import ListaEmpresas from "../components/Home/Contenido/ListaEmpresas";
 import request from "superagent";
 import { useState, useEffect } from 'react';
 import Filtros from "../components/Home/Contenido/Filtros";
-import PerfilCero from "../components/Home/PerfilCero";
+import PerfilCero from "../components/Home/Empresas/Perfiles/PerfilCero";
 import { useDataContext, useSetDataContext } from '../components/Inicialized/DataProvider'
 import { MaysPrimera } from '../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
@@ -66,11 +66,11 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
 
     }
 
-    useEffect(() => {
+   /*  useEffect(() => {
         if (tipo.length != 0) {
             EvBiVisita(empresa.codigo)
         }
-    }, [])
+    }, []) */
 
     return (
         <div id="contentBody">
