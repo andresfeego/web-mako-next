@@ -3,11 +3,15 @@ import BusquedaCategoria from "./BusquedaCategoria"
 import BusquedaCiudad from "./BusquedaCiudad"
 import styles from "./Header.module.scss"
 import stylesSlides from "./SlideHome.module.scss"
-import SlideHome from "./SlideHome"
 import Link from 'next/link'
 import MenuUsuario from "./MenuUsuario"
 import Image from "next/image"
-
+import dynamic from 'next/dynamic';
+import Cargando from '../../Inicialized/Cargando'
+const SlideHome = dynamic(() => import('./SlideHome'), {
+  ssr: false,
+  loading: () => <Cargando />
+});
 
 const Header = ({ slides, municipios}) => {
 
