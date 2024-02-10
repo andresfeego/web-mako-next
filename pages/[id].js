@@ -79,32 +79,23 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
 
     }
 
-    function renderHead(tipo){
-        if (tipo > 1) {
-            <Head>
-            <meta charset="utf-8" />
-            <title>{`Datos de contacto de ${MaysPrimera(empresa.nombre)} - ${MaysPrimera(empresa.nombreMun)} - ${MaysPrimera(empresa.nombreDep)}`}</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            <meta name="description" content={empresa.descripcion} />
-            <meta name="keywords" content={empresa.palabras_clave} />
-            <link rel="canonical" href={process.env.HOST_NAME_MAKO + empresa.codigo} />
-            <meta name="robots" content="index, follow" />
-            <meta name="author" content="www.mako.guru" />
-            <meta name="audience" content="Everyone" />
+    if (mensaje) {
+        nuevoMensaje(tiposAlertas.info, mensaje)
 
-            <meta property="og:title" content={`.: Mako.guru :. Directorio empresarial -  ${empresa.nombre}`} />
-            <meta property="og:description" content={empresa.descripcion} />
-            <meta property="og:url" content={process.env.HOST_NAME_MAKO + empresa.codigo} />
-            <meta property="og:image" content={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} />
-            <meta property="og:locale" content="es_ES" />
+    }
 
-            <meta name="twitter:title" content={`.: Mako.guru :. Directorio empresarial -  ${empresa.nombre}`} />
-            <meta name="twitter:description" content={empresa.descripcion} />
-            <meta name="twitter:image" content={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} />
-            <meta name="twitter:card" content="summary_large_image" />
-        </Head>
-        } else {
-            <Head>
+    /*  useEffect(() => {
+         if (tipo.length != 0) {
+             EvBiVisita(empresa.codigo)
+         }
+     }, []) */
+
+    return (
+        <div id="contentBody">
+            {tipo.length != 0 ?
+                renderPerfil(tipo)
+                :
+                <Head>
                     <title>.: MAKO :. Directorio empresarial</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta name="description" content="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
@@ -125,27 +116,6 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
                     <meta name="twitter:image" content={require('../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
                     <meta name="twitter:card" content="summary_large_image" />
                 </Head>
-        }
-
-    }
-
-    if (mensaje) {
-        nuevoMensaje(tiposAlertas.info, mensaje)
-
-    }
-
-    /*  useEffect(() => {
-         if (tipo.length != 0) {
-             EvBiVisita(empresa.codigo)
-         }
-     }, []) */
-
-    return (
-        <div id="contentBody">
-            {tipo.length != 0 ?
-                renderPerfil(tipo)
-                :
-                renderHead(tipo[0].tipo)
             }
 
 
