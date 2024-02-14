@@ -91,7 +91,7 @@ function normalizarUrl(texto) {
 
 function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, ciuycatConEmpresas) {
   const pages = [
-    { url: 'https://www.mako.guru/directorio-empresarial', 
+    { loc: 'https://www.mako.guru/directorio-empresarial', 
     changefreq: 'monthly', 
     priority: 0.7 },
   ];
