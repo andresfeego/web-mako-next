@@ -11,6 +11,7 @@ import localStore from '../components/Inicialized/localStore'
 import { ThemeProvider } from '@mui/material/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const App = ({ Component, pageProps }) => {
 
@@ -51,6 +52,8 @@ const App = ({ Component, pageProps }) => {
           />
 
           <Component {...pageProps} />
+          <SpeedInsights />
+
         </DataProvider>
       </ThemeProvider>
     </React.Fragment>

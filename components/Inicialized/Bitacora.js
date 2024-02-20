@@ -40,7 +40,7 @@ export const EvBiVisita = (idComercio) => {
 export const EvBiBusqueda = (flujo, busqueda) => {
 
     const data = {
-        tipoAccion: 2,
+        tipoAccion: 1,
         flujo: flujo,
         etiqueta: busqueda,
         hashSession: 'Superadmin',
