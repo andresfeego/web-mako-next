@@ -38,7 +38,7 @@ module.exports = {
   env: {
     //HOST_NAME: 'http://localhost:3020/api/responseMako',
     HOST_NAME: 'https://feegosystem.com:8443/api/responseMako',
-    HOST_NAME_MAKO: 'https://www.mako.guru.com/',
+    HOST_NAME_MAKO: 'https://www.mako.guru/',
   },
     quiet: true
 }
