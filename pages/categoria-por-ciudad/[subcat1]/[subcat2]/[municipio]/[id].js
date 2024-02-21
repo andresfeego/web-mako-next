@@ -44,48 +44,43 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 
 const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) => {
 
-    function renderMunicipio(municipio) {
+    const data = useDataContext();
+    const setData = useSetDataContext();
 
+    useEffect(() =>{
         if (municipio && !data.ux.renderCiudad) {
             if (municipio && data.search.ciudad != municipio) {
                 setData({ search: { ...data.search, ciudad: MaysPrimera(municipio), categoria: idCat, lblCategoria: MaysPrimera(subcatdos) }, ux: { ...data.ux, renderCiudad: true } })
             }
         }
+    }, []);
 
-
-    }
-
-    
-    const data = useDataContext();
-    const setData = useSetDataContext();
 
     return (
         <div id="contentBody">
 
             {idCat != 0 ?
-                [
-                    renderMunicipio(municipio),
-                    <Head>
-                        <title>{'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)}</title>
-                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                        <meta name="description" content={'.: Mako.guru :. Directorio comercial 📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' Colombia con números de contacto.'} />
-                        <meta name="keywords" content={'directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja'} />
-                        <meta name="robots" content="index, follow" />
-                        <meta name="author" content="www.mako.guru" />
-                        <meta name="audience" content="Everyone" />
 
-                        <meta property="og:title" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)} />
-                        <meta property="og:description" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + '  con números de contacto para Colombia👆'} />
-                        <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
-                        <meta property="og:locale" content="es_ES" />
+                <Head>
+                    <title>{'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)}</title>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <meta name="description" content={'.: Mako.guru :. Directorio comercial 📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' Colombia con números de contacto.'} />
+                    <meta name="keywords" content={'directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja'} />
+                    <meta name="robots" content="index, follow" />
+                    <meta name="author" content="www.mako.guru" />
+                    <meta name="audience" content="Everyone" />
 
-                        <meta name="twitter:title" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)} />
-                        <meta name="twitter:description" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' con números de contacto para Colombia👆'} />
-                        <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
-                        <meta name="twitter:card" content="summary_large_image" />
-                    </Head>
+                    <meta property="og:title" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)} />
+                    <meta property="og:description" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + '  con números de contacto para Colombia👆'} />
+                    <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta property="og:locale" content="es_ES" />
 
-                ]
+                    <meta name="twitter:title" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)} />
+                    <meta name="twitter:description" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' con números de contacto para Colombia👆'} />
+                    <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta name="twitter:card" content="summary_large_image" />
+                </Head>
+
                 :
 
                 <Head>

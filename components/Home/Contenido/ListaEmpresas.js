@@ -5,7 +5,7 @@ import { useDataContext, useSetDataContext } from "../../Inicialized/DataProvide
 import Cargando from "../../Inicialized/Cargando";
 
 
-async function getEmpresas(busqueda, ciudad, categoria) {
+async function getEmpresas(busqueda, ciudad, categoria, signal) {
 
     const response = await fetch(process.env.HOST_NAME + '/empresas',
         {
@@ -20,7 +20,8 @@ async function getEmpresas(busqueda, ciudad, categoria) {
                 ciudad: ciudad,
                 busServicios: busqueda,
                 busCategoria: categoria
-            })
+            }),
+            signal
         })
 
     if (response.ok) {
@@ -34,7 +35,7 @@ async function getEmpresas(busqueda, ciudad, categoria) {
 
 
 
-const ListaEmpresas = ({ empresas}) => {
+const ListaEmpresas = ({ empresas }) => {
 
     const data = useDataContext();
     const setData = useSetDataContext();
@@ -43,11 +44,15 @@ const ListaEmpresas = ({ empresas}) => {
     const [listaEmpresas, setListaEmpresas] = useState(empresas)
 
     useEffect(() => {
+        const controller = new AbortController()
+        const { signal } = controller
+
         setCargando(true);
-        getEmpresas(data.search.busqueda, data.search.ciudad, data.search.categoria).then((response) => {
+        getEmpresas(data.search.busqueda, data.search.ciudad, data.search.categoria, signal).then((response) => {
             setListaEmpresas(response); // sets ariaInfo state
             setCargando(false);
         })
+        return () =>controller.abort();
     }
         , [data]
     );
@@ -55,15 +60,15 @@ const ListaEmpresas = ({ empresas}) => {
 
     function renderListaEmpresas(listaempresas) {
         return (
-            listaEmpresas.length != 0 ? listaempresas.map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />): <span>Sin resultados</span>
-            
+            listaEmpresas.length != 0 ? listaempresas.map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />) : <span>Sin resultados</span>
+
         )
     }
 
     return (
         <div className={styles.listaEmpresas}>
-            <h2 style={{display: 'none'}}>Listado de empresas</h2>
-            {cargando ? <Cargando/>:renderListaEmpresas(listaEmpresas)}
+            <h2 style={{ display: 'none' }}>Listado de empresas</h2>
+            {cargando ? <Cargando /> : renderListaEmpresas(listaEmpresas)}
         </div>
     )
 
