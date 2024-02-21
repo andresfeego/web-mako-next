@@ -329,3 +329,12 @@
 .MuiBox-root:focus-visible{
   outline: none;
 }
+
+//_________________titulos para seo no visibles_________________________
+
+.titleH1{
+  font-size: 1em;
+  margin-top: 2em;
+  text-align: center;
+  visibility: hidden;
+}

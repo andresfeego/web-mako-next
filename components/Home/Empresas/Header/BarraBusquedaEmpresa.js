@@ -203,7 +203,7 @@ const BarraBusquedaEmpresa = (props) => {
             </div>
 
             <div className={styles.panelResultados} style={estiloBuscando}>
-                {listaEmpresas != null ?
+                {listaEmpresas != null && (data.search.busqueda != '' || data.search.ciudad != '')?
                     renderListaEmpresas(listaEmpresas)
                     :
                     null
