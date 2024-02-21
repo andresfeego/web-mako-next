@@ -1,19 +1,15 @@
 import styles from "./Empresa.module.scss"
 import Link from 'next/link';
 import { MaysPrimera } from '../../Inicialized/GlobalFunctions'
-import { useDataContext, useSetDataContext } from "../../Inicialized/DataProvider";
 import Image from "next/image";
 
 
 
 const Empresa = (props) => {
-    const data = useDataContext();
-    const setData = useSetDataContext();
+ 
 
     const empresa = props.empresa
-    function ver(codigo) {
-        setData({search: {...data.search, idComercio: codigo}})
-    }
+    
 
     const urllogo = 'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo;
 

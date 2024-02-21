@@ -44,7 +44,6 @@ const BusquedaCiudad = (props) => {
 
 
 
-    function onSubmit(ciudad) {
         function onSubmit(ciudad, id) {
 
             setData({ search: { ...data.search, ciudad: ciudad } })
@@ -53,7 +52,6 @@ const BusquedaCiudad = (props) => {
             setBusCiudad(ciudad)
             setmostrarAuto(false)
         }
-    }
 
     function onClear() {
         setData({ search: { ...data.search, ciudad: '' } })
@@ -112,7 +110,7 @@ const BusquedaCiudad = (props) => {
             } else {
 
                 return (
-                    listaCiudades.map((item) => <div className={styles.ciudad} onClick={() => { onSubmit(MaysPrimera(item.nombre)) }}><h1>{MaysPrimera(item.nombre) + " - " + MaysPrimera(item.nombreDep)}</h1></div>)
+                    listaCiudades.map((item) => <div className={styles.ciudad} onClick={() => { onSubmit(MaysPrimera(item.nombre), item.id) }}><h1>{MaysPrimera(item.nombre) + " - " + MaysPrimera(item.nombreDep)}</h1></div>)
                 )
 
             }
