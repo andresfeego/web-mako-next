@@ -46,7 +46,7 @@ const BusquedaCiudad = (props) => {
 
         function onSubmit(ciudad, id) {
 
-            setData({ search: { ...data.search, ciudad: ciudad } })
+            setData({...data, search: { ...data.search, ciudad: ciudad } })
             EvBiBusqueda('Busqueda ciudad', id);
 
             setBusCiudad(ciudad)
@@ -54,7 +54,7 @@ const BusquedaCiudad = (props) => {
         }
 
     function onClear() {
-        setData({ search: { ...data.search, ciudad: '' } })
+        setData({...data, search: { ...data.search, ciudad: '' } })
         setBusCiudad('')
     }
 

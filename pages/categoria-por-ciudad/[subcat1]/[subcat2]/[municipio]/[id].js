@@ -9,39 +9,6 @@ import { useDataContext, useSetDataContext } from '../../../../../components/Ini
 import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
 
-
-async function getEmpresas(busqueda, ciudad, categoria) {
-
-    const response = await fetch(process.env.HOST_NAME + '/empresas',
-        {
-            method: 'POST',
-            headers: {
-                // Check what headers the API needs. A couple of usuals right below
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                // Validation data coming from a form usually
-                ciudad: ciudad,
-                busServicios: busqueda,
-                busCategoria: categoria
-            })
-        })
-
-
-
-    if (response.ok) {
-        return await response.json()
-    } else {
-        return null
-    }
-
-
-
-}
-
-
-
 const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) => {
 
     const data = useDataContext();
@@ -50,7 +17,7 @@ const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) =>
     useEffect(() =>{
         if (municipio && !data.ux.renderCiudad) {
             if (municipio && data.search.ciudad != municipio) {
-                setData({ search: { ...data.search, ciudad: MaysPrimera(municipio), categoria: idCat, lblCategoria: MaysPrimera(subcatdos) }, ux: { ...data.ux, renderCiudad: true } })
+                setData({...data, search: { ...data.search, ciudad: MaysPrimera(municipio), categoria: idCat, lblCategoria: MaysPrimera(subcatdos) }, ux: { ...data.ux, renderCiudad: true } })
             }
         }
     }, []);
@@ -108,7 +75,6 @@ export async function getServerSideProps(ctx) {
     const slidesJson = await resSlides.json()
     props.props = { slides: slidesJson }
 
-    //const empresas = await getEmpresas("", "", 0)
     props.props = { ...props.props, empresas: [] }
 
     const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')

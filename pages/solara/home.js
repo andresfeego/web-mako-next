@@ -4,7 +4,7 @@ import { useState } from "react";
 import Estadisticas from "../../components/Solara/Estadisticas/Estadisticas";
 import Laboratorio from "../../components/Solara/Laboratorio/Laboratorio";
 import Image from "next/image";
-import CrearEmpresa from "../../components/Solara/CrearEmpresa/CrearEmpresa";
+import Empresas from "../../components/Solara/Empresas/Empresas";
 
 
 const Home = () => {
@@ -44,7 +44,7 @@ const Home = () => {
                 return (
                     [
                         <MainMenu handleMenu={handleMenu} />,
-                        <CrearEmpresa />
+                        <Empresas />
                     ]
                 )
                 break;

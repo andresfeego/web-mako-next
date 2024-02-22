@@ -7,15 +7,15 @@ const Filtros = (props) => {
     const setData = useSetDataContext();
 
     function borrarBusqueda() {
-        setData({search: {...data.search, busqueda: ''}})
+        setData({...data, search: {...data.search, busqueda: ''}})
     }
 
     function borrarCiudad() {
-        setData({search: {...data.search, ciudad: ''}})
+        setData({...data, search: {...data.search, ciudad: ''}})
     }
 
     function borrarCategoria() {
-        setData({search: {...data.search, lblCategoria: '', categoria: ''}})
+        setData({...data, search: {...data.search, lblCategoria: '', categoria: ''}})
     }
 
 

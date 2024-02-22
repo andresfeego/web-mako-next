@@ -15,7 +15,7 @@ const BusquedaCategorias = (props) => {
 			EvBiBusqueda('Busqueda categoria', cat)
 		}
 		//diferente de cero
-		setData({search: {...data.search, categoria: cat, lblCategoria: label}})
+		setData({...data,search: {...data.search, categoria: cat, lblCategoria: label}})
 		
 	}
 

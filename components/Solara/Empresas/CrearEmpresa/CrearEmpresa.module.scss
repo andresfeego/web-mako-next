@@ -1,6 +1,7 @@
+
 .texto {
     margin-top: 20px;
-    color: rgb(0, 0, 0) !important;
+    color: $white0 !important;
 }
 
 .general {
@@ -16,4 +17,8 @@
     flex-direction: column ;
     align-items: center;
     background-color: red !important;
+}
+
+.customMuiInput::before{
+    border-bottom: 1px solid $gray2;
 }

@@ -1,30 +1,4 @@
-async function getEmpresas() {
-
-  const response = await fetch(process.env.HOST_NAME + '/empresas',
-    {
-      method: 'POST',
-      headers: {
-        // Check what headers the API needs. A couple of usuals right below
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        // Validation data coming from a form usually
-        ciudad: '',
-        busServicios: '',
-        busCategoria: 0
-      })
-    })
-
-
-
-  if (response.ok) {
-    return await response.json()
-  } else {
-    return null
-  }
-
-}
+import { getEmpresas } from "../components/Inicialized/GetDB/GetDB"
 
 async function getCategorias() {
 
@@ -188,7 +162,7 @@ function withXMLTemplate(content) {
 
 export async function getServerSideProps({ res }) {
 
-  const empresas = await getEmpresas();
+  const empresas = await getEmpresas('','',0);
   const categorias = await getCategorias();
   const ciudades = await getCiudades();
   const ciuycat = await getCiuycat();

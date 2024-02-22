@@ -8,33 +8,7 @@ import Cargando from '../../../Inicialized/Cargando';
 import Empresa from '../../Contenido/Empresa';
 import { useDataContext, useSetDataContext } from '../../../Inicialized/DataProvider';
 import Image from 'next/image';
-
-async function getEmpresas(busqueda, ciudad, categoria) {
-
-    const response = await fetch(process.env.HOST_NAME + '/empresas',
-        {
-            method: 'POST',
-            headers: {
-                // Check what headers the API needs. A couple of usuals right below
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                // Validation data coming from a form usually
-                ciudad: ciudad,
-                busServicios: busqueda,
-                busCategoria: categoria
-            })
-        })
-
-    if (response.ok) {
-        return await response.json()
-    } else {
-        return null
-    }
-}
-
-
+import { getEmpresas } from '../../../Inicialized/GetDB/GetDB';
 
 const BarraBusquedaEmpresa = (props) => {
 
@@ -52,14 +26,14 @@ const BarraBusquedaEmpresa = (props) => {
     const [busquedaB, setBusqueda] = useState(data.search.busqueda)
 
     function onSubmitCiudad(ciudad) {
-        setData({search: {...data.search, ciudad: ciudad}})
+        setData({...data,search: {...data.search, ciudad: ciudad}})
         setBusCiudad(ciudad)
         setmostrarAuto(false)
 
     }
 
     function onClearCiudad() {
-        setData({search: {...data.search, ciudad: ''}})
+        setData({...data,search: {...data.search, ciudad: ''}})
         setBusCiudad('')
     }
 
@@ -126,12 +100,12 @@ const BarraBusquedaEmpresa = (props) => {
     }
 
     function onSubmit() {
-        setData({search: {...data.search, busqueda: busquedaB}})
+        setData({...data,search: {...data.search, busqueda: busquedaB}})
 
     }
 
     function onClear() {
-        setData({search: {...data.search, busqueda: ''}})
+        setData({...data,search: {...data.search, busqueda: ''}})
         setBusqueda('')
     }
 

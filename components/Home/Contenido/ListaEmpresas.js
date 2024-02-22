@@ -3,36 +3,7 @@ import { useState, useEffect } from 'react';
 import Empresa from './Empresa'
 import { useDataContext, useSetDataContext } from "../../Inicialized/DataProvider";
 import Cargando from "../../Inicialized/Cargando";
-
-
-async function getEmpresas(busqueda, ciudad, categoria, signal) {
-
-    const response = await fetch(process.env.HOST_NAME + '/empresas',
-        {
-            method: 'POST',
-            headers: {
-                // Check what headers the API needs. A couple of usuals right below
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                // Validation data coming from a form usually
-                ciudad: ciudad,
-                busServicios: busqueda,
-                busCategoria: categoria
-            }),
-            signal
-        })
-
-    if (response.ok) {
-        return await response.json()
-    } else {
-        return null
-    }
-}
-
-
-
+import { getEmpresas } from "../../Inicialized/GetDB/GetDB";
 
 
 const ListaEmpresas = ({ empresas }) => {
@@ -40,6 +11,9 @@ const ListaEmpresas = ({ empresas }) => {
     const data = useDataContext();
     const setData = useSetDataContext();
     const [cargando, setCargando] = useState(true);
+    const [moreState, setMoreState] = useState(false);
+    const [loadMoreState, setLoadMoreState] = useState(false);
+    const [page, setPage] = useState(0);
 
     const [listaEmpresas, setListaEmpresas] = useState(empresas)
 
@@ -48,15 +22,32 @@ const ListaEmpresas = ({ empresas }) => {
         const { signal } = controller
 
         setCargando(true);
-        getEmpresas(data.search.busqueda, data.search.ciudad, data.search.categoria, signal).then((response) => {
+        console.log(data)
+        getEmpresas(data.search.busqueda, data.search.ciudad, data.search.categoria, signal, 0, data.ux.limLisEmpresas).then((response) => {
             setListaEmpresas(response); // sets ariaInfo state
             setCargando(false);
+            if (response.length == data.ux.limLisEmpresas) {
+                setMoreState(true)
+            }
+            setPage(1)
         })
-        return () =>controller.abort();
+        return () => controller.abort();
     }
         , [data]
     );
 
+    function moreList() {
+        setMoreState(false)
+        setLoadMoreState(true)
+        setPage(page + 1)
+        getEmpresas(data.search.busqueda, data.search.ciudad, data.search.categoria, null, (page * data.ux.limLisEmpresas), data.ux.limLisEmpresas).then((response) => {
+            setListaEmpresas(listaEmpresas.concat(response)); // sets ariaInfo state
+            setLoadMoreState(false)
+            if (response.length == data.ux.limLisEmpresas) {
+                setMoreState(true)
+            }
+        })
+    }
 
     function renderListaEmpresas(listaempresas) {
         return (
@@ -66,9 +57,13 @@ const ListaEmpresas = ({ empresas }) => {
     }
 
     return (
-        <div className={styles.listaEmpresas}>
+        <div className={styles.contentListaEmpresas}>
             <h2 style={{ display: 'none' }}>Listado de empresas</h2>
-            {cargando ? <Cargando /> : renderListaEmpresas(listaEmpresas)}
+            <div className={styles.listaEmpresas}>
+                {cargando ? <Cargando /> : renderListaEmpresas(listaEmpresas)}
+            </div>
+            {loadMoreState ? <Cargando className={styles.loadMore} /> : null}
+            {moreState ? <div className={styles.moreButton} onClick={() => moreList()}>Ver Más</div> : null}
         </div>
     )
 

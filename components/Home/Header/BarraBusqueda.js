@@ -23,13 +23,13 @@ const BarraBusqueda = (props) => {
     }
 
     function onSubmit() {
-        setData({search: {...data.search, busqueda: busquedaB}})
+        setData({...data,search: {...data.search, busqueda: busquedaB}})
         EvBiBusqueda('Barra busqueda', busquedaB)
 
     }
 
     function onClear() {
-        setData({search: {...data.search, busqueda: ''}})
+        setData({...data,search: {...data.search, busqueda: ''}})
         setBusqueda('')
     }
 
