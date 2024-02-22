@@ -39,12 +39,12 @@ const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) =>
 
                     <meta property="og:title" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)} />
                     <meta property="og:description" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + '  con números de contacto para Colombia👆'} />
-                    <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp')} />
                     <meta property="og:locale" content="es_ES" />
 
                     <meta name="twitter:title" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio)} />
                     <meta name="twitter:description" content={'.: Mako.guru :.📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' con números de contacto para Colombia👆'} />
-                    <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp')} />
                     <meta name="twitter:card" content="summary_large_image" />
                 </Head>
 

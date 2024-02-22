@@ -46,12 +46,12 @@ const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subca
 
                         <meta property="og:title" content={'.: Mako.guru :. Empresas de ' + subcatdos + ' en Colombia'} />
                         <meta property="og:description" content={'📖✔ Listado de empresas de ' + subcatdos + '  con números de contacto para Colombia👆'} />
-                        <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                        <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp')} />
                         <meta property="og:locale" content="es_ES" />
 
                         <meta name="twitter:title" content={'.: Mako.guru :. Empresas de ' + subcatdos + ' en Colombia'} />
                         <meta name="twitter:description" content={'📖✔ Listado de empresas de ' + subcatdos + '  con números de contacto para Colombia👆'} />
-                        <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                        <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp')} />
                         <meta name="twitter:card" content="summary_large_image" />
                     </Head>
                 ]
@@ -70,12 +70,12 @@ const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subca
                     <meta property="og:title" content={`.: Mako.guru :. Directorio empresarial - un directorio con superpoderes`} />
                     <meta property="og:description" content='📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆' />
                     <meta property="og:url" content={process.env.HOST_NAME_MAKO + 'directorio-empresarial'} />
-                    <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta property="og:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp')} />
                     <meta property="og:locale" content="es_ES" />
 
                     <meta name="twitter:title" content={`.: Mako.guru :. Directorio empresarial - un directorio con superpoderes`} />
                     <meta name="twitter:description" content='📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆' />
-                    <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.png')} />
+                    <meta name="twitter:image" content={require('../../../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp')} />
                     <meta name="twitter:card" content="summary_large_image" />
                 </Head>
             }
