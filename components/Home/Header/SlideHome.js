@@ -20,9 +20,9 @@ function Item(props, styles ) {
         <Element prefixCls="banner-user-elem" key={props.idSlide}>
 
             {props.tipoLink == 1 ?
-                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: 'url(https://www.feegosystem.com/scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512.webp)', backgroundSize: 'cover', backgroundPosition: 'center', }} />
+                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: 'url(https://www.feegosystem.com/scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-2.webp)', backgroundSize: 'cover', backgroundPosition: 'center', }} />
                 :
-                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: urlLogo, backgroundSize: 'cover', backgroundPosition: 'center', width: 'auto' }} />
+                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: urlLogo, backgroundSize: 'cover', backgroundPosition: 'center',}} />
             }
             <Link aria-label="Ver más de la categoría" title="Ver más de la categoría" href={urlDestino} >
                 <div className={styles.degradado} />

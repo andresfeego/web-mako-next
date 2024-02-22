@@ -24,7 +24,7 @@ const BusquedaCategorias = (props) => {
 
 			<li className={styles.touch} id="makoTouch" onClick={() => cambiaCat(299, 'Asesor MAKO')} >
 				<div className={styles.circulo}>
-					<Image className={styles.circuloIcon} width={0} height={0} sizes="100vw" loading="lazy" quality='50' alt="mako categorias directorio comercial Colombia" title="mako categorias directorio comercial Colombia" className={styles.icono} src={require('../../../scrAppServer/icons/mako.png')} />
+					<Image width={0} height={0} sizes="100vw" loading="lazy" quality='50' alt="mako categorias directorio comercial Colombia" title="mako categorias directorio comercial Colombia" className={styles.icono} src={require('../../../scrAppServer/icons/mako.png')} />
 				</div>
 				<h3 className={styles.textoCat}> Asesor MAKO</h3>
 			</li>
