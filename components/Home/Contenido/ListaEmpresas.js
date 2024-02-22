@@ -20,6 +20,7 @@ const ListaEmpresas = ({ empresas }) => {
     useEffect(() => {
         const controller = new AbortController()
         const { signal } = controller
+        setMoreState(false)
 
         setCargando(true);
         console.log(data)
