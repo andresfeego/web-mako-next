@@ -4,58 +4,68 @@ import { useState } from "react";
 import Estadisticas from "../../components/Solara/Estadisticas/Estadisticas";
 import Laboratorio from "../../components/Solara/Laboratorio/Laboratorio";
 import Image from "next/image";
+import CrearEmpresa from "../../components/Solara/CrearEmpresa/CrearEmpresa";
 
 
 const Home = () => {
     const [menu, setMenu] = useState(0);
 
-    const handleMenu = (menu) =>{
+    const handleMenu = (menu) => {
         setMenu(menu)
     }
 
-    function renderContenido(){
+    function renderContenido() {
         switch (menu) {
             case 0:
-                return(
+                return (
                     <MainMenu wide={true} handleMenu={handleMenu} />
                 )
                 break;
-        
+
             case 1:
-                return(
+                return (
                     [
                         <MainMenu handleMenu={handleMenu} />,
-                        <Estadisticas/>
+                        <Estadisticas />
                     ]
                 )
                 break;
 
             case 2:
-                return(
+                return (
                     [
                         <MainMenu handleMenu={handleMenu} />,
-                        <Laboratorio/>
+                        <Laboratorio />
+                    ]
+                )
+                break;
+
+            case 3:
+                return (
+                    [
+                        <MainMenu handleMenu={handleMenu} />,
+                        <CrearEmpresa />
                     ]
                 )
                 break;
         }
     }
 
-        return (
-            <div className={styles.solaraHome}>
+    return (
+        <div className={styles.solaraHome}>
 
-                <div className={styles.header}>
-                    <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50'  className={styles.imgMakoLogo} src={require("../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png")} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
-                    <span>Solara Guru Labs</span>
-                </div>
-               
-                <div className={styles.content}>
-                    {renderContenido()}
-                </div>
+            <div className={styles.header}>
+                <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50' className={styles.imgMakoLogo} src={require("../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.png")} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
+                <span>Solara Guru Labs</span>
             </div>
-        )
-    
-    
+
+            <div className={styles.content}>
+                {renderContenido()}
+            </div>
+        </div>
+    )
+
+
 }
 
 

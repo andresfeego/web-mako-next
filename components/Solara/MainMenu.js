@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import stylesMain from "./MainMenu.module.scss";
 import stylesLateral from "./MainMenuLateral.module.scss";
 import Link from 'next/link';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -42,6 +43,14 @@ const MainMenu = ({wide, handleMenu}) => {
                 <a className={styles.button}>
                     <ScienceOutlinedIcon className={styles.icon} />
                     <span className={styles.text}>Laboratorio</span>
+                </a>
+            </div>
+
+            
+            <div onClick={()=> {handleMenu(3), setOpen(false)}}>
+                <a className={styles.button}>
+                    <AddBoxIcon className={styles.icon} />
+                    <span className={styles.text}>Crear Empresa</span>
                 </a>
             </div>
 
