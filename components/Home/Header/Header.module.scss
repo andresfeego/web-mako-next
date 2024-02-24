@@ -11,17 +11,23 @@
 } 
 
  .contenido{
-  width: 54%;
+  width: 56.5%;
   height: 100%;
   margin-left: 15vw; 
   margin-top: 15px;
+}
+
+.containerBusquedaUsuario{
+  display: flex;
   position: relative;
+  flex: 1;
 }
 
  .slide{
-  width: 33svw;
-  height: 500px;
+  width: 780px;
+  height: 620px;
   right: 0vw;
+  top: 0;
   position: absolute;
   overflow: hidden;
 } 
@@ -47,6 +53,132 @@
   height: auto;
 }
 
+.imgMakoLogoResponsive{
+  width: 150px;
+  height: auto;
+  display: none;
+}
+
   .fondoHeader{
       visibility: hidden;
+  }
+
+  @media only screen and (max-width: 2420px) {
+    .contenido{
+      width: 55%;
+    }
+  }
+
+  @media only screen and (max-width: 2200px) {
+    .contenido{
+      width: 54%;
+    }
+  }
+  
+  @media only screen and (max-width: 1920px) {
+    .contenido{
+      width: 55.5%;
+    }
+  }
+
+  @media only screen and (max-width: 1600px) {
+    .contenido{
+      width: 53%;
+    }
+  }
+
+  @media only screen and (max-width: 1440px) {
+    .contenido{
+      width: 52%;
+    }
+  }
+
+  @media only screen and (max-width: 1366px) {
+    .contenido{
+      width: 53%;
+    }
+  }
+
+  @media only screen and (max-width: 1280px) {
+    .contenido{
+      width: 52%;
+    }
+  }
+
+  @media only screen and (max-width: 960px) {
+    .tituloMako .imgMakoLogo{
+      display: none;
+    }
+
+    .contenido{
+      width: 46%;
+    }
+    
+    .imgMakoLogoResponsive{
+      width: 80px;
+      margin: 80% auto ;
+      display: initial;
+    }
+    
+  }
+
+  @media only screen and (max-width: 834px) {
+    .contenido{
+      width: 44%;
+    }
+    
+  }
+
+  @media only screen and (max-width: 600px) {
+    .contenido{
+      width: 80%;
+    }
+    
+  }
+  
+  @media only screen and (max-width: 414px) {
+    .Header{
+      display: flex;
+      flex-direction: column;
+      height: 115px;
+      margin-bottom: calc(115px + 28em);
+    }
+
+    .tituloMako{
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      bottom: 9em;
+      left: 16px;
+    }
+
+    .imgMakoLogoResponsive{
+      width: 50px;
+      height: auto;
+    }
+
+    .containerBusquedaUsuario{
+      flex: none;
+    }
+
+
+    .contenido{
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+      width: 80%;
+      height: 100%;
+      margin-left: 80px; 
+      margin-top: 16px;
+    }
+
+    .slide{
+      width: 100%;
+      height: 35em;
+      right: 0vw;
+      top: 115px;
+    z-index: -10;
+
+    } 
+    
   }

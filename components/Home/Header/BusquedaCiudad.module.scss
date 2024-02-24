@@ -128,3 +128,55 @@
         border-bottom: solid 1px $gray0;
         cursor: pointer;
     }
+
+    @media only screen and (max-width: 2200px) {
+        .busquedaCiudad{
+            width: 40%;
+        }
+    }
+
+    @media only screen and (max-width: 1366px) {
+        .busquedaCiudad{
+            margin-top: 1vw;
+        }
+    }
+
+    
+    @media only screen and (max-width: 960px) {
+        .busquedaCiudad{
+            width: 60%;            
+        }
+    }
+    
+    @media only screen and (max-width: 834px) {
+        .busquedaCiudad{
+            width: 70%;            
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .busquedaCiudad{
+            width: 60%;            
+        }
+    }
+
+    @media only screen and (max-width: 414px) {
+        
+    .busquedaCiudad{
+        width: 73%;
+        height: 36px;
+        background-color:  #fff;
+        margin-top: 8px;
+        border-radius: 1.5em;
+        position: relative;
+    }
+
+    .botonBuscar{
+        display: none;
+    }
+    }
+    
+
+
+
+    

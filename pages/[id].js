@@ -9,6 +9,7 @@ import { useDataContext, useSetDataContext } from '../components/Inicialized/Dat
 import { MaysPrimera } from '../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
+import { getEmpresas } from '../components/Inicialized/GetDB/GetDB';
 
 const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
@@ -102,7 +103,8 @@ export async function getServerSideProps(ctx) {
     const slidesJson = await resSlides.json()
     props.props = { slides: slidesJson }
 
-    props.props = { ...props.props, empresas: [] }
+    const empresas = await getEmpresas('', '', 0, null)
+    props.props = { ...props.props, empresas: empresas }
 
     const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
     const responseJson = await response.json()

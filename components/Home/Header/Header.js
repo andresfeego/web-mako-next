@@ -20,6 +20,7 @@ const Header = ({ slides, municipios }) => {
                 <Link href="/directorio-empresarial" title={`📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆`} >
                     <div>
                         <Image width={0} height={0} sizes="100vw" loading="lazy" quality='40' className={styles.imgMakoLogo} src={require("../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_150x133.webp")} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
+                        <Image width={0} height={0} sizes="100vw" loading="lazy" quality='40' className={styles.imgMakoLogoResponsive} src={require("../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-r.webp")} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
                     </div>
                 </Link>
                 {pathname == '/directorio-empresarial' ?
@@ -30,16 +31,18 @@ const Header = ({ slides, municipios }) => {
             </div>
 
             <div className={styles.contenido}>
-                <BarraBusqueda />
-                <MenuUsuario />
+                <div className={styles.containerBusquedaUsuario}>
+                    <BarraBusqueda  />
+                    <MenuUsuario  />
+                </div>
                 <BusquedaCiudad municipios={municipios} />
                 <h2 style={{ display: 'none' }}>Categorías</h2>
                 <BusquedaCategoria />
+                <div className={styles.slide}>
+                    <SlideHome slides={slides} styles={stylesSlides} parent={'headerHome'} />
+                </div>
             </div>
 
-            <div className={styles.slide}>
-                <SlideHome slides={slides} styles={stylesSlides} parent={'headerHome'} />
-            </div>
 
         </div>
     )

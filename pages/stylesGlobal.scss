@@ -27,6 +27,7 @@
 
   #contentBody{
     padding-bottom: 2em;
+    overflow-x: hidden;
   }
   
   a:-webkit-any-link {
@@ -225,15 +226,16 @@
     height: 40px;
     margin-top: -30px;
     border-radius: 50%;
-    bottom: 35%;
+    bottom: 33%;
     background: $black-color-trasparent;
+    transform: scale(1.3);  // opcion para trnasformar el tamaño sin tocar los numeros de pixeles de anchos altos  y posicionamiento 
   }
   .banner-anim-arrow-default.next {
-    right: 1.4em;
+    right: 3.8em;
   }
   
   .banner-anim-arrow-default.prev {
-      left: 1.4em;
+      left: 3em;
     }
   .banner-anim-arrow-default.next:before,
   .banner-anim-arrow-default.prev:before,
@@ -268,7 +270,7 @@
   }
   .headerHome .banner-anim-thumb {
     position: absolute;
-    top: 8em;
+    top: 70px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -339,4 +341,77 @@
   margin-top: 2em;
   text-align: center;
   visibility: hidden;
+}
+
+@media only screen and (max-width: 2200px) {
+  .banner-anim-arrow-default {
+    transform: scale(1.3);  // opcion para trnasformar el tamaño sin tocar los numeros de pixeles de anchos altos  y posicionamiento 
+  }
+  .banner-anim-arrow-default.next {
+    right: 3.8em;
+  }
+  
+  .banner-anim-arrow-default.prev {
+      left: 3em;
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+  .banner-anim-arrow-default {
+    transform: scale(1.1);  // opcion para trnasformar el tamaño sin tocar los numeros de pixeles de anchos altos  y posicionamiento 
+  }
+  .banner-anim-arrow-default.next {
+    right: 3em;
+  }
+  
+  .banner-anim-arrow-default.prev {
+      left: 2.1em;
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+  .banner-anim-arrow-default {
+    transform: scale(1);  // opcion para trnasformar el tamaño sin tocar los numeros de pixeles de anchos altos  y posicionamiento 
+  }
+  .banner-anim-arrow-default.next {
+    right: 2em;
+  }
+  
+  .banner-anim-arrow-default.prev {
+      left: 1em;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+  .banner-anim-arrow-default.next {
+    right: 3.3em;
+  }
+  
+  .banner-anim-arrow-default.prev {
+      left: 1em;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+  .banner-anim-arrow-default {
+    transform: scale(0.85);  // opcion para trnasformar el tamaño sin tocar los numeros de pixeles de anchos altos  y posicionamiento 
+  }
+  .banner-anim-arrow-default.next {
+    right: 2.5em;
+  }
+  
+  .banner-anim-arrow-default.prev {
+      left: 0.6em;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+  .banner-anim-arrow-default {
+    display: none;
+  }
+
+  .headerHome .banner-anim-thumb {
+    top: 7px;
+    left: 7px;
+  }
 }

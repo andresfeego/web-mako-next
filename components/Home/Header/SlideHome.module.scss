@@ -1,14 +1,14 @@
 .slide{
-    width: 28vw;
-    height: 28vw;
+    width: 26svw;
+    height: 49em;
     background: $gray1 url("../../../scrAppServer/images/fondo_home.webp");
     background-position: center;
     background-size: cover;
     position: absolute;
     border-radius: 20%;
     transform: rotate(23deg);
-    bottom: 5vw;
-    right: -1vw;
+    top: -20svh;
+    right: -0.9svw;    
     overflow: hidden;
     -webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89); 
     box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89);
@@ -18,11 +18,11 @@
 
 .contenido{
     transform: rotate(-23deg);
-    height: 37em;
-    width: 36em;
-    left: -2.6em;
+    height: 104%;
+    width: 109%;
+    left: -2.5svw;
     position: absolute;
-    bottom: -4em;
+    bottom: -6.62svh;
 }
 
 .degradado{
@@ -35,12 +35,12 @@
 }
 
 .iconoEmpresa{
-  width: 8em;
-  height: 8em;
+  width: 9em;
+  height: 9em;
   border-radius: 50%;
   position: absolute !important;
-  bottom: 2em;
-  right: 6.5em;
+  bottom: 2.5em;
+  right: 9.5em;
   z-index: 6;
   -webkit-box-shadow: 3px 5px 22px -3px $gray3; 
   box-shadow: 1px 1px 12px 1px $gray2;
@@ -49,9 +49,9 @@
 
 .textoSlide {
   position: absolute !important;
-  bottom: 10em;
-  left: 5em;
-  width: 75%;
+  bottom: 15em;
+  left: 9em;
+  width: 65%;
   z-index: 10;
   -webkit-text-shadow: 0px 0px 15px $gray4; 
   text-shadow: 2px 2px 2px black;
@@ -68,3 +68,242 @@
 }
 
 
+@media only screen and (max-width: 2200px) {
+  .slide{
+    width: 30svw;
+    height: 45em;
+    right: -1.9svw;    
+}
+
+.contenido{
+  height: 104%;
+  width: 109%;
+  left: -2.8svw;
+  bottom: -6.62svh;
+}
+
+.iconoEmpresa{
+  width: 8em;
+  height: 8em;
+  bottom: 3em;
+  right: 8.5em;
+}
+
+.textoSlide {
+  bottom: 13em;
+  left: 7em;
+}
+
+
+}
+
+
+@media only screen and (max-width: 1920px) {
+  .slide{
+    width: 30svw;
+    height: 40em;
+    top: -15svh;
+    right: -2.5svw;    
+}
+
+.contenido{
+  left: -2.8svw;
+}
+.iconoEmpresa{
+  width: 7.5em;
+  height: 7.5em;
+  right: 8em;
+}
+
+.textoSlide {
+  bottom: 12em;
+}
+
+}
+
+@media only screen and (max-width: 1600px) {
+  .slide{
+    width: 32svw;
+    height: 36em;
+    top: -17svh;
+    right: -2.5svw;    
+}
+
+.contenido{
+  left: -2.8svw;
+}
+
+.iconoEmpresa{
+  width: 7em;
+  height: 7em;
+  right: 7em;
+}
+
+.textoSlide {
+  bottom: 10.5em;
+  left: 6em;
+}
+
+}
+
+@media only screen and (max-width: 1440px) {
+  
+  .slide{
+    width: 33svw;
+    height: 36em;
+    top: -17svh;
+    right: -2.5svw;    
+}
+
+.contenido{
+  left: -2.9svw;
+}
+
+.textoSlide {
+  bottom: 10em;
+  left: 4em;
+  width: 70%;
+}
+
+}
+
+@media only screen and (max-width: 1366px) {
+  .slide{
+    width: 32svw;
+    height: 30em;
+    top: -17svh;
+    right: -3svw;    
+}
+
+.iconoEmpresa{
+  width: 6em;
+  height: 6em;
+  right: 6em;
+}
+
+.textoSlide > div:nth-child(1){
+  font-size: 20px;
+}
+
+
+.textoSlide > div:nth-child(2){
+  font-size: 15px !important;
+}
+
+}
+
+@media only screen and (max-width: 1280px) {
+  .slide{
+    width: 34svw;
+    height: 32em;
+    top: -17svh;
+    right: -5svw;    
+}
+
+.textoSlide {
+  bottom: 10em;
+  left: 4em;
+  width: 65%;
+}
+
+}
+
+@media only screen and (max-width: 960px) {
+  .slide{
+    width: 39svw;
+    height: 28em;
+    top: -14svh;
+    right: -5svw;    
+}
+
+.iconoEmpresa{
+  right: 5em;
+  bottom: 3em;
+}
+
+.textoSlide {
+  bottom: 10em;
+  left: 4em;
+  width: 65%;
+}
+
+}
+
+@media only screen and (max-width: 834px) {
+  .slide{
+    width: 43svw;
+    height: 30em;
+    top: -14svh;
+    right: -8svw;    
+  }
+
+  .contenido{
+    left: -3.5svw;
+  }
+
+  .iconoEmpresa{
+    bottom: 3.5em;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  .slide{
+    width: 43svw;
+    height: 28em;
+    top: -14svh;
+    right: -8svw;    
+  }
+  .contenido{
+    left: -4.5svw;
+  }
+  
+  .iconoEmpresa{
+    right: 4em;
+    bottom: 3em;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .slide{
+    display: none;
+  }
+
+}
+
+
+@media only screen and (max-width: 520px) {
+  .slide{
+    display: initial;
+  }
+
+}
+
+@media only screen and (max-width: 414px) {
+  .slide{
+    width: 132svw;
+    height: 30em;
+    top: -7svh;
+    right: -19svw;    
+    border-radius: 100px;
+  }
+
+  .contenido{
+    height: 30em;
+    width: 100svw;
+    left: 19svw;
+    bottom: -6.62svh;
+  }
+
+  .iconoEmpresa{
+    right: 2.5em;
+    bottom: 2.5em;
+  }
+  .textoSlide {
+    bottom: 10em;
+    left: 2em;
+    width: 80%;
+  }
+
+}

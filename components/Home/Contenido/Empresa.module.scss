@@ -1,7 +1,6 @@
 .Empresa{
     width: 12em;
     height: 14em;
-    margin: 1em 1em 1em 0em;
     transition: all 0.5s ease 0s;
     cursor: pointer;
     overflow: hidden;
@@ -82,3 +81,38 @@
   color: $gray3;
   font-size: 1.5em;
 }
+
+@media only screen and (max-width: 960px) {
+    .logoEmpresa{
+        width: 6em;
+        height: 6em;
+    }
+    .Empresa{
+        width: 8em;
+        height: 10em;
+    }   
+    
+    .Empresa:hover{
+        transform: scale(1.1);
+        height: 11em;
+    }
+    
+  }
+
+  
+@media only screen and (max-width: 414px) {
+    .logoEmpresa{
+        width: 6em;
+        height: 6em;
+    }
+    .Empresa{
+        width: 8em;
+        height: 10em;
+    }   
+    
+    .Empresa:hover{
+        transform: scale(1.1);
+        height: 11em;
+    }
+    
+  }
