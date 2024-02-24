@@ -183,7 +183,7 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
                             :
                             null
                         }
-                        <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`}  className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono}</a>
+                        <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`} className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono}</a>
                     </div>
                     :
                     <a href={'tel:' + telefono.indicativo + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`} className={`${styles.rowInfo}`}> <PhoneForwardedIcon className={styles.infoIcon} /> <p className={`${styles.tel}`}> <span>llamar </span> {telefono.telefono} </p></a>
@@ -365,8 +365,10 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
             {empresa.lat != 0 && empresa.lng != 0 ?
                 <div className={styles.mapa + " " + estiloMapa}>
-                    <div className={styles.abrirmapa} onClick={() => abrirMapaF()}>{lblAbrirMapa}</div>
-                    <MapaContacto nombreEmpresa={empresa.nombre} lat={empresa.lat} lng={empresa.lng} urlLogo={urlLogo} />
+                    <div className={styles.mapaContainer}>
+                        <div className={styles.abrirmapa} onClick={() => abrirMapaF()}>{lblAbrirMapa}</div>
+                        <MapaContacto nombreEmpresa={empresa.nombre} lat={empresa.lat} lng={empresa.lng} urlLogo={urlLogo} />
+                    </div>
                 </div>
                 :
                 null

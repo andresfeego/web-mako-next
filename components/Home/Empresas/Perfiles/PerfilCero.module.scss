@@ -131,7 +131,15 @@ border: solid 1px $gray3;
   width: 50%;
 }
 
-.info>.mapa{
+.mapa>.mapaContainer{
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: solid 1px $primary;
+
+}
+  .info>.mapa{
   height: calc(100% + 48px);
   width: 100%;
   position: absolute;
@@ -153,6 +161,10 @@ transition:         all .7s ease-in-out;
   top: -16px !important;
   border-radius: 0 !important;
   filter: opacity(1);
+}
+
+.mapaAbierto>.mapaContainer{
+  border-radius: 0px;
 }
 
 .abrirmapa{
@@ -266,4 +278,72 @@ transition:         all .7s ease-in-out;
 .imgTrans{
   height: 100%;
   width: auto;
+}
+
+@media only screen and (max-width: 414px) {
+  .empresa{
+    height: fit-content;
+    max-height: 95svh;
+    width: 90svw;
+  }
+  
+  .close::before{
+    top: 1svh;
+    right: 2svw;
+    width: 24px;
+    height: 24px;
+    }
+
+    .headerEmpresa>.textHeader{
+      width: 100%;
+      padding-left: 114px;
+      
+    }
+    
+    .headerEmpresa>.textHeader h3{
+      font-size: 0.9em;
+    }
+
+    .iconos{
+      position: absolute;
+      right: 0.5vw;
+      bottom: 0.5vw;
+      display: flex;
+      transform: scale(0.8);    
+    }
+    
+    .info{
+      height: 100%;
+      padding: 16px 8px 32px 16px;
+      position: relative;
+      height: calc(100% - 114px);
+    }
+    
+    .descripcion{
+      margin: 0;
+    }
+    
+    .info>.textInfo{
+      font-size: 16px;
+      padding-top: 32px;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    
+    .info .textInfo .textInfoIzq{
+      height: fit-content;
+      width: 100%;
+      padding-left: 0px;
+    }
+    
+    .info .textInfo .textInfoDer{
+      height: fit-content;
+      width: 100%;
+    }
+    
+    .info>.mapa{
+      height: 108.5%;
+      top: 99%;
+    }
+    
 }
