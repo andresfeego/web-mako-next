@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/directorio/directorio3.php",
+        "destination": "/KC1P8ST4",
+        "statusCode": 301
+      }
+    ]
+  }
