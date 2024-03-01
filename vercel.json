@@ -1,9 +1,10 @@
 {
-    "rewrites": [
+    "redirects": [
       {
-        "source": "/directorio/directorio3.php",
-        "destination": "/KC1P8ST4",
+        "source": "/directorio/directorio3.php\\?id=(.*)",
+        "destination": "/$1",
         "statusCode": 301
       }
     ]
   }
+  
