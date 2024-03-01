@@ -66,6 +66,7 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
                 :
                 <Head>
                     <title>.: MAKO :. Directorio empresarial</title>
+                    <link rel="icon" href={require('./favicon.ico')} sizes="any" />
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta name="description" content="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />
                     <meta name="keywords" content='directorio telefonico, directorio empresarial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja' />
