@@ -118,7 +118,20 @@
     transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     border-bottom: 2px solid $primary !important;
     pointer-events: none;
+
   }
+
+  .MuiFormLabel-root{
+    color: $white0;
+  }
+
+  .MuiInputBase-root.MuiInput-root:before{
+    border-bottom: 1px solid $white0;
+  }
+
+  .MuiInputBase-input.MuiInput-input{
+    color: $white0;
+  } 
 
 // __________________________________slides _______________________________
 
