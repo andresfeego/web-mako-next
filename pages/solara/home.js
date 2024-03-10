@@ -7,7 +7,7 @@ import Image from "next/image";
 import Empresas from "../../components/Solara/Empresas/Empresas";
 
 
-const Home = () => {
+const Home = ({municipios}) => {
     const [menu, setMenu] = useState(0);
 
     const handleMenu = (menu) => {
@@ -44,7 +44,7 @@ const Home = () => {
                 return (
                     [
                         <MainMenu handleMenu={handleMenu} />,
-                        <Empresas />
+                        <Empresas municipios={municipios}/>
                     ]
                 )
                 break;
@@ -66,6 +66,17 @@ const Home = () => {
     )
 
 
+}
+
+
+export async function getServerSideProps(ctx) {
+    var props = { props: {} }
+
+    const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
+    const municipios = await response.json()
+
+    props.props = { municipios: municipios }
+    return props
 }
 
 

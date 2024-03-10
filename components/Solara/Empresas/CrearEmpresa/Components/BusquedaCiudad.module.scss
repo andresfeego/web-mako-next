@@ -1,0 +1,182 @@
+
+.busquedaCiudad{
+        width: 25%;
+        height: 2.5em;
+        background-color:  #fff;
+        margin-top: 0.5vw;
+        border-radius: 1.5em;
+        position: relative;
+        display: block;
+        text-align: center;
+        padding: 0 0em;
+    }
+
+.buscarCiudad{
+    height: 100%;
+    width: 90%;
+    margin: auto;
+    border: none;
+    color: $gray2;
+    font-size: 1em;
+    background-color: transparent;
+}
+
+.buscarCiudad:focus{
+    outline: none;
+}
+
+
+    #ciudades{
+        height: 2em;
+        margin: 0 auto;
+        font-size: 1.2em;
+        color: $gray2;
+    }
+
+    label + .MuiInput-formControl {
+        margin-top: 1em;
+
+    }
+
+    .MuiFormLabel-root {
+        font-size: 1.1em !important;
+    }
+
+    .MuiInputLabel-formControl {
+        top: 0.8em !important;
+        color: $gray1 !important;
+        left: 0;
+        position: absolute;
+        transform: translate(0, 24px) scale(1);
+    }
+
+    .MuiInputLabel-shrink {
+        transform: translate(0, -0.2em) scale(0.75) !important;
+        transform-origin: top left;
+    }
+    
+    .MuiInput-underline:before {
+        border-bottom: 0px !important;
+        
+    }
+    
+    .Mui-focused{
+        
+        color: $gray2 !important;
+        border-bottom: 5px !important;
+    }
+
+ 
+
+    
+    .botonBuscar{
+        border: solid 1px transparent;
+        width: 1em;
+        height: 1em;
+        font-size: 3.1em;
+        color: #474747;
+        right: -1.2em;
+        top: -0.1em;
+        position: absolute;
+        vertical-align: center;
+        text-align: center;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease 0s;
+        cursor: pointer;
+    }
+    
+    .botonBuscar:hover{
+        border: solid 1px $primaryDark;
+        width: 1em;
+        height: 1em;
+    }
+    
+    
+    .botonBuscar:active{
+        border: solid 1px $secondary;
+        width: 1em;
+        height: 1em;
+    }
+
+
+    .autocompletado{
+        background-color: #fff;
+        min-height: 6vw;
+        margin-top: 0.3vw;
+        border-radius: 10px;
+        max-height: 20vw;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+        width: fit-content;
+        position: relative;
+        min-width: 100%;
+    -webkit-box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89); 
+    box-shadow: 3px 5px 22px -3px rgba(0,0,0,0.89);
+
+    }
+
+    .ciudad{
+        font-size: 0.5em;
+        height: 1vw;
+        text-align: left;
+        margin: 0.4vw 0.4vw 0.1vw 0.4vw;
+        border-bottom: solid 1px $gray0;
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 2200px) {
+        .busquedaCiudad{
+            width: 40%;
+        }
+    }
+
+    @media only screen and (max-width: 1366px) {
+        .busquedaCiudad{
+            margin-top: 1vw;
+        }
+    }
+
+    
+    @media only screen and (max-width: 960px) {
+        .busquedaCiudad{
+            width: 60%;            
+        }
+    }
+    
+    @media only screen and (max-width: 834px) {
+        .busquedaCiudad{
+            width: 70%;            
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .busquedaCiudad{
+            width: 60%;            
+        }
+    }
+
+    @media only screen and (max-width: 414px) {
+        
+    .busquedaCiudad{
+        width: 73%;
+        height: 36px;
+        background-color:  #fff;
+        margin-top: 8px;
+        border-radius: 1.5em;
+        position: relative;
+    }
+
+    .botonBuscar{
+        display: none;
+    }
+    }
+    
+
+
+
+    

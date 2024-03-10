@@ -1,3 +1,6 @@
+import Resizer from "react-image-file-resizer";
+
+
 export const MaysPrimera = (string) => {
     var salida = string.toLowerCase();
     return salida.charAt(0).toUpperCase() + salida.slice(1);
@@ -19,3 +22,21 @@ const generaCodigo = (length) => {
     
     return result;
 }
+
+
+
+export const resizeFile = (file, height, width, type, compress) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      width,
+      height,
+      "webp",
+      compress,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      type
+    );
+  });

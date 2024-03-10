@@ -1,16 +1,12 @@
 import "./stylesGlobal.scss"
 import React from 'react'
-import { useState } from 'react';
-import { Provider } from 'react-redux'
 import { DataProvider } from '../components/Inicialized/DataProvider'
 import NextTopLoader from 'nextjs-toploader';
 import { ToastContainer } from 'react-toastify';
 import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import localStore from '../components/Inicialized/localStore'
 import { ThemeProvider } from '@mui/material/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
-import 'react-image-crop/dist/ReactCrop.css';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 

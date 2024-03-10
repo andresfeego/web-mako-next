@@ -1,9 +1,0 @@
-{
-    "rewrites": [
-      {
-        "source": "/directorio/directorio3.php\\?id=(.*)",
-        "destination": "/$1",
-        "statusCode": 301
-      }
-    ]
-  }

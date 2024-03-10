@@ -4,11 +4,11 @@ import styles from './Empresa.module.scss';
 import ListaVacia from '../ListaVacia';
 import CrearEmpresa from './CrearEmpresa/CrearEmpresa';
 
-const Empresas = () => {
+const Empresas = ({municipios}) => {
     return (
 
         <div className={`${styles.crearEmpresa} ${stylesTableros.tablero}`}>
-            <CrearEmpresa/>
+            <CrearEmpresa municipios={municipios}/>
            
         </div>
 
