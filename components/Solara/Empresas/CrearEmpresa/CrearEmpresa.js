@@ -26,11 +26,11 @@ const CrearEmpresa = ({ municipios }) => {
   const [slogan, setSlogan] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [direccion, setDireccion] = useState('');
-  const [categoria, setCategoria] = useState('');
+  const [categoria, setCategoria] = useState(0);
   const [telefono, setTelefono] = useState('');
   const [correo, setCorreo] = useState('');
   const [tagsText, setTagsText] = useState('');
-  const [municipio, setMunicipio] = useState('');
+  const [municipio, setMunicipio] = useState(0);
 
   const [imageRef, setImageRef] = useState(null);
 
@@ -93,8 +93,8 @@ const CrearEmpresa = ({ municipios }) => {
       if (direccion == '') reject('Falta direccion')
       if (telefono == '') reject('Falta telefono')
       if (correo == '') reject('Falta correo')
-      if (busIdCiudad == 0) reject('Falta municipio')
-      if (idCat == 0) reject('Falta categoría')
+      if (municipio == 0) reject('Falta municipio')
+      if (categoria == 0) reject('Falta categoría')
       if (croppedImage == '') reject('Falta logo')
       if (tagsText.length == 0) reject('Falta palabras clave')
       resolve()
@@ -118,6 +118,16 @@ const CrearEmpresa = ({ municipios }) => {
     }
     crearEmpresaBasica(data).then(() => {
       nuevoMensaje(tiposAlertas.success, 'Empresa guardada')
+        setNombre('')
+        setSlogan('')
+        setDescripcion('')
+        setDireccion('')
+        setCategoria(0)
+        setTelefono('')
+        setCorreo('')
+        setTagsText('')
+        setMunicipio(0)
+
     }).catch((err) => {
       nuevoMensaje(tiposAlertas.error, 'Error: ' + err)
     })
