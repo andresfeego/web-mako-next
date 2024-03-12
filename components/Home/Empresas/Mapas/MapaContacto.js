@@ -6,7 +6,7 @@ import styles from './MapaContacto.module.scss'
 const AnyReactComponent = ({ nombreEmpresa, urlLogo }) => (
     <div className={`${styles.location}`}>
         <div className={`${styles.markerLocation}`}>
-            <Image className={`${styles.imageLocation}`} src={urlLogo} width={30} height={30} />
+            <Image alt={`Logo mapa de contacto para ${nombreEmpresa}`} className={`${styles.imageLocation}`} src={urlLogo} width={30} height={30} />
             <FmdGoodIcon className={`${styles.iconLocation}`} sx={{ fontSize: 40 }} />
         </div>
     </div>
