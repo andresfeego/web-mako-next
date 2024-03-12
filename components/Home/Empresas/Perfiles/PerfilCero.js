@@ -74,7 +74,7 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
                             <div className={styles.close} onClick={() => { setOpen(false); router.push('/directorio-empresarial') }} />
                             <div className={styles.headerEmpresa}>
                                 <div className={styles.logo}>
-                                    <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50'  src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt="" />
+                                    <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50'  src={'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo} alt={`Logo de la empresa ${empresa.nombre}`} />
                                 </div>
                                 <div className={styles.textHeader}>
                                     <h2>{empresa.nombre}</h2>

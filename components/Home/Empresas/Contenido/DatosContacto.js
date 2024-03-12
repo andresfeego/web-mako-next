@@ -330,9 +330,9 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
                             <div className={`${styles.transferencias}`}>
                                 <span>Aceptamos tranferencias desde: </span>
                                 <div className={`${styles.contImgTrans}`}>
-                                    {empresa.transBanCol ? <Image className={`${styles.imgTrans}`} width={0} height={0} sizes="100vw" src={require('../../../../scrAppServer/icons/otros/logo_bancolombia.png')} alt="Aceptamos transferencias desde Bancolombia" title="Aceptamos transferencias desde Bancolombia" /> : null}
-                                    {empresa.transDavi ? <Image className={`${styles.imgTrans}`} width={0} height={0} sizes="100vw" src={require('../../../../scrAppServer/icons/otros/logo_daviplata.png')} alt="Aceptamos transferencias desde Daviplata" title="Aceptamos transferencias desde Daviplata" /> : null}
-                                    {empresa.transNequi ? <Image className={`${styles.imgTrans}`} width={0} height={0} sizes="100vw" src={require('../../../../scrAppServer/icons/otros/logo_nequi.png')} alt="Aceptamos transferencias desde Nequi" title="Aceptamos transferencias desde Nequi" /> : null}
+                                    {empresa.transBanCol ? <Image alt={'Acepta trasacciones con Bancolombia'} className={`${styles.imgTrans}`} width={0} height={0} sizes="100vw" src={require('../../../../scrAppServer/icons/otros/logo_bancolombia.png')} alt="Aceptamos transferencias desde Bancolombia" title="Aceptamos transferencias desde Bancolombia" /> : null}
+                                    {empresa.transDavi ? <Image alt={'Acepta trasacciones con Daviplata'} className={`${styles.imgTrans}`} width={0} height={0} sizes="100vw" src={require('../../../../scrAppServer/icons/otros/logo_daviplata.png')} alt="Aceptamos transferencias desde Daviplata" title="Aceptamos transferencias desde Daviplata" /> : null}
+                                    {empresa.transNequi ? <Image alt={'Acepta trasacciones con Nequi'} className={`${styles.imgTrans}`} width={0} height={0} sizes="100vw" src={require('../../../../scrAppServer/icons/otros/logo_nequi.png')} alt="Aceptamos transferencias desde Nequi" title="Aceptamos transferencias desde Nequi" /> : null}
                                 </div>
                             </div>
                         </div>
