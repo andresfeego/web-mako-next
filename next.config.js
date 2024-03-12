@@ -38,11 +38,7 @@ module.exports = {
           {
               source: '/robots.txt',
               destination: '/api/robots'
-          },
-          {
-            source: '/directorio3.php',
-            destination: '/api/directorio'
-        }
+          }
       ];
   },
   future: {
