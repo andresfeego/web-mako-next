@@ -32,6 +32,19 @@ module.exports = {
       },
     ]
   },
+  reactStrictMode: true,
+  async rewrites() {
+      return [
+          {
+              source: '/robots.txt',
+              destination: '/api/robots'
+          },
+          {
+            source: '/directorio3.php',
+            destination: '/api/directorio'
+        }
+      ];
+  },
   future: {
     webpack5: true,
   },
