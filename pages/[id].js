@@ -57,7 +57,7 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
             nuevoMensaje(tiposAlertas.info, mensaje)
 
         }
-    }, [])
+    }, [mensaje])
 
     return (
         <div id="contentBody">
@@ -106,6 +106,11 @@ export async function getServerSideProps(ctx) {
         const res = await fetch(process.env.HOST_NAME + '/empresas/' + codigo)
         if (res.ok) {
             const responseJson = await res.json();
+            if (responseJson.length == 0) {
+                props.props = { ...props.props, tipo: [], codigo: codigo, mensaje: 'La empresa no existe' }
+            return props
+            } else {
+            console.log(responseJson)
             const empresa = responseJson[0]
             switch (empresa.tipo) {
                 case 0:
@@ -126,9 +131,11 @@ export async function getServerSideProps(ctx) {
                     props.props = { ...props.props, tipo: [], codigo: codigo }
                     return props
             }
+                
+            }
         } else {
 
-            props.props = { ...props.props, tipo: [], codigo: codigo, mensaje: 'La empresa no existe' }
+            props.props = { ...props.props, tipo: [], codigo: codigo, mensaje: 'error al cargar los datos' }
             return props
         }
 
