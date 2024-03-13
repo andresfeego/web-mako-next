@@ -1,6 +1,6 @@
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import Header from '../components/Home/Header/Header';
-import ListaEmpresas from "../components/Home/Contenido/ListaEmpresas";
 import request from "superagent";
 import { useState, useEffect } from 'react';
 import Filtros from "../components/Home/Contenido/Filtros";
@@ -10,8 +10,12 @@ import { MaysPrimera } from '../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
 import { getEmpresas } from '../components/Inicialized/GetDB/GetDB';
+import Cargando from '../components/Inicialized/Cargando';
 
-
+const ListaEmpresas = dynamic(() => import('../components/Home/Contenido/ListaEmpresas'), {
+    ssr: false,
+    loading: () => <Cargando />
+  });
 
 const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 

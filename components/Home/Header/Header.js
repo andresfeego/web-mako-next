@@ -3,12 +3,16 @@ import BusquedaCategoria from "./BusquedaCategoria"
 import BusquedaCiudad from "./BusquedaCiudad"
 import styles from "./Header.module.scss"
 import stylesSlides from "./SlideHome.module.scss"
-import SlideHome from "./SlideHome"
 import Link from 'next/link'
 import MenuUsuario from "./MenuUsuario"
 import Image from "next/image"
 import { usePathname } from 'next/navigation'
+import dynamic from 'next/dynamic'
+import Cargando from "../../Inicialized/Cargando"
 
+const SlideHome = dynamic(() => import('./SlideHome'), {
+    ssr: false,
+  });
 
 const Header = () => {
     const pathname = usePathname()
@@ -39,7 +43,7 @@ const Header = () => {
                 <h2 style={{ display: 'none' }}>Categorías</h2>
                 <BusquedaCategoria />
                 <div className={styles.slide}>
-                    <SlideHome  styles={stylesSlides} parent={'headerHome'} />
+                     <SlideHome  styles={stylesSlides} parent={'headerHome'} /> 
                 </div>
             </div>
 
