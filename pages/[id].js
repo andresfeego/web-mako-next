@@ -17,7 +17,7 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
     function renderPerfil(tipo) {
 
-        if (tipo[0].tipo == 0 || tipo[0].tipo == -1) {
+        if (tipo == 0 || tipo == -1) {
 
             const isInactive = (tipo == -1)
             return [
@@ -50,14 +50,14 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
     }
 
-    
 
-      useEffect(() => {
+
+    useEffect(() => {
         if (mensaje) {
             nuevoMensaje(tiposAlertas.info, mensaje)
-    
+
         }
-     }, []) 
+    }, [])
 
     return (
         <div id="contentBody">
@@ -90,7 +90,7 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
             <Header />
             <Filtros />
-            <ListaEmpresas/>
+            <ListaEmpresas />
         </div>
     )
 }
@@ -98,47 +98,50 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 export async function getServerSideProps(ctx) {
 
     var props = { props: {} }
-
- 
-
-
-
     const codigo = ctx.query.id;
-    const resTipo = await fetch(process.env.HOST_NAME + '/tipoEmpresa/' + codigo)
-    const tipoJson = await resTipo.json()
-    props.props = { ...props.props, tipo: tipoJson, codigo: codigo }
-    console.log('ooooook')
-    if (tipoJson.length == 0) {
-        if (codigo != 'directorio-empresarial') {
-            props.props = { ...props.props, mensaje: 'La empresa no existe' }
-            return props
-        } else {
-            return props
-        }
-    } else {
-        const resEmpresa = await fetch(process.env.HOST_NAME + '/empresaXcodigo/' + codigo)
-        const empresa = await resEmpresa.json()
-        console.log(empresa.tipo)
-        switch (tipoJson[0].tipo) {
-            case 0:
-            case -1:
-                props.props = { ...props.props, empresa: empresa }
-                break;
-            case 1:
-                const urlEmpresa = `/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`
-                return {
-                    redirect: {
-                        destination: encodeURI(urlEmpresa),
-                        permanent: false,
-                    },
-                }
-                break;
 
-            default:
-                break;
+
+    if (codigo != 'directorio-empresarial') {
+
+        const res = await fetch(process.env.HOST_NAME + '/empresas/' + codigo)
+        if (res.ok) {
+            const responseJson = await res.json();
+            const empresa = responseJson[0]
+            switch (empresa.tipo) {
+                case 0:
+                case -1:
+                    props.props = { ...props.props, tipo: empresa.tipo, codigo: codigo, empresa: empresa }
+                    return props
+                    break;
+                case 1:
+                    const urlEmpresa = `/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`
+                    return {
+                        redirect: {
+                            destination: encodeURI(urlEmpresa),
+                            permanent: false,
+                        },
+                    }
+
+                default:
+                    props.props = { ...props.props, tipo: [], codigo: codigo }
+                    return props
+            }
+        } else {
+
+            props.props = { ...props.props, tipo: [], codigo: codigo, mensaje: 'La empresa no existe' }
+            return props
         }
+
+
+    } else {
+        props.props = { ...props.props, tipo: [], codigo: codigo }
         return props
+
     }
+
+
+
+
 }
 
 export default Index;
