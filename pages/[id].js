@@ -14,7 +14,6 @@ import Cargando from '../components/Inicialized/Cargando';
 
 const ListaEmpresas = dynamic(() => import('../components/Home/Contenido/ListaEmpresas'), {
     ssr: false,
-    loading: () => <Cargando />
   });
 
 const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {

@@ -23,7 +23,7 @@ const Empresa = (props) => {
                     </div>
                 </Link>
             :
-            <Link className={styles.Empresa} href={`/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion + " - Mako directorio empresarial"}>
+            <Link className={styles.Empresa} href={'/' + empresa.codigo} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion + " - Mako directorio empresarial"}>
                 <div className={styles.logoEmpresa} style={{ border: '2px solid ', borderColor: empresa.color }}>
                     <Image className={styles.logo} width={0} height={0} sizes="100vw" loading="lazy" quality='50' src={urllogo} alt={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} title={empresa.nombre + " - " + empresa.slogan + " - " + empresa.descripcion} />
                 </div>
