@@ -2,7 +2,19 @@ const path = require('path')
 const withImages = require('next-images')
 
 
-module.exports = {
+
+const withPWA = require('@ducanh2912/next-pwa').default({
+  dest: 'public',
+  cacheOnFrontEndNav: true,
+  reloadOnOnLine: true,
+  swcMinify: true,
+  disable: false,
+  workboxOption: {
+    disableDevLogs: true,
+  }
+})
+
+module.exports = withPWA({
   ...withImages(),
   sassOptions: {
     includePaths: [path.join(__dirname, './components/Inicialized')],
@@ -50,4 +62,7 @@ module.exports = {
     HOST_NAME_MAKO: 'https://www.mako.guru/',
   },
     quiet: true
-}
+})
+
+
+
