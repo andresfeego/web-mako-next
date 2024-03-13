@@ -2,6 +2,8 @@ import BannerAnim from 'rc-banner-anim';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import Cargando from '../../Inicialized/Cargando';
 
 
 
@@ -9,6 +11,8 @@ const { Element } = BannerAnim;
 const BgElement = Element.BgElement;
 
 function Item(props, styles ) {
+
+   
 
     var urlFondo = `url(https://www.feegosystem.com/scrAppServer/images/slides/${props.img})`
     var urlLogo = "url(https://www.feegosystem.com/scrAppServer/images/logos/" + props.descUno + ".png)"
@@ -54,12 +58,22 @@ function createSlides(slides, styles ) {
 }
 
 
-const SlideHome = ({ slides, styles, parent }) => {
+const SlideHome = ({ styles, parent }) => {
 
+    const [slides, setSlides] = useState(null)
+
+    useEffect(() =>{
+        fetch(process.env.HOST_NAME + '/slides')
+        .then((res) => res.json())
+        .then((data) =>{
+            setSlides(data)
+        })
+    
+    }, [])
 
     return (
         <div className={`${styles.slide} ${parent}`}>
-            {createSlides(slides, styles )}
+            {slides ? createSlides(slides, styles ): <Cargando/>}
         </div>
     )
 }

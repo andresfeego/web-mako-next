@@ -6,7 +6,7 @@ import Cargando from "../../Inicialized/Cargando";
 import { getEmpresas } from "../../Inicialized/GetDB/GetDB";
 
 
-const ListaEmpresas = ({ empresas }) => {
+const ListaEmpresas = () => {
 
     const data = useDataContext();
     const setData = useSetDataContext();
@@ -15,7 +15,7 @@ const ListaEmpresas = ({ empresas }) => {
     const [loadMoreState, setLoadMoreState] = useState(false);
     const [page, setPage] = useState(0);
 
-    const [listaEmpresas, setListaEmpresas] = useState(empresas)
+    const [listaEmpresas, setListaEmpresas] = useState(null)
 
     useEffect(() => {
         const controller = new AbortController()

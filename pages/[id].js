@@ -11,7 +11,9 @@ import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
 import { getEmpresas } from '../components/Inicialized/GetDB/GetDB';
 
-const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
+
+
+const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
     function renderPerfil(tipo) {
 
@@ -48,16 +50,14 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
 
     }
 
-    if (mensaje) {
-        nuevoMensaje(tiposAlertas.info, mensaje)
+    
 
-    }
-
-    /*  useEffect(() => {
-         if (tipo.length != 0) {
-             EvBiVisita(empresa.codigo)
-         }
-     }, []) */
+      useEffect(() => {
+        if (mensaje) {
+            nuevoMensaje(tiposAlertas.info, mensaje)
+    
+        }
+     }, []) 
 
     return (
         <div id="contentBody">
@@ -88,10 +88,9 @@ const Index = ({ slides, empresas, municipios, tipo, saveIdComercio, codigo, emp
                 </Head>
             }
 
-
-            <Header slides={slides} municipios={municipios} />
+            <Header />
             <Filtros />
-            <ListaEmpresas empresas={empresas} />
+            <ListaEmpresas/>
         </div>
     )
 }
@@ -100,23 +99,15 @@ export async function getServerSideProps(ctx) {
 
     var props = { props: {} }
 
-    const resSlides = await fetch(process.env.HOST_NAME + '/slides')
-    const slidesJson = await resSlides.json()
-    props.props = { slides: slidesJson }
+ 
 
-    const empresas = await getEmpresas('', '', 0, null)
-    props.props = { ...props.props, empresas: empresas }
 
-    const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
-    const responseJson = await response.json()
-    props.props = { ...props.props, municipios: responseJson }
 
     const codigo = ctx.query.id;
     const resTipo = await fetch(process.env.HOST_NAME + '/tipoEmpresa/' + codigo)
     const tipoJson = await resTipo.json()
-
     props.props = { ...props.props, tipo: tipoJson, codigo: codigo }
-
+    console.log('ooooook')
     if (tipoJson.length == 0) {
         if (codigo != 'directorio-empresarial') {
             props.props = { ...props.props, mensaje: 'La empresa no existe' }
@@ -125,7 +116,9 @@ export async function getServerSideProps(ctx) {
             return props
         }
     } else {
-        const empresa = props.props.empresas.find(({ codigo }) => codigo === props.props.codigo);
+        const resEmpresa = await fetch(process.env.HOST_NAME + '/empresaXcodigo/' + codigo)
+        const empresa = await resEmpresa.json()
+        console.log(empresa.tipo)
         switch (tipoJson[0].tipo) {
             case 0:
             case -1:

@@ -37,10 +37,20 @@ const BusquedaCiudad = (props) => {
 
     var buscarBar
 
-    const [listaCiudades, setLC] = useState(props.municipios)
-    const [listaCiudadesOriginal, setLCO] = useState(props.municipios)
+    const [listaCiudades, setLC] = useState(null)
+    const [listaCiudadesOriginal, setLCO] = useState(null)
     const [busCiudad, setBusCiudad] = useState(data.search.ciudad)
     const [mostrarAuto, setmostrarAuto] = useState(true)
+
+    useEffect(() =>{
+        fetch(process.env.HOST_NAME + '/listaMunicipios')
+        .then((res) => res.json())
+        .then((data) =>{
+            setLC(data)
+            setLCO(data)
+        })
+    
+    }, [])
 
 
 
@@ -133,7 +143,7 @@ const BusquedaCiudad = (props) => {
             }
             {busCiudad != '' && mostrarAuto ?
                 <div className={styles.autocompletado}>
-                    {renderBusqueda()}
+                    {listaCiudades ? renderBusqueda() : <Cargando/>}
                 </div> :
                 null
             }

@@ -10,7 +10,7 @@ import Image from "next/image"
 import { usePathname } from 'next/navigation'
 
 
-const Header = ({ slides, municipios }) => {
+const Header = () => {
     const pathname = usePathname()
 
     return (
@@ -35,11 +35,11 @@ const Header = ({ slides, municipios }) => {
                     <BarraBusqueda  />
                     <MenuUsuario  />
                 </div>
-                <BusquedaCiudad municipios={municipios} />
+                <BusquedaCiudad/>
                 <h2 style={{ display: 'none' }}>Categorías</h2>
                 <BusquedaCategoria />
                 <div className={styles.slide}>
-                    <SlideHome slides={slides} styles={stylesSlides} parent={'headerHome'} />
+                    <SlideHome  styles={stylesSlides} parent={'headerHome'} />
                 </div>
             </div>
 
