@@ -37,7 +37,7 @@ export function DataProvider({children}){
         ux: {
             idComercio: 0,
             scroll: 5,
-            limLisEmpresas: 24 //limite de empresas a mostrar en listados
+            limLisEmpresas: 18 //limite de empresas a mostrar en listados
         }
     };
 

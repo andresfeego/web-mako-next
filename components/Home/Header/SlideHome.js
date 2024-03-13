@@ -4,6 +4,7 @@ import TweenOne from 'rc-tween-one';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Cargando from '../../Inicialized/Cargando';
+import Image from 'next/image';
 
 
 
@@ -14,7 +15,7 @@ function Item(props, styles ) {
 
    
 
-    var urlFondo = `url(https://www.feegosystem.com/scrAppServer/images/slides/${props.img})`
+    var urlFondo = `https://www.feegosystem.com/scrAppServer/images/slides/${props.img}`
     var urlLogo = "url(https://www.feegosystem.com/scrAppServer/images/logos/" + props.descUno + ".png)"
     var urlDestino = `/categorias/${props.descDos}/${props.descUno}`
     if (props.tipoLink == 2) {
@@ -31,7 +32,9 @@ function Item(props, styles ) {
             <Link aria-label="Ver más de la categoría" title="Ver más de la categoría" href={urlDestino} >
                 <div className={styles.degradado} />
             </Link>
-            <BgElement key={"bg1" + props.idSlide} className="bg" style={{ backgroundImage: urlFondo, backgroundSize: 'cover', backgroundPosition: 'center', }} />
+            <BgElement key={"bg1" + props.idSlide} className="bg" style={{  backgroundSize: 'cover', backgroundPosition: 'center', }} >
+                        <Image width={500} height={500} sizes="100vw" loading="lazy" quality='40' className={styles.imgMakoLogo} src={urlFondo} />
+                </BgElement>
             <div className={styles.textoSlide}>
                 <QueueAnim name="QueueAnim" key={"h1" + props.idSlide}>{props.titulo}</QueueAnim>
                 <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} name="TweenOne" id="TweenOne">
