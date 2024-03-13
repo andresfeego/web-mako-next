@@ -22,7 +22,6 @@ module.exports = withPWA({
 
 
   },
-  compress: true,
   i18n: {
     locales: ["es"],
     defaultLocale: "es",

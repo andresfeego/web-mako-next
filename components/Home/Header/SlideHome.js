@@ -33,7 +33,7 @@ function Item(props, styles ) {
                 <div className={styles.degradado} />
             </Link>
             <BgElement key={"bg1" + props.idSlide} className="bg" style={{  backgroundSize: 'cover', backgroundPosition: 'center', }} >
-                        <Image width={500} height={500} sizes="100vw" loading="lazy" quality='40' className={styles.imgMakoLogo} src={urlFondo} />
+                        <Image width={0} height={0} sizes="100vw" loading="lazy" quality='40' className={styles.backg} src={urlFondo} alt='Slide Mako Directorio comercial'/>
                 </BgElement>
             <div className={styles.textoSlide}>
                 <QueueAnim name="QueueAnim" key={"h1" + props.idSlide}>{props.titulo}</QueueAnim>
