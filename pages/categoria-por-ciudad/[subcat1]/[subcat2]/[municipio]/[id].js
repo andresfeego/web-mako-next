@@ -29,9 +29,9 @@ const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) =>
             {idCat != 0 ?
 
                 <Head>
-                    <title>{'.: Mako.guru :.📖📑📒✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + '🌐 【2024】'}</title>
+                    <title>{'✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' para 【2024】'}</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                    <meta name="description" content={'.: Mako.guru :. Directorio comercial 📖✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' Colombia con números de contacto.'} />
+                    <meta name="description" content={'.: Mako.guru :. Directorio comercial 📖✔ Encuentra aqui un Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' Colombia con números de contacto.'} />
                     <meta name="keywords" content={'directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja'} />
                     <meta name="robots" content="index, follow" />
                     <meta name="author" content="www.mako.guru" />
