@@ -38,7 +38,7 @@ const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subca
                     <Head>
                         <title>{'Listado de empresas de ' + subcatdos + ' en diferentes cuidades de Colombia'}</title>
                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                        <meta name="description" content={'.: Mako.guru :. Empresas de ' + subcatdos + ' en Colombia --' + '📖✔ Listado de empresas de ' + subcatdos + '  con números de contacto para Colombia👆'} />
+                        <meta name="description" content={'.: Mako.guru :. Empresas de ' + subcatdos + ' en Colombia --' + '📖✔ Listado de empresas de ' + subcatdos + '  con números de contacto, Whatsapp, correos, direcciones, como llegar, mapa, horarios, medios de pago y telefonos para Colombia👆'} />
                         <meta name="keywords" content={'directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja, ' + subcatdos} />
                         <meta name="robots" content="index, follow" />
                         <meta name="author" content="www.mako.guru" />
