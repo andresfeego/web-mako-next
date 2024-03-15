@@ -66,7 +66,7 @@ function normalizarUrl(texto) {
 function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, ciuycatConEmpresas) {
   const pages = [
     { loc: 'https://www.mako.guru/directorio-empresarial', 
-    changefreq: 'monthly', 
+    changefreq: 'daily', 
     priority: 0.7 },
   ];
 
@@ -75,8 +75,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
     pages.push(
       {
         loc: `https://www.mako.guru/${empresa.codigo}`,
-        changefreq: 'monthly',
-        priority: 0.7
+        changefreq: 'weekly',
       }
       )
 
@@ -91,8 +90,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       pages.push(
         {
           loc: `https://www.mako.guru/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
-          changefreq: 'monthly',
-          priority: 0.7
+          changefreq: 'weekly',
         }
         )
   
@@ -105,8 +103,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       pages.push(
         {
           loc: `https://www.mako.guru/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
-          changefreq: 'monthly',
-          priority: 0.7
+          changefreq: 'weekly',
         }
         )
   
@@ -117,8 +114,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       pages.push(
         {
           loc: `https://www.mako.guru/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
-          changefreq: 'monthly',
-          priority: 0.7
+          changefreq: 'weekly',
         }
         )
   
