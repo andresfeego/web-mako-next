@@ -9,7 +9,7 @@ import { useDataContext, useSetDataContext } from '../../../../../components/Ini
 import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
 
-const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) => {
+const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio, categoriaCompleta}) => {
 
     const data = useDataContext();
     const setData = useSetDataContext();
@@ -32,7 +32,7 @@ const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio }) =>
                     <title>{'✔ Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' para 【2024】'}</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta name="description" content={'.: Mako.guru :. Directorio comercial 📖✔ Encuentra aqui un Listado de empresas de ' + subcatdos + ' en ' + MaysPrimera(municipio) + ' Colombia con números de contacto, Whatsapp, correos, direcciones, como llegar, mapa, horarios, medios de pago y teléfonos.'} />
-                    <meta name="keywords" content={'directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja'} />
+                    <meta name="keywords" content={` ${categoriaCompleta.palabras_clave}, directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, ${MaysPrimera(municipio)}`} />
                     <meta name="robots" content="index, follow" />
                     <meta name="author" content="www.mako.guru" />
                     <meta name="audience" content="Everyone" />
@@ -85,6 +85,11 @@ export async function getServerSideProps(ctx) {
     const idCat = ctx.query.id;
     const subcatdos = ctx.query.subcat2;
     const municipio = ctx.query.municipio;
+
+    const responseCat = await fetch(process.env.HOST_NAME + '/subcategoria2Xid/' + idCat)
+    const responseCatJson = await responseCat.json()
+    
+    props.props = { ...props.props, categoriaCompleta: responseCatJson[0] }
 
     props.props = { ...props.props, idCat: idCat, subcatdos: subcatdos.replace(/\-/g, ' '), municipio: municipio.replace(/\-/g, ' ') }
 

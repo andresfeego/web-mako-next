@@ -9,7 +9,7 @@ import { useDataContext, useSetDataContext } from '../../../../../components/Ini
 import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
 
-const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subcatdos, idCat, empresa, mensaje }) => {
+const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subcatdos, idCat, empresa, mensaje , categoriaCompleta}) => {
 
     function renderCat(idCat) {
 
@@ -39,7 +39,7 @@ const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subca
                         <title>{'Listado de empresas de ' + subcatdos + ' en diferentes cuidades de Colombia'}</title>
                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                         <meta name="description" content={'.: Mako.guru :. Empresas de ' + subcatdos + ' en Colombia --' + '📖✔ Listado de empresas de ' + subcatdos + '  con números de contacto, Whatsapp, correos, direcciones, como llegar, mapa, horarios, medios de pago y telefonos para Colombia👆'} />
-                        <meta name="keywords" content={'directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja, ' + subcatdos} />
+                        <meta name="keywords" content={` ${categoriaCompleta.palabras_clave}, directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja, ` + subcatdos} />
                         <meta name="robots" content="index, follow" />
                         <meta name="author" content="www.mako.guru" />
                         <meta name="audience" content="Everyone" />
@@ -109,6 +109,11 @@ export async function getServerSideProps(ctx) {
     const categoria = ctx.query.categoria;
     const subcatuno = ctx.query.subcatuno;
     const subcatdos = ctx.query.subcatdos;
+
+    const responseCat = await fetch(process.env.HOST_NAME + '/subcategoria2Xid/' + idCat)
+    const responseCatJson = await responseCat.json()
+    
+    props.props = { ...props.props, categoriaCompleta: responseCatJson[0] }
 
     props.props = { ...props.props, idCat: idCat, categoria: categoria, subcatuno: subcatuno, subcatdos: subcatdos.replace(/\-/g, ' ') }
 

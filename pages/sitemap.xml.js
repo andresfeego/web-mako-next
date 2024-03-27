@@ -56,7 +56,6 @@ function normalizarUrl(texto) {
     texto = texto.slice(0, -1)
   }
 
-    console.log(texto)
   return((texto));
   
 }
@@ -76,6 +75,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       {
         loc: `https://www.mako.guru/${empresa.codigo}`,
         changefreq: 'weekly',
+        lastmod: empresa.fechaLastMod
       }
       )
 
@@ -87,11 +87,14 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
   
     categoriasConEmpresas.map(categoriasConEmpresas => {
   
+console.log(categoriasConEmpresas)
+
       pages.push(
         {
           loc: `https://www.mako.guru/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
           changefreq: 'weekly',
-        }
+        lastmod: categoriasConEmpresas.fechaLastMod
+      }
         )
   
   
@@ -104,7 +107,8 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
         {
           loc: `https://www.mako.guru/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
           changefreq: 'weekly',
-        }
+        lastmod: ciudadesConEmpresas.fechaLastMod
+      }
         )
   
   
@@ -115,7 +119,8 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
         {
           loc: `https://www.mako.guru/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
           changefreq: 'weekly',
-        }
+        lastmod: ciuycatConEmpresas.fechaLastMod
+      }
         )
   
   
