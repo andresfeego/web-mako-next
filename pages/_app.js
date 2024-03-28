@@ -7,6 +7,7 @@ import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
+import Script from 'next/script'
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -18,6 +19,7 @@ const App = ({ Component, pageProps }) => {
 
 
     <React.Fragment>
+      <Script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=db1cd646-84d1-4e26-820f-80450b7ba0cd"> </Script>
       <ThemeProvider theme={customTheme}>
         <ToastContainer
           position="top-center"
