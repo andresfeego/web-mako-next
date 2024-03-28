@@ -65,8 +65,7 @@ function normalizarUrl(texto) {
 function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, ciuycatConEmpresas) {
   const pages = [
     { loc: 'https://www.mako.guru/directorio-empresarial', 
-    changefreq: 'daily', 
-    priority: 0.7 },
+  },
   ];
 
   empresas.map(empresa => {
@@ -74,7 +73,6 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
     pages.push(
       {
         loc: `https://www.mako.guru/${empresa.codigo}`,
-        changefreq: 'weekly',
         lastmod: empresa.fechaLastMod
       }
       )
@@ -92,7 +90,6 @@ console.log(categoriasConEmpresas)
       pages.push(
         {
           loc: `https://www.mako.guru/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
-          changefreq: 'weekly',
         lastmod: categoriasConEmpresas.fechaLastMod
       }
         )
@@ -106,7 +103,6 @@ console.log(categoriasConEmpresas)
       pages.push(
         {
           loc: `https://www.mako.guru/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
-          changefreq: 'weekly',
         lastmod: ciudadesConEmpresas.fechaLastMod
       }
         )
@@ -118,7 +114,6 @@ console.log(categoriasConEmpresas)
       pages.push(
         {
           loc: `https://www.mako.guru/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
-          changefreq: 'weekly',
         lastmod: ciuycatConEmpresas.fechaLastMod
       }
         )
@@ -157,7 +152,7 @@ function buildSitemapXml(fields) {
 };
 
 function withXMLTemplate(content) {
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${content}</urlset>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${content}</urlset>`;
 };
 
 
