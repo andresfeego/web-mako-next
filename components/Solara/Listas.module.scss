@@ -7,10 +7,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding-bottom: 24px;
     color: $gray2;
     max-height: 850px;
-    overflow-y: auto;
 }
 
 .title{
@@ -61,6 +59,8 @@
 .contentLista{
     min-height: 50px;
     padding: 16px;
+    overflow-y: auto;
+    max-height: 100%;
     display: block;
     flex-direction: column;
 }

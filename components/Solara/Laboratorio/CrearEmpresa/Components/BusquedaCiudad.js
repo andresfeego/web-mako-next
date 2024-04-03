@@ -11,7 +11,7 @@ import { EvBiBusqueda } from '../../../../Inicialized/Bitacora';
 
 
 
-const BusquedaCiudad = ({municipios, setMunicipio}) => {
+const BusquedaCiudad = ({municipios, setMunicipio, ciudadInicial}) => {
 
     const data = useDataContext();
     const setData = useSetDataContext();
@@ -20,9 +20,26 @@ const BusquedaCiudad = ({municipios, setMunicipio}) => {
 
     const [listaCiudades, setLC] = useState(municipios)
     const [listaCiudadesOriginal, setLCO] = useState(municipios)
-    const [busCiudad, setBusCiudad] = useState('')
+    const [busCiudad, setBusCiudad] = useState(ciudadInicial)
     const [mostrarAuto, setmostrarAuto] = useState(true)
 
+    useEffect(() =>{
+        fetch(process.env.HOST_NAME + '/listaMunicipios')
+        .then((res) => res.json())
+        .then((data) =>{
+            setLC(data)
+            setLCO(data)
+        })
+    
+    }, [])
+
+    useEffect(() =>{
+        if (ciudadInicial == 0) {
+            setBusCiudad('')
+            setMunicipio(0)
+        }
+    
+    }, [ciudadInicial])
 
         function onSubmit(ciudad, id) {
             setBusCiudad(ciudad)
@@ -94,12 +111,8 @@ const BusquedaCiudad = ({municipios, setMunicipio}) => {
 
     return (
         <div className={styles.busquedaCiudad}>
-            <input type="text" placeholder="En que ciudad lo buscas ?" className={styles.buscarCiudad}  name="busCiudad" value={busCiudad} onChange={onChange}></input>
-            {data.search.ciudad === '' ?
-                <div className={styles.botonBuscar} onClick={() => onSubmit()} > <BtnSearch style={{ width: '90%', height: '90%' }} /></div>
-                :
-                <div className={styles.botonBuscar} onClick={() => onClear()} > <BtnClose style={{ width: '85%', height: '85%' }} /></div>
-            }
+            <input type="text" placeholder="Ciudad"  className={styles.buscarCiudad}  name="busCiudad" value={busCiudad} onChange={onChange}></input>
+           
             {busCiudad != '' && mostrarAuto ?
                 <div className={styles.autocompletado}>
                     {renderBusqueda()}

@@ -39,6 +39,15 @@
 
 }
 
+.formContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer input::placeholder,
+.formContainer label{
+  color: $gray3
+}
 .containerCrop{
     display: flex;
     justify-content: center;
@@ -78,3 +87,64 @@
       margin-left: 32;
     }
   
+    .sinLogo{
+      width: 200px;
+      height: 200px;
+      border: $gray3 2px solid;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    .sinLogoContainer{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .labelButtonSelectImage{
+      padding: 8px 18px;
+      font-size: 16px;
+      background-color: $primary !important;
+      margin: 12px auto !important;
+      border-radius: 20px;
+      color: $gray4;
+    }
+
+    .containerCropped{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .buttons{
+      display: flex;
+    }
+
+    .buttonSelectImage{
+      display: none;
+    }
+
+    .ImageOutlined{
+      height: 50%;
+      font-size: 8em !important;
+      color: $gray3;
+    }
+
+    .buttonRegistrar{
+      font-size: 20px ;
+      padding: 8px 48px;
+  }
+
+  .containerTelefono{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px $gray3;
+    padding: 8px 8px 18px 8px;
+    border-radius: 10px;
+  }
+
+  .inputTelefono{
+    margin-bottom: 14px;
+  }

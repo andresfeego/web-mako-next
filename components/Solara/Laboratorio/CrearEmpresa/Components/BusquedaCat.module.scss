@@ -1,0 +1,80 @@
+.contCategoria{
+    display: flex;
+    flex-direction: column;
+}
+
+.contBarraBusqueda{
+display: flex;
+margin-bottom: 24px;
+}
+
+.barraBusqueda{
+    width: 100%;
+}
+.inputformBusCat{
+    flex: 1;
+    width: 100%;
+}
+
+.iconBuscar{
+width: 10%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.iconBuscar *{
+    font-size: 1.8em !important;
+}
+
+.categoriasSeleccionables{
+    max-height: 450px;
+    height: fit-content;
+    overflow-y: auto;
+}
+
+.categoria{
+    margin-bottom: 8px;
+    width: 100%;
+    display: flex;
+    border: solid 1px $gray4;
+    padding: 4px;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.textoCategoria{
+    flex: 1;
+}
+
+.textoCategoria span{
+    font-size: 9px;
+}
+
+.textoCategoria h3,
+.textoCategoria h4,
+.textoCategoria h5{
+    font-size: 16px;
+    color: $white0;
+}
+
+.btn{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btnAsignar{
+    background-color: $primary;
+
+}
+
+.btnCancelar{
+    background-color: $rojo
+}
+

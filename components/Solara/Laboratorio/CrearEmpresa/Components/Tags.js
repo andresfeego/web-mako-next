@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { nuevoMensaje, tiposAlertas } from "../../../../Inicialized/Toast";
+import styles from './Tags.module.scss'
+import { useEffect } from "react";
 
 const KeyCodes = {
     comma: 188,
@@ -10,7 +12,7 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-const Tags = ({ setTagsText }) => {
+const Tags = ({ setTagsText, tagsIniciales}) => {
 
     const [tags, setTags] = useState([])
     const [input, setInput] = useState(null)
@@ -23,6 +25,12 @@ const Tags = ({ setTagsText }) => {
         { id: 'celulares', text: 'celulares' },
         { id: 'ropa', text: 'ropa' }
     ])
+
+    useEffect(() =>{
+        if (tagsIniciales == '') {
+            setTags([])
+        }
+    }, [tagsIniciales])
 
     const handleDelete = i => {
         setTags(tags.filter((tag, index) => index !== i));
@@ -80,8 +88,7 @@ const Tags = ({ setTagsText }) => {
     }
 
     return (
-        <div>
-            <span className="palabrasClave">Agrega palabras clave por las cuales encontraran tu negocio en google, escribe la palabra o frase y presiona enter o ,</span>
+        <div className={styles.tagsContainer}>
             <ReactTags
                 tags={tags}
                 suggestions={suggestions}
@@ -92,10 +99,22 @@ const Tags = ({ setTagsText }) => {
                 handleTagClick={handleTagClick}
                 placeholder={"Palabras clave"}
                 handleInputChange={handleInputChange}
-                inputFieldPosition="bottom"
+                inputFieldPosition="top"
                 autocomplete
+                classNames={{
+                    tags: 'tagsClass',
+                    tagInputField: styles.inputField,
+                    selected: 'selectedClass',
+                    tag: 'tagClass',
+                    remove: 'removeClass',
+                    suggestions: 'suggestionsClass',
+                    activeSuggestion: 'activeSuggestionClass',
+                    editTagInput: 'editTagInputClass',
+                    editTagInputField: 'editTagInputField',
+                    clearAll: 'clearAllClass',
+                  }}
             />
-            <Button title='Agregar' onClick={handleAgregarTag}>Agregar</Button>
+            <div className={styles.buttonAgregar} title='Agregar' onClick={handleAgregarTag}>Agregar</div>
 
         </div>
 

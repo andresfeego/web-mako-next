@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import stylesGeneral from './listadoResultados.module.scss'
+import stylesGeneral from '../../../listadoResultados.module.scss'
 import { useState } from 'react';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 
-const ListadoResultadosVacio = () => {
+const ListadoResultados = () => {
 
     const[busquedas, setBusquedas] = useState(false)
 
@@ -31,9 +31,14 @@ const ListadoResultadosVacio = () => {
 
     return ( 
         <div className={`${stylesGeneral.listadoResultados}`}>
-            <span>Aqui va el contenido</span>
+                <RefreshOutlinedIcon onClick={()=> getBusquedas()} className={`${stylesGeneral.recargar}`}/>
+            {busquedas ? 
+                renderLista()
+            :
+            <span>Sin resultados</span>
+        }
         </div>
      );
 }
  
-export default ListadoResultadosVacio;
+export default ListadoResultados;

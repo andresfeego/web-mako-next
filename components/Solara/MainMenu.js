@@ -47,12 +47,7 @@ const MainMenu = ({wide, handleMenu}) => {
             </div>
 
             
-            <div onClick={()=> {handleMenu(3), setOpen(false)}}>
-                <a className={styles.button}>
-                    <AddBoxIcon className={styles.icon} />
-                    <span className={styles.text}>Crear Empresa</span>
-                </a>
-            </div>
+            
 
         </div>
     );

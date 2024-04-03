@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import stylesGeneral from './Listas.module.scss'
+import stylesGeneral from '../../../Listas.module.scss'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import TarjetaVacia from './TarjetaVacia';
-import ListadoResultadosVacio from './ListadoResultadosVacio';
+import ListadoResultados from './ListadoResultados';
 
-const ListaVacia = () => {
+const BusquedasPorPalabra = () => {
 
     const [openFilter, setOpenFilter] = useState(false);
     return (
         <div className={`${stylesGeneral.lista}`}>
-            <span className={`${stylesGeneral.title}`}>Aqui va el titulo</span>
+            <span className={`${stylesGeneral.title}`}>Busquedas por palabra</span>
             <div className={`${stylesGeneral.filters}`}>
                 {openFilter ?
                     <KeyboardArrowUpOutlinedIcon className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
@@ -21,7 +20,13 @@ const ListaVacia = () => {
                     <span className={`${stylesGeneral.titleFilters}`}>Filtros</span>
                     {openFilter ?
                         <div className={`${stylesGeneral.filtersToApply}`}>
-                            <span>Aqui van los filtros</span>
+                            <span>fdfsgdfsg</span>
+                            <span>fdfsgdfsg</span>
+                            <span>fdfsgdfsg</span>
+                            <span>fdfsgdfsg</span>
+                            <span>fdfsgdfsg</span>
+                            <span>fdfsgdfsg</span>
+                            <span>fdfsgdfsg</span>
                         </div>
                         :
                         null
@@ -30,10 +35,10 @@ const ListaVacia = () => {
             </div>
 
             <div className={`${stylesGeneral.contentLista}`}>
-                <span>Aqui va el contenido</span>
+                <ListadoResultados/>
             </div>
         </div>
     );
 }
 
-export default ListaVacia;
+export default BusquedasPorPalabra;
