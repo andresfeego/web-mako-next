@@ -104,9 +104,9 @@ const Tags = ({ setTagsText, tagsIniciales}) => {
                 classNames={{
                     tags: 'tagsClass',
                     tagInputField: styles.inputField,
-                    selected: 'selectedClass',
-                    tag: 'tagClass',
-                    remove: 'removeClass',
+                    selected: styles.tags,
+                    tag: styles.tag,
+                    remove: styles.removeTags,
                     suggestions: 'suggestionsClass',
                     activeSuggestion: 'activeSuggestionClass',
                     editTagInput: 'editTagInputClass',
