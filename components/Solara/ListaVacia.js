@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import stylesGeneral from './Listas.module.scss'
+import stylesGeneral from '../../../Listas.module.scss'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import TarjetaVacia from './TarjetaVacia';

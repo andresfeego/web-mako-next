@@ -1,4 +1,5 @@
 import request from "superagent"
+import {generaCodigo} from './GlobalFunctions'
 
 
 export const EvBiClickButton = (flujo, etiqueta) => {
@@ -7,7 +8,7 @@ export const EvBiClickButton = (flujo, etiqueta) => {
         tipoAccion: 4,
         flujo: flujo,
         etiqueta: etiqueta,
-        hashSession: 'Superadmin',
+        hashSession: generateHashSession(),
         authenticated: false,
         usuario: 0,
         dispositivo: 'NA',
@@ -25,7 +26,7 @@ export const EvBiVisita = (idComercio) => {
         tipoAccion: 2,
         flujo: 'Apertura local',
         etiqueta: idComercio,
-        hashSession: 'Superadmin',
+        hashSession: generateHashSession(),
         authenticated: false,
         usuario: 0,
         dispositivo: 'NA',
@@ -43,7 +44,7 @@ export const EvBiBusqueda = (flujo, busqueda) => {
         tipoAccion: 1,
         flujo: flujo,
         etiqueta: busqueda,
-        hashSession: 'Superadmin',
+        hashSession: generateHashSession(),
         authenticated: false,
         usuario: 0,
         dispositivo: 'NA',
@@ -53,6 +54,20 @@ export const EvBiBusqueda = (flujo, busqueda) => {
     }
 
     saveDb(data)
+}
+
+function generateHashSession(){
+    const DataHashSession = window.sessionStorage.getItem('hashSession');
+    if (DataHashSession) {
+        return DataHashSession
+    } else {
+        const hashSession = process.env.DEV_ENV ? 'SuperAdmin' : generaCodigo(60, true)
+        console.log(hashSession)
+        window.sessionStorage.setItem('hashSession', hashSession)
+        return hashSession
+
+    }
+
 }
 
 

@@ -1,9 +1,11 @@
 .tablero{
-    padding-left: 80px;
+    padding-left: 40px;
     padding-top: 24px;
     display: flex;
     flex-direction: row;
     gap: 24px;
     flex-wrap: nowrap;
     overflow-x: auto;
+    padding-right: 50px;
+
 }

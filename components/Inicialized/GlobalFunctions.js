@@ -10,9 +10,12 @@ String.prototype.toProperCase = function () {
     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
 
-const generaCodigo = (length) => {
+export const generaCodigo = (length, min) => {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    if (min) {
+      characters       = 'abcdefghijklmnopqrstuvwxyz_0123456789';
+    }
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));

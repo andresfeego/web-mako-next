@@ -2,9 +2,26 @@ import { useState } from 'react';
 import stylesGeneral from '../../../Listas.module.scss'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import ListadoResultados from './ListadoResultados';
+import ListadoDosCol from '../../../GeneralComponents/ListadoDosCol';
+import { useEffect } from 'react';
 
 const BusquedasPorPalabra = () => {
+
+    const[busquedas, setBusquedas] = useState([])
+
+    async function getBusquedas(){
+        const resBusquedas = await fetch(process.env.HOST_NAME + '/bitacora/busquedasPalabra')
+        const busquedasJson = await resBusquedas.json()
+        setBusquedas(busquedasJson)
+    }
+
+    useEffect(() => {
+        getBusquedas()
+    },[])
+
+    const refresh = () =>{
+        getBusquedas()
+    }
 
     const [openFilter, setOpenFilter] = useState(false);
     return (
@@ -35,7 +52,7 @@ const BusquedasPorPalabra = () => {
             </div>
 
             <div className={`${stylesGeneral.contentLista}`}>
-                <ListadoResultados/>
+                <ListadoDosCol data={busquedas} refresh={refresh} />
             </div>
         </div>
     );
