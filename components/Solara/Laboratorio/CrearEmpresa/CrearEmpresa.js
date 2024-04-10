@@ -254,7 +254,7 @@ const CrearEmpresa = ({ municipios }) => {
 
 
           <br />
-          <TextField id="standard-basic" label="Nombre" variant="standard" color="success" value={nombre} onChange={e => setNombre(e.target.value)} />
+          <TextField id="standard-basic" autoFocus label="Nombre" variant="standard" color="success" value={nombre} onChange={e => setNombre(e.target.value)} />
           <br />
           <TextField id="standard-basic" label="Slogan" variant="standard" color="success" value={slogan} onChange={e => setSlogan(e.target.value)} />
           <br />

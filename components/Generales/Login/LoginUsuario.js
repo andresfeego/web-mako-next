@@ -5,6 +5,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LoginMako from './LoginMako';
 import RegistroMako from './RegistroMako';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
+import { authProvider } from '../../../services/firebase';
 
 
 
@@ -34,22 +35,38 @@ const LoginUsuario = (props) => {
     }
   }, [usuario]);
 
+  async function handleAuth(provider){
+
+    try {
+
+      const user = await authProvider(provider)
+      console.log(user)
+      
+    } catch (error) {
+      console.warn(error)
+    }
+
+  }
+
   function RenderContenido() {
 
     switch (menu) {
       case 0:
         return (
           <div className="buttons">
+
             <Button title='Iniciar Sesion' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion')
               setAccion(0)
               setMenu(1)
             }} > Iniciar Sesión</Button>
+
             <Button title='Registrarse' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Registrarse')
               setAccion(1)
               setMenu(1)
             }} > Registrarse</Button>
+
           </div>
         )
         break;
@@ -58,6 +75,7 @@ const LoginUsuario = (props) => {
       case 1:
         return (
           <div className="buttons">
+
             <ArrowBackIcon className='backModal' onClick={() => {
               EvBiClickButton('Menu pincipal', 'atras menu login')
               setMenu(0)
@@ -65,12 +83,14 @@ const LoginUsuario = (props) => {
 
             <Button title='GOOGLE' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Google')
-              setMenu(2)
+              handleAuth('google')
             }} > GOOGLE</Button>
+
             <Button title='FACEBOOK' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Facebook')
-              setMenu(3)
+              authProvider('facebook')
             }}> FACEBOOK</Button>
+
             <Button title='MAKO' onClick={() => {
               if (accion == 0) {
                 EvBiClickButton('Menu pincipal', 'Iniciar Sesion Mako')

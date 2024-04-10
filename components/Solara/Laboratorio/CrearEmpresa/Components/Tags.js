@@ -101,6 +101,7 @@ const Tags = ({ setTagsText, tagsIniciales}) => {
                 handleInputChange={handleInputChange}
                 inputFieldPosition="top"
                 autocomplete
+                autofocus={false}
                 classNames={{
                     tags: 'tagsClass',
                     tagInputField: styles.inputField,

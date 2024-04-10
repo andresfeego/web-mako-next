@@ -17,6 +17,17 @@
     margin-bottom: 8px;
 }
 
+.item span:first-child{
+    display: flex;
+    align-items: flex-end;
+    max-width: 60%;
+}
+
+.item span:last-child{
+    flex: 1;
+    text-align: right;
+}
+
 .recargar{
     position: absolute;
     top: 5px;

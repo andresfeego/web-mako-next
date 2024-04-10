@@ -33,7 +33,8 @@ const FlujosNavegacion = () => {
         const resultList = Object.entries(result)
 
         resultList.map((item) => {
-            item[1].map((data, index) => {
+            
+            item[1].sort(((a, b) => a.id - b.id)).map((data, index) => {
                 item[1][index] = {
                     datoUno: data.flujo,
                     datoDos: data.etiqueta
