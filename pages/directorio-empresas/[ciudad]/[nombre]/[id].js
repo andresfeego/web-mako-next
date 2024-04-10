@@ -1,18 +1,17 @@
 
 import { useRouter } from "next/router"
-import Head from 'next/head'
-import { MaysPrimera } from '../../../../components/Inicialized/GlobalFunctions'
-import EmpresaTipoUno from "../../../../components/Home/Empresas/EmpresaTipoUno";
-import EmpresaTipoCero from "../../../../components/Home/Empresas/EmpresaTipoCero";
 import { useEffect } from 'react'
-import { useDataContext, useSetDataContext, useSetUserContext, useUserContext } from "../../../../components/Inicialized/DataProvider";
-import { search } from "superagent";
 import { EvBiVisita } from "../../../../components/Inicialized/Bitacora";
-import PerfilCero from "../../../../components/Home/Empresas/Perfiles/PerfilCero";
 import PerfilUno from "../../../../components/Home/Empresas/Perfiles/PerfilUno/PerfilUno";
 
-const Empresa = ({ empresa, municipios, empresas, slides }) => {
+const Empresa = ({ empresa, municipios, empresas, slides, codigo }) => {
 
+    useEffect(() => {
+        if(empresa){
+            console.warn(empresa)
+            EvBiVisita(empresa.codigo)
+        }
+    }, [codigo])
      return (
         <PerfilUno perfilEmpresa={empresa} municipios={municipios} empresas={empresas} slides={slides}/>
     )
@@ -21,9 +20,9 @@ const Empresa = ({ empresa, municipios, empresas, slides }) => {
 
 export async function getServerSideProps(ctx) {
     var props = { props: {} }
+const codigo = ctx.query.id
 
-
-    const resEmpresa = await fetch(process.env.HOST_NAME + '/empresas/' + ctx.query.id)
+    const resEmpresa = await fetch(process.env.HOST_NAME + '/empresas/' + codigo)
     const empresaJson = await resEmpresa.json()
     props.props = { empresa: empresaJson[0] }
 
@@ -39,9 +38,8 @@ export async function getServerSideProps(ctx) {
     /* const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + ctx.query.id) */
     const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/slides')
     const slidesEmpresaJson = await resSlidesEmpresa.json()
-    props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: [], slides: slidesEmpresaJson }
+    props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: [], slides: slidesEmpresaJson, codigo: codigo }
 
-    console.log(props.props.slides)
     return props
 }
 

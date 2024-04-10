@@ -26,7 +26,6 @@ function renderPerfilUno(perfilEmpresa, municipios, empresas, slides){
 
 const PerfilUno = ({ perfilEmpresa, municipios, empresas, slides }) => {
 
-    console.log(perfilEmpresa)
     const data = useDataContext();
     const setData = useSetDataContext();
 
@@ -38,11 +37,9 @@ const PerfilUno = ({ perfilEmpresa, municipios, empresas, slides }) => {
     const { id, ciudad } = router.query;
     const [empresa, setEmpresa] = useState(perfilEmpresa)
 
-     useEffect(() => {
-        EvBiVisita(empresa.codigo)
-    }, []) 
     const isInactive = (empresa.tipo == -1)
 
+    const urlEmpresa = `/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`
 
     return (
         <div>
@@ -55,7 +52,7 @@ const PerfilUno = ({ perfilEmpresa, municipios, empresas, slides }) => {
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta name="description" content={empresa.slogan + ' - ' +empresa.descripcion} />
                     <meta name="keywords" content={empresa.palabras_clave} />
-                    <link rel="canonical" href={process.env.HOST_NAME_MAKO + empresa.codigo} />
+                    <link rel="canonical" href={process.env.HOST_NAME_MAKO + urlEmpresa} />
                     <meta name="robots" content="index, follow" />
                     <meta name="author" content="www.mako.guru" />
                     <meta name="audience" content="Everyone" />

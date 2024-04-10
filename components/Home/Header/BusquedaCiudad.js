@@ -8,25 +8,6 @@ import { MaysPrimera } from '../../Inicialized/GlobalFunctions';
 import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
-function getCiudades() {
-
-    request
-        .get('/response/listaMunicipios')
-        .set('accept', 'json')
-        .end((err, res) => {
-            if (err) {
-                console.log(err);
-
-            } else {
-
-                const respuesta = JSON.parse(res.text);
-                return respuesta
-
-            }
-        });
-
-
-}
 
 
 
@@ -52,7 +33,7 @@ const BusquedaCiudad = (props) => {
     
     }, [])
 
-
+  
 
         function onSubmit(ciudad, id) {
 

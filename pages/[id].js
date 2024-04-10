@@ -62,6 +62,14 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
         }
     }, [mensaje])
 
+    useEffect(() => {
+        if (tipo.length != 0 && (tipo == 0 || tipo == -1)) {
+            console.warn('tipo:' + tipo)
+            EvBiVisita(empresa.codigo)
+        }
+    }, [empresa])
+
+
     return (
         <div id="contentBody">
             {tipo.length != 0 ?
@@ -113,7 +121,6 @@ export async function getServerSideProps(ctx) {
                 props.props = { ...props.props, tipo: [], codigo: codigo, mensaje: 'La empresa no existe' }
             return props
             } else {
-            console.log(responseJson)
             const empresa = responseJson[0]
             switch (empresa.tipo) {
                 case 0:

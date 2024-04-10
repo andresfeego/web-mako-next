@@ -9,7 +9,7 @@ const TarjetaBasica = ({titulo, contenido}) => {
     const [openCard, setOpenCard] = useState(false)
 
     return ( 
-        <div className={`${stylesGeneral.tarjeta}`}>
+        <div className={`${stylesGeneral.card}`}>
             <div className={stylesGeneral.header}>
                 <span className={stylesGeneral.title}>
                     {titulo.substr(0, 10)}
