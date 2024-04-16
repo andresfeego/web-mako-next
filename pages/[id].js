@@ -85,7 +85,8 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
                     <meta name="robots" content="index, follow" />
                     <meta name="author" content="www.mako.guru" />
                     <meta name="audience" content="Everyone" />
-
+                    <meta name="facebook-domain-verification" content="6f5ij55sc8w96zyf4g559gj0ex6ajb" />
+                    
                     <meta property="og:title" content={`.: Mako.guru :. Directorio empresarial - un directorio con superpoderes`} />
                     <meta property="og:description" content='📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆' />
                     <meta property="og:url" content={process.env.HOST_NAME_MAKO + 'directorio-empresarial'} />
