@@ -1,0 +1,29 @@
+.fomrulario{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.separador{
+    border-bottom: solid 1px $gray1;
+    width: 100%;
+}
+
+.creaCuenta{
+    margin-top: 16px;
+    width: 100%;
+    text-align: center;
+    color: $secondary;
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoMako{
+    width: 100px;
+    margin-bottom: 16px;
+}

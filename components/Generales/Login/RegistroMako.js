@@ -1,6 +1,6 @@
 
 import { Button, Input } from '@mui/material';
-import styles from '../../Home/Header/MenuUsuario.module.scss';
+import styles from './MenuUsuario.module.scss';
 import React from 'react';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
 

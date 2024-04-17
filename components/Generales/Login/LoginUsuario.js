@@ -1,13 +1,13 @@
 import { Button } from '@mui/material';
-import styles from '../../Home/Header/MenuUsuario.module.scss';
+import styles from './MenuUsuario.module.scss';
 import React, { useEffect } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LoginMako from './LoginMako';
 import RegistroMako from './RegistroMako';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
 import { authProvider } from '../../../services/firebase';
-
-
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
 
 
@@ -35,13 +35,13 @@ const LoginUsuario = (props) => {
     }
   }, [usuario]);
 
-  async function handleAuth(provider){
+  async function handleAuth(provider) {
 
     try {
 
       const user = await authProvider(provider)
       console.log(user)
-      
+
     } catch (error) {
       console.warn(error)
     }
@@ -53,19 +53,25 @@ const LoginUsuario = (props) => {
     switch (menu) {
       case 0:
         return (
-          <div className="buttons">
+          <div className={styles.buttons} >
 
-            <Button title='Iniciar Sesion' onClick={() => {
-              EvBiClickButton('Menu pincipal', 'Iniciar Sesion')
-              setAccion(0)
-              setMenu(1)
-            }} > Iniciar Sesión</Button>
+            <span className={styles.continuar}>Continuar con</span>
+            <Button className={styles.button} title='Continuar con Google' onClick={() => {
+              EvBiClickButton('Menu pincipal', 'Iniciar Sesion Google')
+              handleAuth('google')
+            }} ><GoogleIcon /> <span>Google</span></Button>
 
-            <Button title='Registrarse' onClick={() => {
-              EvBiClickButton('Menu pincipal', 'Registrarse')
-              setAccion(1)
+            <Button className={styles.button} title='Continuar con Facebook' onClick={() => {
+              EvBiClickButton('Menu pincipal', 'Iniciar Sesion Facebook')
+              authProvider('facebook')
+            }}> <FacebookOutlinedIcon /> <span>Facebook</span></Button>
+
+            <Button className={styles.button}  title='Continuar con Mako' onClick={() => {
+              EvBiClickButton('Menu pincipal', 'Iniciar Sesion Mako')
               setMenu(1)
-            }} > Registrarse</Button>
+
+            }
+            }> <img src={require('../../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_150x150.webp')} alt="" /> <span>Mako</span> </Button>
 
           </div>
         )
@@ -75,35 +81,11 @@ const LoginUsuario = (props) => {
       case 1:
         return (
           <div className="buttons">
-
             <ArrowBackIcon className='backModal' onClick={() => {
               EvBiClickButton('Menu pincipal', 'atras menu login')
               setMenu(0)
             }} />
-
-            <Button title='GOOGLE' onClick={() => {
-              EvBiClickButton('Menu pincipal', 'Iniciar Sesion Google')
-              handleAuth('google')
-            }} > GOOGLE</Button>
-
-            <Button title='FACEBOOK' onClick={() => {
-              EvBiClickButton('Menu pincipal', 'Iniciar Sesion Facebook')
-              authProvider('facebook')
-            }}> FACEBOOK</Button>
-
-            <Button title='MAKO' onClick={() => {
-              if (accion == 0) {
-                EvBiClickButton('Menu pincipal', 'Iniciar Sesion Mako')
-                setMenu(4)
-              } else {
-                if (accion == 1) {
-                  EvBiClickButton('Menu pincipal', 'Registrarse Mako')
-                  setMenu(5)
-                }
-
-              }
-            }}> MAKO</Button>
-
+            <LoginMako />
           </div>
         )
 
@@ -131,18 +113,6 @@ const LoginUsuario = (props) => {
               setMenu(1)
             }} />
             <span>FACEBOOK</span>
-          </div>
-        )
-        break;
-
-      case 4:
-        return (
-          <div className="buttons">
-            <ArrowBackIcon className='backModal' onClick={() => {
-              EvBiClickButton('Menu pincipal', 'atras menu login')
-              setMenu(1)
-            }} />
-            <LoginMako />
           </div>
         )
         break;
@@ -175,7 +145,6 @@ const LoginUsuario = (props) => {
   return (
 
     <div className={styles.contentLogin}>
-
       {RenderContenido()}
     </div>
 

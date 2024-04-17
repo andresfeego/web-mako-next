@@ -12,10 +12,11 @@ export const basico = {
     pt: 2,
     px: 4,
     pb: 3,
+    transition: 'all 0.5s ease 0s'
   };
   
 
 
   export const small = {
-    width: 400,
+    width: 100,
   };
