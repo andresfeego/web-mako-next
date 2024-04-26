@@ -8,39 +8,118 @@ import { EvBiClickButton } from '../../Inicialized/Bitacora';
 import { authProvider } from '../../../services/firebase';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import { usuarioExiste } from '../../Inicialized/GetDB/GetDB';
+import { nuevoMensaje, tiposAlertas } from "../../Inicialized/Toast";
+import { HelpTexts } from '../../Inicialized/HelpTexts';
+import { nuevoUsuario } from '../../Inicialized/GetDB/SetDb';
+import { useSetUserContext, useUserContext } from '../../Inicialized/DataProvider';
 
 
 
 
-const LoginUsuario = (props) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+const LoginUsuario = ({setOpen}) => {
+ 
+
+  const user = useUserContext();
+  const setUser = useSetUserContext();
 
   const [menu, setMenu] = React.useState(0);
   const [accion, setAccion] = React.useState(0);
-
-  const usuario = true;
-
-  useEffect(() => {
-    if (usuario) {
-      setMenu(0);
-    }
-    else {
-      setMenu(0);
-    }
-  }, [usuario]);
 
   async function handleAuth(provider) {
 
     try {
 
-      const user = await authProvider(provider)
-      console.log(user)
+      authProvider(provider).then((user) => {
+        console.log(user)
+        if(user){
+          usuarioExiste(user.user.email).then((result) =>{
+
+            if (result) {
+              switch (provider) {
+                case 'google':
+                  
+                  const dataUserGoogle = user._tokenResponse
+                  const usuarioGoogle = {
+                    id: result.id,
+                    nombre: dataUserGoogle.firstName,
+                    apellido: dataUserGoogle.lastName,
+                    correo: dataUserGoogle.email,
+                    genero: 0
+                  }
+                  setUser(usuarioGoogle)
+                  setOpen(false)
+                  
+                  break;
+
+                  case 'facebook':
+                  
+                  const dataUserFacebook = user._tokenResponse
+                  const usuarioFacebook = {
+                    id: result.id,
+                    nombre: dataUserFacebook.firstName,
+                    apellido: dataUserFacebook.lastName,
+                    correo: dataUserFacebook.email,
+                    genero: 0
+                  }
+                  setUser(usuarioFacebook)
+                  setOpen(false)
+                  
+                  break;
+              
+                default:
+                  break;
+              }
+            } else {
+              switch (provider) {
+                case 'google':
+                  
+                  const dataUserGoogle = user._tokenResponse
+                  nuevoUsuario(dataUserGoogle.firstName, dataUserGoogle.lastName, dataUserGoogle.email, '', 0, user.user.uid, '').then((result) => {
+                    console.log(result)
+                    const usuarioGoogle = {
+                      id: result,
+                      nombre: dataUserGoogle.firstName,
+                      apellido: dataUserGoogle.lastName,
+                      correo: dataUserGoogle.email,
+                      genero: 0
+                    }
+                    setUser(usuarioGoogle)
+                    setOpen(false)
+                  })
+                  
+                  break;
+
+                  case 'facebook':
+                  
+                  const dataUserFacebook = user._tokenResponse
+                  nuevoUsuario(dataUserFacebook.firstName, dataUserFacebook.lastName, dataUserFacebook.email, '', 0, '', user.user.uid).then((result) => {
+                    console.log(result)
+                    const usuarioFacebook = {
+                      id: result,
+                      nombre: dataUserFacebook.firstName,
+                      apellido: dataUserFacebook.lastName,
+                      correo: dataUserFacebook.email,
+                      genero: 0
+                    }
+                    setUser(usuarioFacebook)
+                    setOpen(false)
+                  })
+                  
+                  break;
+              
+                default:
+                  break;
+              }
+
+            }
+          })
+       }
+      }).catch((err) => {
+        console.log(err)
+      })
+
+
 
     } catch (error) {
       console.warn(error)
@@ -63,7 +142,7 @@ const LoginUsuario = (props) => {
 
             <Button className={styles.button} title='Continuar con Facebook' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Facebook')
-              authProvider('facebook')
+              handleAuth('facebook') 
             }}> <FacebookOutlinedIcon /> <span>Facebook</span></Button>
 
             <Button className={styles.button}  title='Continuar con Mako' onClick={() => {
@@ -85,7 +164,7 @@ const LoginUsuario = (props) => {
               EvBiClickButton('Menu pincipal', 'atras menu login')
               setMenu(0)
             }} />
-            <LoginMako />
+            <LoginMako setOpen={setOpen}/>
           </div>
         )
 

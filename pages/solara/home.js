@@ -43,7 +43,7 @@ const Home = ({municipios}) => {
     }
 
     return (
-        <div className={styles.solaraHome}>
+        <div className={`${styles.solaraHome} pathSolara`}>
 
             <div className={styles.header}>
                 <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50' className={styles.imgMakoLogo} src={require("../../scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-1.webp")} alt="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" title="📖✔ Directorio con súper poderes para empresas.👦 ↔ 🏭 Conectamos usuarios con el comercio en general de forma interactiva y eficaz. 🔍 Busca productos y servicios de tus tiendas favoritas, síguelas, chatea con ellos, cotiza tus productos y guarda en tus contactos para que puedas consultarlos sin conexión a internet.👆" />

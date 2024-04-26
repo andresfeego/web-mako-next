@@ -46,3 +46,35 @@ export const uploadLogo = ( image ) => {
             });
     })
 }
+
+
+export const nuevoUsuario = (nombre, apellido, correo, pass, genero, tkgoogle, tkfacebook) => {
+
+    return new Promise((resolve, reject) => {
+
+
+        request
+            .post(process.env.HOST_NAME + '/usuario/nuevoUsuario')
+            .accept('application/json')
+            .send({
+                nombre, 
+                apellido, 
+                correo, 
+                pass, 
+                genero,
+                tkgoogle,
+                tkfacebook
+            })
+            .set('accept', 'json')
+            .end((err, res) => {
+                if (err) {
+
+                    reject("Error al guardar información de usuario")
+
+                } else {
+                    resolve(res.body.insertId)
+
+                }
+            });
+    })
+}

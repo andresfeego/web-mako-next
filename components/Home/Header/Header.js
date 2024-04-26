@@ -4,7 +4,7 @@ import BusquedaCiudad from "./BusquedaCiudad"
 import styles from "./Header.module.scss"
 import stylesSlides from "./SlideHome.module.scss"
 import Link from 'next/link'
-import MenuUsuario from "./MenuUsuario"
+import MenuUsuario from "./Menu/MenuUsuario"
 import Image from "next/image"
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'

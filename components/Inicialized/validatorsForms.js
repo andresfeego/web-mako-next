@@ -1,8 +1,38 @@
-import { HelpTexts } from "./HelpTexts"
+//import { getPermisosXIdInterface } from "./GetDB"
+import { usuarioExiste } from "./GetDB/GetDB";
+import { errorText, HelpTexts } from "./HelpTexts"
 
 
 
-export const validaMail = (text) => {
+/* 
+
+export const validaPermisosInterface = (id, roles) => {
+    return new Promise( async(resolve, reject) => {
+        
+        let listaPermisos = await getPermisosXIdInterface(id)
+        if (listaPermisos.length > 0) {
+            listaPermisos = listaPermisos[0].permisos.split(",")
+        } else {
+            resolve(false)
+        }
+            if (listaPermisos.find(per => per == 100)) {
+            
+            resolve(true)
+            
+        } else {
+        
+            if (listaPermisos.find(per => roles.find(rol => per == rol ) )) {
+                resolve(true)
+            } else {
+                resolve(false)
+            }
+        }
+        
+    })
+} */
+
+
+export const validaMail = (text, creandoUsuario) => {
     return new Promise((resolve, reject) => {
         if (text == '') {
             resolve({ error: true, text: text, errorText: HelpTexts.vacioGeneral })
@@ -11,7 +41,19 @@ export const validaMail = (text) => {
             if (!expr.test(text)) {
                 resolve({ error: true, text: text, errorText: HelpTexts.formatoMail })
             } else {
-                resolve({ error: false, text: text, errorText: '' })
+                if (creandoUsuario) {
+                    usuarioExiste(text).then((result)=> {
+                        if (result) {
+                            resolve({ error: true, text: text, errorText: HelpTexts.usuarioExiste })
+                        } else {
+                            resolve({ error: false, text: text, errorText: ''})
+                        }
+                    }).catch((err) => {
+                        resolve({ error: true, text: text, errorText: HelpTexts.impValiUsuario })
+                    })
+                } else {
+                    resolve({ error: false, text: text, errorText: '' })
+                }
             }
         }
     })
@@ -32,6 +74,22 @@ export const validaPassword = (text) => {
 
     })
 }
+
+export const validaConfirPassword = (confirPass, pass) => {
+    return new Promise((resolve, reject) => {
+        if (confirPass == '') {
+            resolve({ error: true, text: confirPass, errorText: HelpTexts.vacioGeneral })
+        } else {
+            if (confirPass != pass) {
+                resolve({ error: true, text: confirPass, errorText: (HelpTexts.NoConfirPass) })
+            } else {
+                resolve({ error: false, text: confirPass, errorText: '' })
+            }
+        }
+
+    })
+}
+
 
 export const validaName = (text) => {
     return new Promise((resolve, reject) => {
@@ -105,7 +163,7 @@ export const validaTipoDocumento = (value) => {
 
 export const validaGenero = (value) => {
     return new Promise((resolve, reject) => {
-        if (value == '') {
+        if (!value) {
             resolve({ error: true, text: value, errorText: HelpTexts.sinDatoCB })
         } else {
             resolve({ error: false, text: value, errorText: '' })

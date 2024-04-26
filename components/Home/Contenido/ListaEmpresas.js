@@ -32,7 +32,7 @@ const ListaEmpresas = () => {
             }
             setPage(1)
         })
-        return () => controller.abort();
+        return () => controller.abort('por el usuario');
     }
         , [data]
     );

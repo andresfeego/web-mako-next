@@ -126,17 +126,28 @@
 
   }
 
-  .MuiFormLabel-root{
+  .pathSolara .MuiFormLabel-root{
     color: $white0;
   }
 
-  .MuiInputBase-root.MuiInput-root:before{
+  .pathSolara .MuiInputLabel-root.Mui-focused{
+    color: $secondary;
+  }
+
+  .pathSolara .MuiInputBase-root.MuiInput-root:before{
     border-bottom: 1px solid $white0;
   }
 
-  .MuiInputBase-input.MuiInput-input{
+  .pathSolara .MuiInputBase-input.MuiInput-input{
     color: $white0;
   } 
+
+  .MuiFormControl-root:has(.MuiSelect-select)>.MuiInputLabel-root {
+    margin-left: -14px;
+  }
+
+  .MuiFormControl-root:has(.MuiSelect-select)>.MuiInputLabel-root-focused {
+  }
 
 // __________________________________slides _______________________________
 

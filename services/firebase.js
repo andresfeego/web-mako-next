@@ -25,12 +25,15 @@ const facebookProvider =  new FacebookAuthProvider()
 const auth = getAuth()
 
 export const  authProvider = async (provider) =>{
-  const providerSelected = provider == 'google' ? googleProvider : facebookProvider
+  return new Promise(async(resolve, reject) => {
+    const providerSelected = provider == 'google' ? googleProvider : facebookProvider
+    try {
+      const result = await signInWithPopup(auth, providerSelected)
+      resolve(result)
+    } catch (error) {
+      reject(error)
+    }
+    
+  })
 
-  try {
-    const result = await signInWithPopup(auth, providerSelected)
-    console.log(result)
-  } catch (error) {
-    console.log(error)
-  }
 }

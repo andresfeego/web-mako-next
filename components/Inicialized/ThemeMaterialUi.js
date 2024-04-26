@@ -1,9 +1,10 @@
 import { createTheme } from '@mui/material/styles';
+import {  } from '@mui/material/';
 
 
 export const customTheme = createTheme({
     components: {
-      MuiButtonBase: {
+      MuiButton: {
         defaultProps: {
             style:{
                 color: '#414042',
@@ -12,11 +13,16 @@ export const customTheme = createTheme({
                 fontSize: '25px',    
                 marginTop: '48px',
                 display: 'flex' ,
-                borderRadius: '2vw' 
+                borderRadius: '50px' 
 
             }
         },
       },
     },
+    palette: { 
+      primary: {
+          main: '#34C1BB',
+      },
+  },
   });
   
