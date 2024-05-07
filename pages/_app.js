@@ -20,7 +20,6 @@ const App = ({ Component, pageProps }) => {
 
 
     <React.Fragment>
-      <Script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=db1cd646-84d1-4e26-820f-80450b7ba0cd"> </Script>
       <GoogleAnalytics trackPageViews />
       <ThemeProvider theme={customTheme}>
         <ToastContainer
