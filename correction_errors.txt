@@ -1,0 +1,5 @@
+
+___________________  error en vercel 500 de version Node _________________________________
+
+This Serverless Function has crashed.
+Cambiar version de node en settings del proyecto en vercel y realizar un git push con algun cambio 
