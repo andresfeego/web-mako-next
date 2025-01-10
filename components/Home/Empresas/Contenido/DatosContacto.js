@@ -173,8 +173,8 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
 
     function renderTelefonos(telefonos) {
-        return (telefonos.map((telefono) =>
-            <div className={`${styles.telefono}`}>
+        return (telefonos.map((telefono , index) =>
+            <div key={'keycompTel-' + index} className={`${styles.telefono}`}>
                 {telefono.tipo == 0 ?
                     <div className={`${styles.rowInfo}`}>
                         <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`}><SendToMobileIcon className={styles.infoIcon} /></a>
@@ -196,8 +196,8 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
     }
 
     function renderMails(mails) {
-        return (mails.map((mail) =>
-            <a target="_blank" href={'mailto:' + mail.correo} title={`Enviar correo a: ${mail.correo}`} className={`${styles.rowInfo}`}> <MailOutlineIcon className={styles.infoIcon} /> {mail.correo} </a>
+        return (mails.map((mail, index) =>
+            <a key={'keycompMail-' + index} target="_blank"  href={'mailto:' + mail.correo} title={`Enviar correo a: ${mail.correo}`} className={`${styles.rowInfo}`}> <MailOutlineIcon className={styles.infoIcon} /> {mail.correo} </a>
         )
         )
     }
@@ -226,15 +226,15 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
     }
 
     function renderRedes(redes) {
-        return (redes.map((redSocial) =>
-            <a target="_blank" title={`Visitar el ${redSocial.descSocial} de ${empresa.nombre}`} href={redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()} className={`${styles.rowInfo}`}> {renderIconoRedes(redSocial.descSocial)} <span style={{ textOverflow: "ellipsis" }}>{redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()}</span> </a>
+        return (redes.map((redSocial, index) =>
+            <a key={'keycompSocial-' + index} target="_blank" title={`Visitar el ${redSocial.descSocial} de ${empresa.nombre}`} href={redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()} className={`${styles.rowInfo}`}> {renderIconoRedes(redSocial.descSocial)} <span style={{ textOverflow: "ellipsis" }}>{redSocial.link.toLowerCase().startsWith('w') || redSocial.link.toLowerCase().startsWith('h') ? redSocial.link.toLowerCase() : redSocial.paginaSocial.toLowerCase() + redSocial.link.toLowerCase()}</span> </a>
         )
         )
     }
 
     function renderHorarios(horarios) {
-        return (horarios.map((horario) =>
-            <div className={`${styles.columnInfo} ${styles.horario}`}>
+        return (horarios.map((horario, index) =>
+            <div key={'keycompHor-' + index} className={`${styles.columnInfo} ${styles.horario}`}>
                 <span>{horario.descHorario}</span>
                 {/* <span>{horario.descJornada}</span> */}
                 <span>{horario.de}</span>

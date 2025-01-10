@@ -24,8 +24,8 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
             const isInactive = (tipo == -1)
             return [
-                <PerfilCero inactivo={isInactive} Perfilempresa={empresa} />,
-                <Head>
+                <PerfilCero key={'keycompPerf-' + codigo} inactivo={isInactive} Perfilempresa={empresa} />,
+                <Head key={'keycompHead-' + codigo}>
                     <meta charset="utf-8" />
                     <title>{`Datos de contacto de ${MaysPrimera(empresa.nombre)} - ${MaysPrimera(empresa.nombreMun)} - ${MaysPrimera(empresa.nombreDep)}`}</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -71,11 +71,11 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 
 
     return (
-        <div id="contentBody">
+        <div key={'keycompPerf-' + codigo} id="contentBody">
             {tipo.length != 0 ?
                 renderPerfil(tipo)
                 :
-                <Head>
+                <Head key={'keycompHead-' + codigo}>
                     <title>.: MAKO :. Directorio empresarial</title>
                     <link rel="icon" href={require('./favicon.ico')} sizes="any" />
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
