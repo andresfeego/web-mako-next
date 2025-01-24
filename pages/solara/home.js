@@ -25,7 +25,7 @@ const Home = ({municipios}) => {
                 return (
                     [
                         <MainMenu handleMenu={handleMenu} />,
-                        {/* <Estadisticas /> */}
+                        <Estadisticas /> 
                     ]
                 )
                 break;
@@ -34,7 +34,7 @@ const Home = ({municipios}) => {
                 return (
                     [
                         <MainMenu handleMenu={handleMenu} />,
-                        {/* <Laboratorio /> */}
+                        <Laboratorio /> 
                     ]
                 )
                 break;
