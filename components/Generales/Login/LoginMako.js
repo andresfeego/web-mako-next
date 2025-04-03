@@ -10,6 +10,8 @@ import { errorText } from '../../Inicialized/HelpTexts';
 import { nuevoUsuario } from '../../Inicialized/GetDB/SetDb';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
 import { useSetUserContext } from '../../Inicialized/DataProvider';
+import { connectStorageEmulator } from 'firebase/storage';
+import { loginUsuario } from '../../Inicialized/GetDB/GetDB';
 
 
 
@@ -57,6 +59,62 @@ const LoginMako = ({ setOpen}) => {
     })
   }
 
+  function validaErrorLogin(){
+    return new Promise((resolve, reject) => {
+
+      const inputsForm = [
+        {input: inputCorreo, setInpu: setCorreo},
+        {input: inputContrasena, setInpu: setContrasena}
+
+      ]
+
+      validaErrosForm(inputsForm).then((result) => {
+
+        resolve()
+      }).catch((err) => {
+
+        reject()
+      })
+    })
+  }
+
+  function login(){
+    return new Promise((resolve, reject) => {
+      loginUsuario(inputCorreo.value, inputContrasena.value).then((result) => {
+        resolve(result)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  function handleLogin(){
+    nuevoMensaje(tiposAlertas.cargando, 'Validando credenciales')
+    validaErrorLogin().then((result) => {
+      login().then((result) => {
+        console.log(result)
+       if(result.error){
+        nuevoMensaje(tiposAlertas.cargadoError, result.message)
+       }else{
+        const usuario = {
+          id: result.id,
+          nombre: result.nombres,
+          apellido: result.apellidos,
+          correo: result.correo,
+          genero: result.genero
+        }
+        setUser(usuario.id) 
+        setOpen(false)
+        nuevoMensaje(tiposAlertas.cargadoSuccess, 'Credenciales correctas')
+       }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }).catch((err) =>{
+      nuevoMensaje(tiposAlertas.cargadoError, 'Verificar credenciales ingresadas')
+    })
+  }
+
   function submit() {
     nuevoMensaje(tiposAlertas.cargando, 'Creando cuenta de usuario')
     validaErros().then(() => {
@@ -69,7 +127,7 @@ const LoginMako = ({ setOpen}) => {
           genero: inputGenero.value
         }
         console.log(usuario)
-        setUser(usuario) 
+        setUser(usuario.id) 
         setOpen(false)
         nuevoMensaje(tiposAlertas.cargadoSuccess, 'Cuenta creada de forma exitosa')
       }).catch((err) => {
@@ -83,11 +141,11 @@ const LoginMako = ({ setOpen}) => {
 
   function renderContenido(menu) {
   
-    console.log(inputGenero.selectValues)
-
-
     switch (menu) {
       case 0:
+        if(inputCorreo.creando){
+          setCorreo({...inputCorreo, creando: false})
+        }
         return (
           <div className={styles.container}>
 
@@ -98,9 +156,30 @@ const LoginMako = ({ setOpen}) => {
               noValidate
               autoComplete="off"
             >
-              <TextField id="correo" label="Correo" variant="standard" />
-              <TextField id="password" label="Contraseña" type='password' variant="standard" />
-              <Button title='GUARDAR' className={styles.guardar} onClick={() => { EvBiClickButton('Menu pincipal', 'Boton login Mako'); handleOpen() }} > Iniciar Sesión</Button>
+              <TextField
+                id={inputCorreo.name}
+                label={inputCorreo.label}
+                onChange={(e) => { onChangeHandler(inputCorreo, setCorreo, e.target.value, false) }}
+                onBlur={(e) => { onChangeHandler(inputCorreo, setCorreo, e.target.value, false, true) }}
+                variant="standard"
+                value={inputCorreo.value}
+                error={inputCorreo.error}
+                helperText={inputCorreo.errorText}
+              />
+
+              <TextField
+                id={inputContrasena.name}
+                label={inputContrasena.label}
+                onChange={(e) => { onChangeHandler(inputContrasena, setContrasena, e.target.value, false) }}
+                onBlur={(e) => { onChangeHandler(inputContrasena, setContrasena, e.target.value, false, true) }}
+                variant="standard"
+                value={inputContrasena.value}
+                error={inputContrasena.error}
+                type='password'
+                helperText={inputContrasena.errorText}
+              />
+
+              <Button title='Iniciar sesión' className={styles.guardar} onClick={() => { EvBiClickButton('Menu pincipal', 'Boton login Mako'); handleLogin() }} > Iniciar Sesión</Button>
             </Box>
 
             <div className={styles.separador} />

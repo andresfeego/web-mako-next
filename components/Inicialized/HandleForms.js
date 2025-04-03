@@ -2,7 +2,6 @@ export const onChangeHandler = (campo, setCampo, value, CB, blur) => {
     return new Promise((resolve, reject) => {
       let campoaux = Object.create(campo);
       campoaux = {...campo}
-      console.log(campoaux)
       let auxiValueUno = undefined
 
       if(campo.name == 'confirContrasena'){
@@ -14,7 +13,6 @@ export const onChangeHandler = (campo, setCampo, value, CB, blur) => {
       }
       
     campo.validator(value, auxiValueUno).then((res) => {
-      console.log(res.text)
       campoaux.value = res.text
       campoaux.error = res.error
       campoaux.errorText = res.errorText
@@ -43,8 +41,8 @@ export const onChangeHandler = (campo, setCampo, value, CB, blur) => {
         const setInp = item['setInpu']
         
         onChangeHandler(inpForm, setInp, inpForm.value, false, true).then((result) => {
-          console.log(result)
           if (result.error) {
+            console.log(result)
             reject()
           }else(
             resolve()

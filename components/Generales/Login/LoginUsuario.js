@@ -3,7 +3,6 @@ import styles from './MenuUsuario.module.scss';
 import React, { useEffect } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LoginMako from './LoginMako';
-import RegistroMako from './RegistroMako';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
 import { authProvider } from '../../../services/firebase';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -47,7 +46,7 @@ const LoginUsuario = ({setOpen}) => {
                     correo: dataUserGoogle.email,
                     genero: 0
                   }
-                  setUser(usuarioGoogle)
+                  setUser(usuarioGoogle.id)
                   setOpen(false)
                   
                   break;
@@ -62,7 +61,7 @@ const LoginUsuario = ({setOpen}) => {
                     correo: dataUserFacebook.email,
                     genero: 0
                   }
-                  setUser(usuarioFacebook)
+                  setUser(usuarioFacebook.id)
                   setOpen(false)
                   
                   break;
@@ -84,7 +83,7 @@ const LoginUsuario = ({setOpen}) => {
                       correo: dataUserGoogle.email,
                       genero: 0
                     }
-                    setUser(usuarioGoogle)
+                    setUser(usuarioGoogle.id)
                     setOpen(false)
                   })
                   
@@ -102,7 +101,7 @@ const LoginUsuario = ({setOpen}) => {
                       correo: dataUserFacebook.email,
                       genero: 0
                     }
-                    setUser(usuarioFacebook)
+                    setUser(usuarioFacebook.id)
                     setOpen(false)
                   })
                   
@@ -140,10 +139,10 @@ const LoginUsuario = ({setOpen}) => {
               handleAuth('google')
             }} ><GoogleIcon /> <span>Google</span></Button>
 
-            <Button className={styles.button} title='Continuar con Facebook' onClick={() => {
+            {/* <Button className={styles.button} title='Continuar con Facebook' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Facebook')
               handleAuth('facebook') 
-            }}> <FacebookOutlinedIcon /> <span>Facebook</span></Button>
+            }}> <FacebookOutlinedIcon /> <span>Facebook</span></Button> */}
 
             <Button className={styles.button}  title='Continuar con Mako' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Mako')
@@ -196,18 +195,7 @@ const LoginUsuario = ({setOpen}) => {
         )
         break;
 
-      case 5:
-        return (
-          <div className="buttons">
-            <ArrowBackIcon className='backModal' onClick={() => {
-              EvBiClickButton('Menu pincipal', 'atras menu login')
-              setMenu(1)
-            }} />
-            <RegistroMako />
-          </div>
-        )
-        break;
-      case 10:
+        case 10:
         return (
           <p>"menu principal"</p>
         )

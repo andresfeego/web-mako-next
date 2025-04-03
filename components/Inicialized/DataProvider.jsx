@@ -1,5 +1,6 @@
 import React, {useState, useContext, useReducer} from "react";
 import { useEffect } from "react";
+import { getUsuario } from "./GetDB/GetDB";
 
 const dataContext = React.createContext();
 const setDataContext = React.createContext();
@@ -65,7 +66,6 @@ export function DataProvider({children}){
 
     function reduceUser(state, updates){
         if (updates.action == 'clean') {
-            console.log('clean')
             window.localStorage.removeItem('user')
             return null
         }
@@ -80,19 +80,34 @@ export function DataProvider({children}){
     }
     
     useEffect(() => {
-        const UserJSON = window.localStorage.getItem('user');
-        console.log('userdata' , UserJSON)
-        if (UserJSON) {
-            const sessionStorageUser = JSON.parse( UserJSON );
-            setUser(sessionStorageUser);
-        }
+
+        async function fetchData() {
+            const UserJSON = window.localStorage.getItem('user');
+            if (UserJSON) {
+                const sessionStorageUser = JSON.parse( UserJSON );
+                const userDB = await getUsuario(sessionStorageUser);
+                setUser(userDB);
+            }
+          }
+          fetchData();
+
     }, [])
 
 
     useEffect(() =>{
-        console.log('asdsad' , user)
-        if (user) {
-            window.localStorage.setItem('user', JSON.stringify(user))
+
+        async function fetchData(id) {
+                getUsuario(id).then((result)=>{
+                    setUser(result);
+                });
+            }
+            
+            if (user) {
+                if (!user.correo) {
+                    fetchData(user);
+                }
+                console.log(user);
+                window.localStorage.setItem('user', JSON.stringify(user.id))
         }
         
     },[user])
