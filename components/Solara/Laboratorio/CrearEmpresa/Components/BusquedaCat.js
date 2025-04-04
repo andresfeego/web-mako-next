@@ -27,7 +27,6 @@ const BusquedaCat = ({ setCategoria, categoria }) => {
     const [categoriaEscogida, setcategoriaEscogida] = useState(null)
 
     useEffect(() => {
-        //setlistaBusquedaCAt(getCategorias('a'))
         getCategorias('a').then((lista) => {
             setlistaBusquedaCAt(lista)
         })

@@ -13,7 +13,6 @@ const AnyReactComponent = ({ nombreEmpresa, urlLogo }) => (
 );
 
 export default function SimpleMap({ nombreEmpresa, lat, lng, urlLogo }) {
-    console.log(lng);
     const defaultProps = {
         center: {
             lat: parseFloat(lat),

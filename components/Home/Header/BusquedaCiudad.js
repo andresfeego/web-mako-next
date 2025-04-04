@@ -1,136 +1,106 @@
-import { useState, useEffect } from 'react'
-import styles from './BusquedaCiudad.module.scss'
+import { useState, useEffect } from 'react';
+import styles from './BusquedaCiudad.module.scss';
 import BtnSearch from '@material-ui/icons/Search';
 import BtnClose from '@material-ui/icons/Close';
-import request from 'superagent';
 import Cargando from '../../Inicialized/Cargando';
 import { MaysPrimera } from '../../Inicialized/GlobalFunctions';
-import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
+import useDataStore from '@/components/Stores/useDataStore';
 
+let buscarBar;
 
+const BusquedaCiudad = () => {
+  const ciudad = useDataStore((state) => state.search.ciudad);
+  const setSearch = useDataStore((state) => state.setSearch);
 
+  const [listaCiudades, setLC] = useState(null);
+  const [listaCiudadesOriginal, setLCO] = useState(null);
+  const [busCiudad, setBusCiudad] = useState(ciudad);
+  const [mostrarAuto, setmostrarAuto] = useState(true);
 
-const BusquedaCiudad = (props) => {
+  useEffect(() => {
+    fetch(process.env.HOST_NAME + '/listaMunicipios')
+      .then((res) => res.json())
+      .then((data) => {
+        setLC(data);
+        setLCO(data);
+      });
+  }, []);
 
-    const data = useDataContext();
-    const setData = useSetDataContext();
+  function onSubmit(ciudad, id) {
+    setSearch({ ciudad });
+    EvBiBusqueda('Busqueda ciudad', id);
+    setBusCiudad(ciudad);
+    setmostrarAuto(false);
+  }
 
-    var buscarBar
+  function onClear() {
+    setSearch({ ciudad: '' });
+    setBusCiudad('');
+  }
 
-    const [listaCiudades, setLC] = useState(null)
-    const [listaCiudadesOriginal, setLCO] = useState(null)
-    const [busCiudad, setBusCiudad] = useState(data.search.ciudad)
-    const [mostrarAuto, setmostrarAuto] = useState(true)
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') onSubmit(busCiudad);
+  }
 
-    useEffect(() =>{
-        fetch(process.env.HOST_NAME + '/listaMunicipios')
-        .then((res) => res.json())
-        .then((data) =>{
-            setLC(data)
-            setLCO(data)
-        })
-    
-    }, [])
-
-  
-
-        function onSubmit(ciudad, id) {
-
-            setData({...data, search: { ...data.search, ciudad: ciudad } })
-            EvBiBusqueda('Busqueda ciudad', id);
-
-            setBusCiudad(ciudad)
-            setmostrarAuto(false)
-        }
-
-    function onClear() {
-        setData({...data, search: { ...data.search, ciudad: '' } })
-        setBusCiudad('')
+  function buscar(valor) {
+    setLC("init");
+    if (valor === "") {
+      setLC(listaCiudadesOriginal);
+    } else {
+      const prepBus = new RegExp(valor, 'i');
+      const Auxi = listaCiudadesOriginal.filter(item =>
+        prepBus.test(item.nombre) || prepBus.test(item.nombreDep)
+      );
+      setLC(Auxi.length === 0 ? [] : Auxi);
     }
+  }
 
-    function handleKeyDown(e) {
-        if (e.key === 'Enter') {
-            onSubmit(busCiudad);
-        }
-    }
+  function onChange(e) {
+    setmostrarAuto(true);
+    clearTimeout(buscarBar);
+    const value = e.target.value;
+    setBusCiudad(value);
+    buscarBar = setTimeout(() => buscar(value), 500);
+  }
 
+  function renderBusqueda() {
+    if (listaCiudades === "init") return <Cargando />;
+    if (listaCiudades.length === 0) return <span>sin resultados</span>;
+    return listaCiudades.map((item) => (
+      <div className={styles.ciudad} onClick={() => onSubmit(MaysPrimera(item.nombre), item.id)}>
+        <h1>{MaysPrimera(item.nombre)} - {MaysPrimera(item.nombreDep)}</h1>
+      </div>
+    ));
+  }
 
+  useEffect(() => {
+    setBusCiudad(ciudad);
+    setmostrarAuto(false);
+  }, [ciudad]);
 
-
-    function buscar(busqueda) {
-        setLC("init")
-
-        if (busqueda == "") {
-
-            setLC(listaCiudadesOriginal)
-
-        } else {
-            var prepBus = new RegExp(busqueda, 'i'); // preparando termino de busqueda
-            let Auxi = listaCiudadesOriginal.filter((item) => {
-                if (prepBus.test(item.nombre) || prepBus.test(item.nombreDep)) {
-                    return true
-                } else {
-                    return false
-                }
-            });
-            if (Auxi.length == 0) {
-                Auxi = []
-            }
-            setLC(Auxi)
-
-        }
-    }
-
-
-    function onChange(e) {
-        setmostrarAuto(true)
-        clearTimeout(buscarBar)
-        var value = e.target.value
-        setBusCiudad(value)
-
-        buscarBar = setTimeout(() => buscar(value), 500);
-    }
-
-    function renderBusqueda() {
-        if (listaCiudades == "init") {
-            return <Cargando />
-        } else {
-            if (listaCiudades.length == 0) {
-                return <span>sin resultados</span>
-            } else {
-
-                return (
-                    listaCiudades.map((item) => <div className={styles.ciudad} onClick={() => { onSubmit(MaysPrimera(item.nombre), item.id) }}><h1>{MaysPrimera(item.nombre) + " - " + MaysPrimera(item.nombreDep)}</h1></div>)
-                )
-
-            }
-        }
-    }
-
-    useEffect(() => {
-        setBusCiudad(data.search.ciudad)
-        setmostrarAuto(false)
-    }, [data])
-
-
-    return (
-        <div className={styles.busquedaCiudad}>
-            <input type="text" placeholder="En que ciudad lo buscas ?" className={styles.buscarCiudad} onKeyDown={handleKeyDown} name="busCiudad" value={busCiudad} onChange={onChange}></input>
-            {data.search.ciudad === '' ?
-                <div className={styles.botonBuscar} onClick={() => onSubmit()} > <BtnSearch style={{ width: '90%', height: '90%' }} /></div>
-                :
-                <div className={styles.botonBuscar} onClick={() => onClear()} > <BtnClose style={{ width: '85%', height: '85%' }} /></div>
-            }
-            {busCiudad != '' && mostrarAuto ?
-                <div className={styles.autocompletado}>
-                    {listaCiudades ? renderBusqueda() : <Cargando/>}
-                </div> :
-                null
-            }
-
+  return (
+    <div className={styles.busquedaCiudad}>
+      <input
+        type="text"
+        placeholder="En que ciudad lo buscas ?"
+        className={styles.buscarCiudad}
+        onKeyDown={handleKeyDown}
+        name="busCiudad"
+        value={busCiudad}
+        onChange={onChange}
+      />
+      {ciudad === ''
+        ? <div className={styles.botonBuscar} onClick={() => onSubmit()}><BtnSearch style={{ width: '90%', height: '90%' }} /></div>
+        : <div className={styles.botonBuscar} onClick={onClear}><BtnClose style={{ width: '85%', height: '85%' }} /></div>
+      }
+      {busCiudad !== '' && mostrarAuto &&
+        <div className={styles.autocompletado}>
+          {listaCiudades ? renderBusqueda() : <Cargando />}
         </div>
-    )
-}
-export default BusquedaCiudad;
+      }
+    </div>
+  );
+};
 
+export default BusquedaCiudad;

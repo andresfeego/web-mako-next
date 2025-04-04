@@ -62,7 +62,6 @@ function generateHashSession(){
         return DataHashSession
     } else {
         const hashSession = process.env.DEV_ENV ? 'SuperAdmin' : generaCodigo(60, true)
-        console.log(hashSession)
         window.sessionStorage.setItem('hashSession', hashSession)
         return hashSession
 

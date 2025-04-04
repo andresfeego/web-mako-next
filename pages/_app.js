@@ -1,6 +1,5 @@
 import "./stylesGlobal.scss"
 import React from 'react'
-import { DataProvider } from '../components/Inicialized/DataProvider'
 import NextTopLoader from 'nextjs-toploader';
 import { ToastContainer } from 'react-toastify';
 import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
@@ -34,7 +33,7 @@ const App = ({ Component, pageProps }) => {
           draggable
           pauseOnHover />
 
-        <DataProvider>
+        
 
 
           <NextTopLoader
@@ -54,7 +53,6 @@ const App = ({ Component, pageProps }) => {
           <Component {...pageProps} />
           <SpeedInsights />
 
-        </DataProvider>
       </ThemeProvider>
     </React.Fragment>
   )

@@ -85,7 +85,6 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
   
     categoriasConEmpresas.map(categoriasConEmpresas => {
   
-console.log(categoriasConEmpresas)
 
       pages.push(
         {

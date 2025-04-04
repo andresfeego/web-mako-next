@@ -11,7 +11,7 @@ import { usuarioExiste } from '../../Inicialized/GetDB/GetDB';
 import { nuevoMensaje, tiposAlertas } from "../../Inicialized/Toast";
 import { HelpTexts } from '../../Inicialized/HelpTexts';
 import { nuevoUsuario } from '../../Inicialized/GetDB/SetDb';
-import { useSetUserContext, useUserContext } from '../../Inicialized/DataProvider';
+import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 
 
 
@@ -19,8 +19,8 @@ import { useSetUserContext, useUserContext } from '../../Inicialized/DataProvide
 const LoginUsuario = ({setOpen}) => {
  
 
-  const user = useUserContext();
-  const setUser = useSetUserContext();
+  const user = useUsuarioStore((state) => state.usuario);
+  const setUsuario = useUsuarioStore((state) => state.setUsuario);
 
   const [menu, setMenu] = React.useState(0);
   const [accion, setAccion] = React.useState(0);
@@ -30,7 +30,6 @@ const LoginUsuario = ({setOpen}) => {
     try {
 
       authProvider(provider).then((user) => {
-        console.log(user)
         if(user){
           usuarioExiste(user.user.email).then((result) =>{
 
@@ -46,7 +45,7 @@ const LoginUsuario = ({setOpen}) => {
                     correo: dataUserGoogle.email,
                     genero: 0
                   }
-                  setUser(usuarioGoogle.id)
+                  setUsuario(usuarioGoogle.id)
                   setOpen(false)
                   
                   break;
@@ -61,7 +60,7 @@ const LoginUsuario = ({setOpen}) => {
                     correo: dataUserFacebook.email,
                     genero: 0
                   }
-                  setUser(usuarioFacebook.id)
+                  setUsuario(usuarioFacebook.id)
                   setOpen(false)
                   
                   break;
@@ -75,7 +74,6 @@ const LoginUsuario = ({setOpen}) => {
                   
                   const dataUserGoogle = user._tokenResponse
                   nuevoUsuario(dataUserGoogle.firstName, dataUserGoogle.lastName, dataUserGoogle.email, '', 0, user.user.uid, '').then((result) => {
-                    console.log(result)
                     const usuarioGoogle = {
                       id: result,
                       nombre: dataUserGoogle.firstName,
@@ -83,7 +81,7 @@ const LoginUsuario = ({setOpen}) => {
                       correo: dataUserGoogle.email,
                       genero: 0
                     }
-                    setUser(usuarioGoogle.id)
+                    setUsuario(usuarioGoogle.id)
                     setOpen(false)
                   })
                   
@@ -93,7 +91,6 @@ const LoginUsuario = ({setOpen}) => {
                   
                   const dataUserFacebook = user._tokenResponse
                   nuevoUsuario(dataUserFacebook.firstName, dataUserFacebook.lastName, dataUserFacebook.email, '', 0, '', user.user.uid).then((result) => {
-                    console.log(result)
                     const usuarioFacebook = {
                       id: result,
                       nombre: dataUserFacebook.firstName,
@@ -101,7 +98,7 @@ const LoginUsuario = ({setOpen}) => {
                       correo: dataUserFacebook.email,
                       genero: 0
                     }
-                    setUser(usuarioFacebook.id)
+                    setUsuario(usuarioFacebook.id)
                     setOpen(false)
                   })
                   

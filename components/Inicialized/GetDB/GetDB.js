@@ -4,7 +4,6 @@ import request from "superagent"
 
 
 export async function getEmpresas(busqueda, ciudad, categoria, signal, limInf, limSup) {
-    //console.log(limSup)
     const limiteInf = limInf ? limInf : 0
     const limiteSup = limSup ? limSup : 9000000000
 

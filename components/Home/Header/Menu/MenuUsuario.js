@@ -8,16 +8,16 @@ import { basico } from '../../../Inicialized/ModalStyles';
 import CloseIcon from '@material-ui/icons/Close';
 import LoginUsuario from '../../../Generales/Login/LoginUsuario';
 import { EvBiClickButton } from '../../../Inicialized/Bitacora';
-import { useUserContext } from '../../../Inicialized/DataProvider';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuPrincipal from './MenuPrincipal';
+import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 
 
 
 
 const MenuUsuario = (props) => {
 
-    const user = useUserContext()
+    const user = useUsuarioStore((state) => state.usuario);
 
     const [open, setOpen] = React.useState(false);
     function handleOpen() {
@@ -28,7 +28,6 @@ const MenuUsuario = (props) => {
     };
 
     return (
-
         <React.Fragment>
 
             {user ?

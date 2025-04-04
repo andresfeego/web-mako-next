@@ -1,25 +1,18 @@
-import React from 'react'
-import styles from './BusquedaCategoria.module.scss'
-import { useDataContext, useSetDataContext } from '../../Inicialized/DataProvider';
+import React from 'react';
+import styles from './BusquedaCategoria.module.scss';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 import Image from 'next/image';
-
+import useDataStore from '@/components/Stores/useDataStore';
 
 const BusquedaCategorias = (props) => {
+  const setSearch = useDataStore((state) => state.setSearch);
 
-	const data = useDataContext();
-	const setData = useSetDataContext();
+  function cambiaCat(cat, label) {
+    if (cat !== 0) EvBiBusqueda('Busqueda categoria', cat);
+    setSearch({ categoria: cat, lblCategoria: label });
+  }
 
-	function cambiaCat(cat, label) {
-		if (cat != 0) {
-			EvBiBusqueda('Busqueda categoria', cat)
-		}
-		//diferente de cero
-		setData({...data,search: {...data.search, categoria: cat, lblCategoria: label}})
-		
-	}
-
-	return (
+  return (
 		<ul className={styles.BusquedaCategorias}>
 
 			<li className={styles.touch} id="makoTouch" onClick={() => cambiaCat(299, 'Asesor MAKO')} >

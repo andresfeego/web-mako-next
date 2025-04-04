@@ -11,9 +11,9 @@ const useUsuarioStore = create(
       clearUsuario: () => set({ usuario: null }),
     }),
     {
-      name: 'mako-usuario', // Clave usada en localStorage
+      name: 'mako-usuario', 
       partialize: (state) => ({
-        usuario: state.usuario, // Solo persistimos lo necesario
+        usuario: state.usuario, 
       }),
     }
   )

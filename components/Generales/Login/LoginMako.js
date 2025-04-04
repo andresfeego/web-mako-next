@@ -9,9 +9,9 @@ import { nuevoMensaje, tiposAlertas } from '../../Inicialized/Toast';
 import { errorText } from '../../Inicialized/HelpTexts';
 import { nuevoUsuario } from '../../Inicialized/GetDB/SetDb';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
-import { useSetUserContext } from '../../Inicialized/DataProvider';
 import { connectStorageEmulator } from 'firebase/storage';
 import { loginUsuario } from '../../Inicialized/GetDB/GetDB';
+import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 
 
 
@@ -25,7 +25,7 @@ const LoginMako = ({ setOpen}) => {
   const [inputNombre, setNombre] = React.useState(nombre);
   const [inputApellido, setApellido] = React.useState(apellido);
   const [inputGenero, setGenero] = React.useState(genero);
-  const setUser = useSetUserContext();
+  const setUsuario = useUsuarioStore((state) => state.setUsuario);
 
 
   function validaErros() {
@@ -92,7 +92,6 @@ const LoginMako = ({ setOpen}) => {
     nuevoMensaje(tiposAlertas.cargando, 'Validando credenciales')
     validaErrorLogin().then((result) => {
       login().then((result) => {
-        console.log(result)
        if(result.error){
         nuevoMensaje(tiposAlertas.cargadoError, result.message)
        }else{
@@ -103,7 +102,7 @@ const LoginMako = ({ setOpen}) => {
           correo: result.correo,
           genero: result.genero
         }
-        setUser(usuario.id) 
+        setUsuario(usuario.id) 
         setOpen(false)
         nuevoMensaje(tiposAlertas.cargadoSuccess, 'Credenciales correctas')
        }
@@ -126,8 +125,7 @@ const LoginMako = ({ setOpen}) => {
           correo: inputCorreo.value,
           genero: inputGenero.value
         }
-        console.log(usuario)
-        setUser(usuario.id) 
+        setUsuario(usuario.id) 
         setOpen(false)
         nuevoMensaje(tiposAlertas.cargadoSuccess, 'Cuenta creada de forma exitosa')
       }).catch((err) => {
