@@ -14,6 +14,15 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const isProd = process.env.NODE_ENV === 'production';
 
+const HOST_NAME = isProd
+  ? 'https://feegosystem.com:8443/api/responseMako'
+  : 'http://localhost:3020/api/responseMako';
+
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("HOST_NAME:", HOST_NAME);
+console.log("VERCEL_ENV:", process.env.VERCEL_ENV || 'local');
+console.log("VERCEL_URL:", process.env.VERCEL_URL || 'http://localhost:3000');
+
 module.exports = withPWA({
   reactStrictMode: isProd, // ✅ Solo activado en producción
   ...withImages(),
@@ -55,10 +64,8 @@ module.exports = withPWA({
     webpack5: true,
   },
   env: {
-    //HOST_NAME: 'http://localhost:3020/api/responseMako',
-    HOST_NAME: 'https://feegosystem.com:8443/api/responseMako',
+    HOST_NAME, // usa la constante que ya es dinámica
     HOST_NAME_MAKO: 'https://www.mako.guru/',
-    DEV_ENV: false,
     NEXT_PUBLIC_ID_ANALYTICS: "G-5JYYZXZD6J"
   },
   quiet: true
