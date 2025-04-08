@@ -21,7 +21,7 @@ const ListadoDosCol = ({data, refresh}) => {
         <div className={`${stylesGeneral.listadoResultados}`}>
                 {refresh && <RefreshOutlinedIcon onClick={()=> refresh()} className={`${stylesGeneral.recargar}`}/>}
 
-            {data.lenght != 0 ? 
+            {Array.isArray(data) && data.length !== 0 ? 
                 renderLista()
             :
             <span>Sin resultados</span>

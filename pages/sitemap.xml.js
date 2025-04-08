@@ -1,8 +1,9 @@
-import { getEmpresas } from "../components/Inicialized/GetDB/GetDB"
+import { getCategoriasConEmpresas, getCiudadesConEmpresas, getCiudadYCategoriaConEmpresas, getTodasLasEmpresas } from '@/components/Inicialized/data/helpersGetDB';
+
 
 async function getCategorias() {
 
-  const response = await fetch(process.env.HOST_NAME + '/categoriasConEmpresas')
+  const response = await getCategoriasConEmpresas();
 
 
 
@@ -18,7 +19,7 @@ async function getCategorias() {
 
 async function getCiudades() {
 
-  const response = await fetch(process.env.HOST_NAME + '/ciudadesConEmpresas')
+  const response = await getCiudadesConEmpresas();
 
 
 
@@ -33,7 +34,7 @@ async function getCiudades() {
 
 async function getCiuycat() {
 
-  const response = await fetch(process.env.HOST_NAME + '/ciuycatConEmpresas')
+  const response = await getCiudadYCategoriaConEmpresas();
 
 
 
@@ -157,7 +158,7 @@ function withXMLTemplate(content) {
 
 export async function getServerSideProps({ res }) {
 
-  const empresas = await getEmpresas('','',0);
+  const empresas = await getTodasLasEmpresas();
   const categorias = await getCategorias();
   const ciudades = await getCiudades();
   const ciuycat = await getCiuycat();

@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
 import Script from 'next/script'
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from "nextjs-google-analytics";
  
 
@@ -51,7 +50,6 @@ const App = ({ Component, pageProps }) => {
           />
 
           <Component {...pageProps} />
-          <SpeedInsights />
 
       </ThemeProvider>
     </React.Fragment>

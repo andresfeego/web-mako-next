@@ -1,16 +1,13 @@
 
-import { Box, Button, Input, MenuItem, Select, InputLabel, TextField, FormControl, FormHelperText } from '@mui/material';
+import { Box, Button, MenuItem, Select, InputLabel, TextField, FormControl, FormHelperText } from '@mui/material';
 import styles from './LoginMako.module.scss';
 import React from 'react';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
 import { apellido, confirContrasena, contrasena, correo, genero, nombre } from "../../Inicialized/CamposForm";
-import { onChangeConfirContrasenaHandler, onChangeHandler, validaErrosForm } from '../../Inicialized/HandleForms';
+import { onChangeHandler, validaErrosForm } from '../../Inicialized/HandleForms';
 import { nuevoMensaje, tiposAlertas } from '../../Inicialized/Toast';
-import { errorText } from '../../Inicialized/HelpTexts';
-import { nuevoUsuario } from '../../Inicialized/GetDB/SetDb';
-import { ConnectingAirportsOutlined } from '@mui/icons-material';
-import { connectStorageEmulator } from 'firebase/storage';
-import { loginUsuario } from '../../Inicialized/GetDB/GetDB';
+import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
+import { loginUsuario } from '@/components/Inicialized/data/helpersGetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 
 

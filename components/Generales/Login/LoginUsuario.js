@@ -6,13 +6,9 @@ import LoginMako from './LoginMako';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
 import { authProvider } from '../../../services/firebase';
 import GoogleIcon from '@mui/icons-material/Google';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import { usuarioExiste } from '../../Inicialized/GetDB/GetDB';
-import { nuevoMensaje, tiposAlertas } from "../../Inicialized/Toast";
-import { HelpTexts } from '../../Inicialized/HelpTexts';
-import { nuevoUsuario } from '../../Inicialized/GetDB/SetDb';
+import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
-
+import { usuarioExiste } from '@/components/Inicialized/data/helpersGetDB';
 
 
 
@@ -31,7 +27,7 @@ const LoginUsuario = ({setOpen}) => {
 
       authProvider(provider).then((user) => {
         if(user){
-          usuarioExiste(user.user.email).then((result) =>{
+          usuarioExiste(user.user.email).then((result) => {
 
             if (result) {
               switch (provider) {

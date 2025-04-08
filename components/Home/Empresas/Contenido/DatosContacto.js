@@ -3,7 +3,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import Loyalty from '@material-ui/icons/Loyalty';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Info from '@material-ui/icons/Info';
-import SendToMobileIcon from '@material-ui/icons/MobileFriendly';
+import SendToMobileIcon from '@mui/icons-material/MobileFriendly';
 import PhoneForwardedIcon from '@mui/icons-material/Phone';
 import { useRouter } from 'next/router';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -13,99 +13,38 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import LanguageIcon from '@mui/icons-material/Language';
 import XIcon from '@mui/icons-material/X';
 import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
+import { AddToHomeScreen, Facebook, LocalConvenienceStoreRounded, PaymentSharp, YouTube } from "@material-ui/icons";
+import { ArrowCircleUp, Diversity1Rounded, FacebookOutlined, Instagram, Moped } from "@mui/icons-material";
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { MaysPrimera } from "../../../Inicialized/GlobalFunctions";
-import { AddToHomeScreen, Facebook, LocalConvenienceStoreRounded, PaymentSharp, YouTube } from "@material-ui/icons";
-import { ArrowCircleUp, Diversity1Rounded, FacebookOutlined, Instagram, Moped } from "@mui/icons-material";
 import MapaContacto from '../Mapas/MapaContacto';
 import Image from 'next/image';
 
-async function getEmpresa(idComercio) {
-  const response = await fetch(process.env.HOST_NAME + '/empresas/' + idComercio, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  });
+import { getTelefonosEmpresa, getEmailsEmpresa, getRedesEmpresa, getHorariosEmpresa } from "@/components/Inicialized/data/helpersGetDB";
 
-  if (response.ok) {
-    const responseJson = await response.json();
-    return responseJson[0];
-  } else {
-    return null;
-  }
-}
 
 async function getTelefonos(idComercio) {
-  const response = await fetch(process.env.HOST_NAME + '/empresas/telefonos/' + idComercio, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  });
-
-  if (response.ok) {
-    const responseJson = await response.json();
-    return responseJson;
-  } else {
-    return null;
-  }
+  const res = await getTelefonosEmpresa(idComercio);
+  return res || null;
 }
 
 async function getMails(idComercio) {
-  const response = await fetch(process.env.HOST_NAME + '/empresas/emails/' + idComercio, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  });
-
-  if (response.ok) {
-    const responseJson = await response.json();
-    return responseJson;
-  } else {
-    return null;
-  }
+  const res = await getEmailsEmpresa(idComercio);
+  return res || null;
 }
 
 async function getRedes(idComercio) {
-  const response = await fetch(process.env.HOST_NAME + '/empresas/redes/' + idComercio, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  });
-
-  if (response.ok) {
-    const responseJson = await response.json();
-    return responseJson;
-  } else {
-    return null;
-  }
+  const res = await getRedesEmpresa(idComercio);
+  return res || null;
 }
 
 async function getHorarios(idComercio) {
-  const response = await fetch(process.env.HOST_NAME + '/empresas/horarios/' + idComercio, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-  });
-
-  if (response.ok) {
-    const responseJson = await response.json();
-    return responseJson;
-  } else {
-    return null;
-  }
+  const res = await getHorariosEmpresa(idComercio);
+  return res || null;
 }
+
 
 const DatosContacto = ({ Perfilempresa, styles }) => {
   const [open, setOpen] = useState(true);
@@ -199,9 +138,9 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
         <div className={styles.textInfoDer}>
           {redes && renderRedes(redes)}
-          {horarios && <div className={styles.rowInfo}><AccessTimeSharpIcon className={styles.infoIcon} /><div className={styles.columnInfo}>{renderHorarios(horarios)}</div></div>}
-          {empresa.datafono && <div className={styles.rowInfo}><PaymentSharp className={styles.infoIcon} /><span>Aceptamos tarjetas de crédito</span></div>}
-          {(empresa.transBanCol || empresa.transDavi || empresa.transNequi) &&
+          {Array.isArray(horarios) && horarios.length > 0 &&(<div className={styles.rowInfo}><AccessTimeSharpIcon className={styles.infoIcon} /><div className={styles.columnInfo}>{renderHorarios(horarios)}</div></div>)}
+          {empresa.datafono !== 0 && <div className={styles.rowInfo}><PaymentSharp className={styles.infoIcon} /><span>Aceptamos tarjetas de crédito</span></div>}
+          {(empresa.transBanCol !== 0 || empresa.transDavi !== 0 || empresa.transNequi !== 0) &&
             <div className={styles.rowInfo}>
               <AddToHomeScreen className={styles.infoIcon} />
               <div className={styles.transferencias}>

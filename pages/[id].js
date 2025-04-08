@@ -8,8 +8,8 @@ import PerfilCero from "../components/Home/Empresas/Perfiles/PerfilCero";
 import { MaysPrimera } from '../components/Inicialized/GlobalFunctions';
 import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
-import { getEmpresas } from '../components/Inicialized/GetDB/GetDB';
 import Cargando from '../components/Inicialized/Cargando';
+import { getEmpresa } from '@/components/Inicialized/data/helpersGetDB';
 
 const ListaEmpresas = dynamic(() => import('../components/Home/Contenido/ListaEmpresas'), {
   ssr: false,
@@ -95,9 +95,8 @@ export async function getServerSideProps(ctx) {
   const codigo = ctx.query.id;
 
   if (codigo !== 'directorio-empresarial') {
-    const res = await fetch(process.env.HOST_NAME + '/empresas/' + codigo);
-    if (res.ok) {
-      const responseJson = await res.json();
+    const responseJson = await getEmpresa(codigo);
+    if (responseJson) {
       if (responseJson.length === 0) {
         props.props = { tipo: [], codigo, mensaje: 'La empresa no existe' };
         return props;

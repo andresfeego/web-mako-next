@@ -1,6 +1,6 @@
-import { usuarioExiste } from "./GetDB/GetDB";
-import { errorText, HelpTexts } from "./HelpTexts"
+import { usuarioExiste } from '@/components/Inicialized/data/helpersGetDB';
 
+import { errorText, HelpTexts } from "./HelpTexts"
 
 export const validaMail = (text, creandoUsuario) => {
     return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ export const validaMail = (text, creandoUsuario) => {
                 resolve({ error: true, text: text, errorText: HelpTexts.formatoMail })
             } else {
                 if (creandoUsuario) {
-                    usuarioExiste(text).then((result)=> {
+                    usuarioExiste(user.user.email).then((result) => {
                         if (result) {
                             resolve({ error: true, text: text, errorText: HelpTexts.usuarioExiste })
                         } else {

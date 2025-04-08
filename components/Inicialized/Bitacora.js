@@ -1,6 +1,6 @@
 import request from "superagent"
 import {generaCodigo} from './GlobalFunctions'
-
+import { saveBit } from "@/components/Inicialized/data/helpersSetDB";
 
 export const EvBiClickButton = (flujo, etiqueta) => {
 
@@ -17,7 +17,7 @@ export const EvBiClickButton = (flujo, etiqueta) => {
         pais: 'COL'   //cambiar en base de datos => ubicacion()
     }
 
-    saveDb(data)
+     saveBit(data)
 }
 
 export const EvBiVisita = (idComercio) => {
@@ -35,11 +35,11 @@ export const EvBiVisita = (idComercio) => {
         pais: 'COL'   //cambiar en base de datos => ubicacion()
     }
 
-    saveDb(data)
+     saveBit(data)
 }
 
 export const EvBiBusqueda = (flujo, busqueda) => {
-
+console.log('okokokok');
     const data = {
         tipoAccion: 1,
         flujo: flujo,
@@ -53,7 +53,7 @@ export const EvBiBusqueda = (flujo, busqueda) => {
         pais: 'COL'   //cambiar en base de datos => ubicacion()
     }
 
-    saveDb(data)
+     saveBit(data)
 }
 
 function generateHashSession(){
@@ -68,52 +68,6 @@ function generateHashSession(){
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const saveDb = (data) => {
-    return new Promise((resolve, reject) => {
-        request
-            .post(process.env.HOST_NAME + '/bitacora/nuevoEvento')
-            .send(data)
-            .set('accept', 'json')
-            .end((err, res) => {
-                if (err) {
-
-                    reject("Error al guardar información de bitacora")
-
-                } else {
-                    resolve()
-
-                }
-            });
-    })
-}
-
-
-
-
 
 
 function getBrowserType() {

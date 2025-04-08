@@ -7,7 +7,7 @@ import { MaysPrimera } from '../../../Inicialized/GlobalFunctions';
 import Cargando from '../../../Inicialized/Cargando';
 import Empresa from '../../Contenido/Empresa';
 import Image from 'next/image';
-import { getEmpresas } from '../../../Inicialized/GetDB/GetDB';
+import { getEmpresas } from '@/components/Inicialized/data/helpersGetDB';
 import useDataStore from '@/components/Stores/useDataStore';
 
 const BarraBusquedaEmpresa = (props) => {

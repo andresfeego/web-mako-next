@@ -6,6 +6,7 @@ import Filtros from "../../../../../components/Home/Contenido/Filtros";
 import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctions';
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
 import useDataStore from '@/components/Stores/useDataStore';
+import { getSlides, getListaMunicipios, getSubcategoria2Xid } from '@/components/Inicialized/data/helpersGetDB';
 
 const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subcatdos, idCat, empresa, mensaje, categoriaCompleta }) => {
   const categoriaStore = useDataStore((state) => state.search.categoria);
@@ -65,12 +66,12 @@ const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subca
 export async function getServerSideProps(ctx) {
   const props = { props: {} };
 
-  const resSlides = await fetch(process.env.HOST_NAME + '/slides');
+  const resSlides = await getSlides();
   const slidesJson = await resSlides.json();
   props.props.slides = slidesJson;
   props.props.empresas = [];
 
-  const response = await fetch(process.env.HOST_NAME + '/listaMunicipios');
+  const response = await getListaMunicipios();
   const responseJson = await response.json();
   props.props.municipios = responseJson;
 
@@ -79,7 +80,7 @@ export async function getServerSideProps(ctx) {
   const subcatuno = ctx.query.subcatuno;
   const subcatdos = ctx.query.subcatdos;
 
-  const responseCat = await fetch(process.env.HOST_NAME + '/subcategoria2Xid/' + idCat);
+  const responseCat = await getSubcategoria2Xid(idCat);
   const responseCatJson = await responseCat.json();
 
   props.props = {

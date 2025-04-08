@@ -7,6 +7,7 @@ import PerfilCero from "../../../../components/Home/Empresas/Perfiles/PerfilCero
 import { MaysPrimera } from '../../../../components/Inicialized/GlobalFunctions';
 import { nuevoMensaje, tiposAlertas } from '../../../../components/Inicialized/Toast';
 import useDataStore from '@/components/Stores/useDataStore';
+import { getSlides, getListaMunicipios } from '@/components/Inicialized/data/helpersGetDB';
 
 const Index = ({ slides, empresas, municipios, idCiudad, departamento, municipio, empresa, mensaje }) => {
   const ciudadStore = useDataStore((state) => state.search.ciudad);
@@ -68,13 +69,13 @@ const Index = ({ slides, empresas, municipios, idCiudad, departamento, municipio
 export async function getServerSideProps(ctx) {
   const props = { props: {} };
 
-  const resSlides = await fetch(process.env.HOST_NAME + '/slides');
+  const resSlides = await getSlides();
   const slidesJson = await resSlides.json();
   props.props.slides = slidesJson;
 
   props.props.empresas = [];
 
-  const response = await fetch(process.env.HOST_NAME + '/listaMunicipios');
+  const response = await getListaMunicipios();
   const responseJson = await response.json();
   props.props.municipios = responseJson;
 

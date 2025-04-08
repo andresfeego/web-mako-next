@@ -7,11 +7,11 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import CheckIcon from '@material-ui/icons/Check';
 import styles from './BusquedaCat.module.scss'
 import CloseIcon from '@material-ui/icons/Close';
+import { getCategoriasCompletas } from '@/components/Inicialized/data/helpersGetDB';
 
 async function getCategorias(cat) {
 
-    const response = await fetch(process.env.HOST_NAME + '/categoriasCompletas/' + cat)
-    const categorias = await response.json()
+    const categorias = await getCategoriasCompletas(cat);
     return categorias
 }
 

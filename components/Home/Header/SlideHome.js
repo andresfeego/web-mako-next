@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Cargando from '../../Inicialized/Cargando';
 import Image from 'next/image';
+import { getSlides } from "@/components/Inicialized/data/helpersGetDB";
 
 
 
@@ -65,14 +66,11 @@ const SlideHome = ({ styles, parent }) => {
 
     const [slides, setSlides] = useState(null)
 
-    useEffect(() =>{
-        fetch(process.env.HOST_NAME + '/slides')
-        .then((res) => res.json())
-        .then((data) =>{
-            setSlides(data)
-        })
-    
-    }, [])
+    useEffect(() => {
+        getSlides().then((data) => {
+        if (data) setSlides(data);
+      });
+    }, []);
 
     return (
         <div className={`${styles.slide} ${parent}`}>

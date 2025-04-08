@@ -5,7 +5,7 @@ import { Button, TextField } from '@mui/material';
 import BusquedaCiudad, { busIdCiudad } from './Components/BusquedaCiudad'
 import BusquedaCat, { idCat } from './Components/BusquedaCat';
 import { nuevoMensaje, tiposAlertas } from '../../../Inicialized/Toast'
-import { crearEmpresaBasica, uploadLogo } from '../../../Inicialized/GetDB/SetDb';
+import { crearEmpresaBasica, uploadLogo } from '@/components/Inicialized/data/helpersSetDB';
 import Cropper from 'react-easy-crop'
 import getCroppedImgURL, { imageResult } from './Components/CropImage'
 import Slider from '@material-ui/core/Slider'

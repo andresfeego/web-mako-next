@@ -2,7 +2,7 @@ import styles from "./ListaEmpresas.module.scss";
 import { useState, useEffect } from 'react';
 import Empresa from './Empresa';
 import Cargando from "../../Inicialized/Cargando";
-import { getEmpresas } from "../../Inicialized/GetDB/GetDB";
+import { getEmpresas } from '@/components/Inicialized/data/helpersGetDB';
 import useDataStore from '@/components/Stores/useDataStore';
 
 const ListaEmpresas = () => {
@@ -47,7 +47,7 @@ const ListaEmpresas = () => {
   }
 
   function renderListaEmpresas(lista) {
-    return lista.length !== 0
+    return Array.isArray(lista) && lista.length !== 0
       ? lista.map((empresa) => <Empresa key={empresa.codigo} empresa={empresa} />)
       : <span>Sin resultados</span>;
   }

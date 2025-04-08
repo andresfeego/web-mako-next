@@ -6,6 +6,7 @@ import Cargando from '../../Inicialized/Cargando';
 import { MaysPrimera } from '../../Inicialized/GlobalFunctions';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 import useDataStore from '@/components/Stores/useDataStore';
+import { getListaMunicipios } from '@/components/Inicialized/data/helpersGetDB';
 
 let buscarBar;
 
@@ -19,12 +20,12 @@ const BusquedaCiudad = () => {
   const [mostrarAuto, setmostrarAuto] = useState(true);
 
   useEffect(() => {
-    fetch(process.env.HOST_NAME + '/listaMunicipios')
-      .then((res) => res.json())
-      .then((data) => {
+    getListaMunicipios().then((data) => {
+      if (data) {
         setLC(data);
         setLCO(data);
-      });
+      }
+    });
   }, []);
 
   function onSubmit(ciudad, id) {

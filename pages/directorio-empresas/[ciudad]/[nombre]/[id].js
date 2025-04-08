@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { useEffect } from 'react'
 import { EvBiVisita } from "../../../../components/Inicialized/Bitacora";
 import PerfilUno from "../../../../components/Home/Empresas/Perfiles/PerfilUno/PerfilUno";
+import { getEmpresa, getListaMunicipios, getSlides } from '@/components/Inicialized/data/helpersGetDB';
 
 const Empresa = ({ empresa, municipios, empresas, slides, codigo }) => {
 
@@ -22,22 +23,19 @@ export async function getServerSideProps(ctx) {
     var props = { props: {} }
 const codigo = ctx.query.id
 
-    const resEmpresa = await fetch(process.env.HOST_NAME + '/empresas/' + codigo)
-    const empresaJson = await resEmpresa.json()
+const empresaJson = await getEmpresa(codigo);
     props.props = { empresa: empresaJson[0] }
 
 
 
 
-    const response = await fetch(process.env.HOST_NAME + '/listaMunicipios')
-    const responseJson = await response.json()
+    const responseJson = await getListaMunicipios();
     props.props = { empresa: empresaJson[0], municipios: responseJson }
 
     props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: [] }
 
     /* const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/empresas/imagenesSlide/' + ctx.query.id) */
-    const resSlidesEmpresa = await fetch(process.env.HOST_NAME + '/slides')
-    const slidesEmpresaJson = await resSlidesEmpresa.json()
+    const slidesEmpresaJson = await getSlides();
     props.props = { empresa: empresaJson[0], municipios: responseJson, empresas: [], slides: slidesEmpresaJson, codigo: codigo }
 
     return props
