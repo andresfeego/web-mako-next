@@ -5,7 +5,7 @@ const withImages = require('next-images');
 const isProd = process.env.NODE_ENV === 'production';
 
 const HOST_NAME = isProd
-  ? 'https://feegosystem.com:50443/api/responseMako'
+  ? 'https://feegosystem.com/proxyPassthrough.php?path=/api/responseMako'
   : 'http://127.0.0.1:3020/api/responseMako';
 
 console.log("NODE_ENV:", process.env.NODE_ENV);
