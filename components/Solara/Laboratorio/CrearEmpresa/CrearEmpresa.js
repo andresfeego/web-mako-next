@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import stylesGeneral from '../../Listas.module.scss';
 import styles from './CrearEmpresa.module.scss';
-import { Button, TextField } from '@mui/material';
+import TextField from '@material-ui/core/TextField';
 import BusquedaCiudad, { busIdCiudad } from './Components/BusquedaCiudad'
 import BusquedaCat, { idCat } from './Components/BusquedaCat';
 import { nuevoMensaje, tiposAlertas } from '../../../Inicialized/Toast'
