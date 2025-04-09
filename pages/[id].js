@@ -91,43 +91,62 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  let props = { props: {} };
   const codigo = ctx.query.id;
 
-  if (codigo !== 'directorio-empresarial') {
+  // Por defecto
+  const props = { tipo: [], codigo };
+
+  if (codigo === 'directorio-empresarial') {
+    return { props };
+  }
+
+  try {
     const responseJson = await getEmpresa(codigo);
-    if (responseJson) {
-      if (responseJson.length === 0) {
-        props.props = { tipo: [], codigo, mensaje: 'La empresa no existe' };
-        return props;
-      } else {
-        const empresa = responseJson[0];
-        switch (empresa.tipo) {
-          case 0:
-          case -1:
-            props.props = { tipo: empresa.tipo, codigo, empresa };
-            return props;
-          case 1:
-            const urlEmpresa = `/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`;
-            return {
-              redirect: {
-                destination: encodeURI(urlEmpresa),
-                permanent: false,
-              },
-            };
-          default:
-            props.props = { tipo: [], codigo };
-            return props;
-        }
-      }
-    } else {
-      props.props = { tipo: [], codigo, mensaje: 'error al cargar los datos' };
-      return props;
+
+    if (!responseJson || responseJson.length === 0) {
+      return {
+        props: {
+          ...props,
+          mensaje: 'La empresa no existe',
+        },
+      };
     }
-  } else {
-    props.props = { tipo: [], codigo };
-    return props;
+
+    const empresa = responseJson[0];
+
+    switch (empresa.tipo) {
+      case 0:
+      case -1:
+        return {
+          props: {
+            tipo: empresa.tipo,
+            codigo,
+            empresa,
+          },
+        };
+
+      case 1:
+        const urlEmpresa = `/directorio-empresas/${empresa.nombreMun}-${empresa.nombreDep}/${empresa.nombre.replace(/\s/g, '-')}/${empresa.codigo}`;
+        return {
+          redirect: {
+            destination: encodeURI(urlEmpresa),
+            permanent: false,
+          },
+        };
+
+      default:
+        return { props };
+    }
+
+  } catch (error) {
+    console.error(`[getServerSideProps] Error al obtener empresa ${codigo}:`, error.message);
+
+    return {
+      props: {
+        ...props,
+        mensaje: 'Error al cargar los datos desde el backend',
+        errorDetails: error.message,
+      },
+    };
   }
 }
-
-export default Index;
