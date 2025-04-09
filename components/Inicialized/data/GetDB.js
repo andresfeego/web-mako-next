@@ -8,7 +8,7 @@ export async function getDB(endpoint, options = {}) {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       ...options.headers,
-    }
+    },
   };
 
   if (method !== 'GET' && method !== 'HEAD' && options.body) {
@@ -24,24 +24,28 @@ export async function getDB(endpoint, options = {}) {
 
     const contentType = res.headers.get('content-type');
 
+    // ⚠️ Error HTTP (por ejemplo 500, 404, etc.)
     if (!res.ok) {
-      console.error(`[getDB] ❗ Error HTTP: ${res.status} ${res.statusText} -> ${url}`);
       const errText = await res.text();
-      console.error(`[getDB] ❗ Respuesta RAW:`, errText);
-      return null;
+      const msg = `[getDB] ❗ HTTP ${res.status} ${res.statusText} → ${url}\nRespuesta RAW:\n${errText}`;
+      console.error(msg);
+      throw new Error(msg);
     }
 
+    // ⚠️ Respuesta no es JSON
     if (!contentType || !contentType.includes('application/json')) {
-      console.warn(`[getDB] ⚠️ Respuesta inesperada (no JSON) en: ${url}`);
       const raw = await res.text();
-      console.log('[getDB] 🔍 Contenido crudo:', raw);
-      return null;
+      const msg = `[getDB] ⚠️ Respuesta no-JSON en ${url}\nContenido crudo:\n${raw}`;
+      console.warn(msg);
+      throw new Error(msg);
     }
 
+    // ✅ Todo OK
     return await res.json();
+
   } catch (err) {
-    console.error(`[getDB] ❌ Fallo total al hacer fetch a ${url}`);
-    console.error('[getDB] 🧨 Error:', err.message || err);
-    return null;
+    const msg = `[getDB] 🧨 Error general al hacer fetch a ${url} → ${err.message || err}`;
+    console.error(msg);
+    throw new Error(msg);
   }
 }
