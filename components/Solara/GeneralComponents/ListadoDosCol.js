@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
 import stylesGeneral from './styles/listadoDosCol.module.scss'
-import { useState } from 'react';
-import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
+import { FiRefreshCcw } from "react-icons/fi";
+
 
 const ListadoDosCol = ({data, refresh}) => {
 
@@ -19,7 +18,7 @@ const ListadoDosCol = ({data, refresh}) => {
         
         return ( 
         <div className={`${stylesGeneral.listadoResultados}`}>
-                {refresh && <RefreshOutlinedIcon onClick={()=> refresh()} className={`${stylesGeneral.recargar}`}/>}
+                {refresh && <FiRefreshCcw onClick={()=> refresh()} className={`${stylesGeneral.recargar}`}/>}
 
             {Array.isArray(data) && data.length !== 0 ? 
                 renderLista()

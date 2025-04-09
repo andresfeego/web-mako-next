@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import stylesGeneral from './styles/TarjetaBasica.module.scss'
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 import ListadoDosCol from './ListadoDosCol';
 
 const TarjetaBasica = ({titulo, contenido}) => {
@@ -16,9 +16,9 @@ const TarjetaBasica = ({titulo, contenido}) => {
                 </span>
 
                 {openCard ?
-                    <KeyboardArrowUpOutlinedIcon className={`${stylesGeneral.openCard}`} onClick={() => setOpenCard(!openCard)} />
+                    <FaChevronUp className={`${stylesGeneral.openCard}`} onClick={() => setOpenCard(!openCard)} />
                     :
-                    <KeyboardArrowDownOutlinedIcon className={`${stylesGeneral.openCard}`} onClick={() => setOpenCard(!openCard)} />
+                    <FaChevronDown className={`${stylesGeneral.openCard}`} onClick={() => setOpenCard(!openCard)} />
                 }
 
             </div>

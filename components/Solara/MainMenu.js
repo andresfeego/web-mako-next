@@ -1,13 +1,10 @@
-import { Button } from "@mui/material";
 import stylesMain from "./MainMenu.module.scss";
 import stylesLateral from "./MainMenuLateral.module.scss";
-import Link from 'next/link';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
-import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { MdOutlineScience } from "react-icons/md";
+import { FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
+import { MdOutlineHome } from "react-icons/md";
 import { useState } from "react";
 
 const MainMenu = ({wide, handleMenu}) => {
@@ -25,11 +22,11 @@ const MainMenu = ({wide, handleMenu}) => {
     return (
         <div className={`${styles.mainMenu} ${stylesOpen}`}>
             <div className={`${styles.openMenu} ${styles.iconMenu}`} onClick={()=> setOpen(!open)}>
-                {open? <KeyboardArrowLeftIcon/> : <KeyboardArrowRightIcon/>}
+                {open? <FaChevronLeft/> : <FaChevronRight/>}
             </div>
 
             <div className={`${styles.goHome} ${styles.iconMenu}`} onClick={()=> {handleMenu(0); setOpen(false)}}>
-                <HomeOutlinedIcon/>
+                <MdOutlineHome/>
             </div>
 
             <div onClick={()=> {handleMenu(1), setOpen(false)}}>
@@ -41,7 +38,7 @@ const MainMenu = ({wide, handleMenu}) => {
 
             <div onClick={()=> {handleMenu(2), setOpen(false)}}>
                 <a className={styles.button}>
-                    <ScienceOutlinedIcon className={styles.icon} />
+                    <MdOutlineScience className={styles.icon} />
                     <span className={styles.text}>Laboratorio</span>
                 </a>
             </div>

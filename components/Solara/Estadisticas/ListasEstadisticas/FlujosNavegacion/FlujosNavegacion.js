@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import stylesGeneral from '../../../Listas.module.scss';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 import TarjetaBasica from '../../../GeneralComponents/TarjetaBasica';
 import { getFlujosNavegacion } from '@/components/Inicialized/data/helpersGetDB';
 
@@ -49,9 +49,9 @@ const FlujosNavegacion = () => {
             <span className={`${stylesGeneral.title}`}>Flujos de navegación</span>
             <div className={`${stylesGeneral.filters}`}>
                 {openFilter ?
-                    <KeyboardArrowUpOutlinedIcon className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
+                    <FaChevronUp className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
                     :
-                    <KeyboardArrowDownOutlinedIcon className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
+                    <FaChevronDown className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
                 }
             </div>
             <div className={`${stylesGeneral.contentLista}`}>
