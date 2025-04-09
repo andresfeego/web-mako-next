@@ -1,14 +1,14 @@
 
 import styles from './MenuUsuario.module.scss';
 import PersonIcon from '@material-ui/icons/Person';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
+import Modal from '@material-ui/core/Modal';
+import Box from '@material-ui/core/Box';
 import React from 'react';
 import { basico } from '../../../Inicialized/ModalStyles';
 import CloseIcon from '@material-ui/icons/Close';
 import LoginUsuario from '../../../Generales/Login/LoginUsuario';
 import { EvBiClickButton } from '../../../Inicialized/Bitacora';
-import MenuIcon from '@mui/icons-material/Menu';
+import { GiHamburgerMenu } from "react-icons/gi";
 import MenuPrincipal from './MenuPrincipal';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 
@@ -31,7 +31,7 @@ const MenuUsuario = (props) => {
         <React.Fragment>
 
             {user ?
-                <MenuIcon onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 6 }} />
+                <GiHamburgerMenu onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 6 }} />
                 :
                 <PersonIcon onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 6 }} />
             }

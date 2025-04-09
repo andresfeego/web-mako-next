@@ -12,6 +12,9 @@
     src: url('../scrAppServer/fonts/Caviar_dreams/CaviarDreams_Bold.ttf');
   }
 
+  svg[width="1em"][height="1em"] {
+    font-size: 1.5em;
+  }
 
   body{
     margin: 0px;

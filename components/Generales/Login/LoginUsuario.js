@@ -1,11 +1,11 @@
-import { Button } from '@mui/material';
+import { Button } from '@material-ui/core';
 import styles from './MenuUsuario.module.scss';
 import React, { useEffect } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LoginMako from './LoginMako';
 import { EvBiClickButton } from '../../Inicialized/Bitacora';
 import { authProvider } from '../../../services/firebase';
-import GoogleIcon from '@mui/icons-material/Google';
+import { FaGoogle } from 'react-icons/fa';
 import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 import { usuarioExiste } from '@/components/Inicialized/data/helpersGetDB';
@@ -130,7 +130,7 @@ const LoginUsuario = ({setOpen}) => {
             <Button className={styles.button} title='Continuar con Google' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Google')
               handleAuth('google')
-            }} ><GoogleIcon /> <span>Google</span></Button>
+            }} ><FaGoogle /> <span>Google</span></Button>
 
             {/* <Button className={styles.button} title='Continuar con Facebook' onClick={() => {
               EvBiClickButton('Menu pincipal', 'Iniciar Sesion Facebook')

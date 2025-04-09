@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import stylesGeneral from '../../../Listas.module.scss'
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import TarjetaVacia from './TarjetaVacia';
-import ListadoResultadosVacio from './ListadoResultadosVacio';
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 
 const ListaVacia = () => {
 
@@ -13,9 +11,9 @@ const ListaVacia = () => {
             <span className={`${stylesGeneral.title}`}>Aqui va el titulo</span>
             <div className={`${stylesGeneral.filters}`}>
                 {openFilter ?
-                    <KeyboardArrowUpOutlinedIcon className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
+                    <FaChevronUp className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
                     :
-                    <KeyboardArrowDownOutlinedIcon className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
+                    <FaChevronDown className={`${stylesGeneral.openFilter}`} onClick={() => setOpenFilter(!openFilter)} />
                 }
                 <div className={`${stylesGeneral.contentFilter}`} style={openFilter? {height: '150px'} : {height: '18px'}}>
                     <span className={`${stylesGeneral.titleFilters}`}>Filtros</span>

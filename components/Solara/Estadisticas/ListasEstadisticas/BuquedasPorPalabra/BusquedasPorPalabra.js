@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import stylesGeneral from '../../../Listas.module.scss';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 import ListadoDosCol from '../../../GeneralComponents/ListadoDosCol';
 import { getBusquedasPalabra } from '@/components/Inicialized/data/helpersGetDB'; // usa el helper
 
@@ -28,12 +28,12 @@ const BusquedasPorPalabra = () => {
       
       <div className={stylesGeneral.filters}>
         {openFilter ? (
-          <KeyboardArrowUpOutlinedIcon
+          <FaChevronUp
             className={stylesGeneral.openFilter}
             onClick={() => setOpenFilter(!openFilter)}
           />
         ) : (
-          <KeyboardArrowDownOutlinedIcon
+          <FaChevronDown
             className={stylesGeneral.openFilter}
             onClick={() => setOpenFilter(!openFilter)}
           />

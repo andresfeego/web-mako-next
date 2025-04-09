@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import stylesGeneral from './listadoResultados.module.scss'
 import { useState } from 'react';
-import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import { getBusquedasPalabra } from '@/components/Inicialized/data/helpersGetDB';
 
 const ListadoResultadosVacio = () => {

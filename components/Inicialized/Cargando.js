@@ -1,13 +1,12 @@
-import { css } from "@emotion/react";
 import BeatLoader from "react-spinners/BeatLoader";
 import styles from "./Cargando.module.scss"
 
-
+/* 
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: gray;
-`;
+`; */
 
 const Cargando = () => {
 
@@ -16,7 +15,7 @@ const Cargando = () => {
             <div className={styles.CargandoContainer}>
                 
                 <BeatLoader
-                    css={override}
+                    //css={override} falta reescribir estylos 
                     size={15}
                     color={"gray"}
                     loading={true}

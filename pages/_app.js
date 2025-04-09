@@ -4,7 +4,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { ToastContainer } from 'react-toastify';
 import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
 import Script from 'next/script'
 import { GoogleAnalytics } from "nextjs-google-analytics";

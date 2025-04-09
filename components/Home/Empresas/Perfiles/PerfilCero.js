@@ -4,9 +4,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import Loyalty from '@material-ui/icons/Loyalty';
 import Info from '@material-ui/icons/Info';
 import { useRouter } from 'next/router';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import DatosContacto from "../Contenido/DatosContacto";
+import Box from '@material-ui/core/Box';
+import Modal from '@material-ui/core/Modal';
+import DatosContacto from "../Contenido/DatosContacto.js";
 import Image from "next/image";
 
 const style = {

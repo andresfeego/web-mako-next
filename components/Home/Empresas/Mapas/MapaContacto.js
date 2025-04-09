@@ -1,13 +1,13 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
 import Image from "next/image";
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import { MdOutlineFmdGood } from "react-icons/md";
 import styles from './MapaContacto.module.scss'
 const AnyReactComponent = ({ nombreEmpresa, urlLogo }) => (
     <div className={`${styles.location}`}>
         <div className={`${styles.markerLocation}`}>
             <Image alt={`Logo mapa de contacto para ${nombreEmpresa}`} className={`${styles.imageLocation}`} src={urlLogo} width={30} height={30} />
-            <FmdGoodIcon className={`${styles.iconLocation}`} sx={{ fontSize: 40 }} />
+            <MdOutlineFmdGood className={`${styles.iconLocation}`} sx={{ fontSize: 40 }} />
         </div>
     </div>
 );

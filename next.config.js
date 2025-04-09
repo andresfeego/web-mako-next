@@ -19,7 +19,7 @@ module.exports = {
   ...withImages(),
   sassOptions: {
     includePaths: [path.join(__dirname, './components/Inicialized')],
-    prependData: `@import "variables.scss";`,
+    prependData: `@use './variables' as *;`,
   },
   i18n: {
     locales: ["es"],
