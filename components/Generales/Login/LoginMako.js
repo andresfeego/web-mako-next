@@ -92,8 +92,9 @@ const LoginMako = ({ setOpen}) => {
        if(result.error){
         nuevoMensaje(tiposAlertas.cargadoError, result.message)
        }else{
+        console.log(result)
         const usuario = {
-          id: result.id,
+          id: result.userId,
           nombre: result.nombres,
           apellido: result.apellidos,
           correo: result.correo,

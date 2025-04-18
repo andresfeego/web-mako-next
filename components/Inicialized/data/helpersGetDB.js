@@ -29,6 +29,13 @@ export async function loginUsuario(correo, pass) {
   });
 }
 
+export async function loginSocial(correo) {
+  return await getDB('/usuario/loginSocial', {
+    method: 'POST',
+    body: { correo }
+  });
+}
+
 export async function getRolesUsuario(idUser) {
   return await getDB('/usuario/rolesXid/' + idUser, { method: 'GET' });
 }

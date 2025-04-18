@@ -8,7 +8,8 @@ import { authProvider } from '../../../services/firebase';
 import { FaGoogle } from 'react-icons/fa';
 import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
-import { usuarioExiste } from '@/components/Inicialized/data/helpersGetDB';
+import { loginSocial, usuarioExiste } from '@/components/Inicialized/data/helpersGetDB';
+import { nuevoMensaje, tiposAlertas } from '@/components/Inicialized/Toast';
 
 
 
@@ -27,9 +28,16 @@ const LoginUsuario = ({setOpen}) => {
 
       authProvider(provider).then((user) => {
         if(user){
-          usuarioExiste(user.user.email).then((result) => {
+          usuarioExiste(user.user.email).then(async (result) => {
 
             if (result) {
+              const resp = await loginSocial(user._tokenResponse.email);
+
+              if (resp?.error) {
+                nuevoMensaje(tiposAlertas.error, resp.message);
+                return;
+              }
+              console.log(result)
               switch (provider) {
                 case 'google':
                   
@@ -43,6 +51,7 @@ const LoginUsuario = ({setOpen}) => {
                   }
                   setUsuario(usuarioGoogle.id)
                   setOpen(false)
+                  nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
                   
                   break;
 
@@ -58,6 +67,7 @@ const LoginUsuario = ({setOpen}) => {
                   }
                   setUsuario(usuarioFacebook.id)
                   setOpen(false)
+                  nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
                   
                   break;
               
@@ -69,7 +79,13 @@ const LoginUsuario = ({setOpen}) => {
                 case 'google':
                   
                   const dataUserGoogle = user._tokenResponse
-                  nuevoUsuario(dataUserGoogle.firstName, dataUserGoogle.lastName, dataUserGoogle.email, '', 0, user.user.uid, '').then((result) => {
+                  nuevoUsuario(dataUserGoogle.firstName, dataUserGoogle.lastName, dataUserGoogle.email, '', 0, user.user.uid, '').then( async(result) => {
+                    const resp = await loginSocial(dataUserGoogle.email);
+                    console.log(result)
+                    if (resp?.error) {
+                      nuevoMensaje(tiposAlertas.error, resp.message);
+                      return;
+                    }
                     const usuarioGoogle = {
                       id: result,
                       nombre: dataUserGoogle.firstName,
@@ -79,6 +95,7 @@ const LoginUsuario = ({setOpen}) => {
                     }
                     setUsuario(usuarioGoogle.id)
                     setOpen(false)
+                    nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
                   })
                   
                   break;
@@ -86,7 +103,14 @@ const LoginUsuario = ({setOpen}) => {
                   case 'facebook':
                   
                   const dataUserFacebook = user._tokenResponse
-                  nuevoUsuario(dataUserFacebook.firstName, dataUserFacebook.lastName, dataUserFacebook.email, '', 0, '', user.user.uid).then((result) => {
+                  nuevoUsuario(dataUserFacebook.firstName, dataUserFacebook.lastName, dataUserFacebook.email, '', 0, '', user.user.uid).then(async (result) => {
+                    const resp = await loginSocial(dataUserFacebook.email);
+
+                    if (resp?.error) {
+                      nuevoMensaje(tiposAlertas.error, resp.message);
+                      return;
+                    }
+
                     const usuarioFacebook = {
                       id: result,
                       nombre: dataUserFacebook.firstName,
@@ -96,6 +120,7 @@ const LoginUsuario = ({setOpen}) => {
                     }
                     setUsuario(usuarioFacebook.id)
                     setOpen(false)
+                    nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
                   })
                   
                   break;

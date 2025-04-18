@@ -8,7 +8,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
 import Script from 'next/script'
 import { GoogleAnalytics } from "nextjs-google-analytics";
- 
+import ScreenSizeOverlay from '@/components/Dev/ScreenSizeOverlay';
+
 
 const App = ({ Component, pageProps }) => {
 
@@ -18,6 +19,7 @@ const App = ({ Component, pageProps }) => {
 
 
     <React.Fragment>
+      <ScreenSizeOverlay />
       <GoogleAnalytics trackPageViews />
       <ThemeProvider theme={customTheme}>
         <ToastContainer
