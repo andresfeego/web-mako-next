@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /solara/
+Disallow: /usuario/
+Disallow: /login/
+Disallow: /registro/
+Disallow: /favoritos/
+Disallow: /contactar/
+Disallow: /mis-empresas/
+
+Allow: /
+
+Sitemap: https://www.mako.guru/sitemap.xml
