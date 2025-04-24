@@ -20,14 +20,15 @@
     "firebase": "^11.6.0",
     "google-map-react": "^2.2.1",
     "isomorphic-fetch": "^3.0.0",
+    "js-cookie": "^3.0.5",
     "next": "^15.2.5",
     "next-images": "^1.8.5",
     "next-sitemap": "^4.2.3",
     "nextjs-google-analytics": "^2.3.7",
     "nextjs-toploader": "^3.8.16",
     "rc-banner-anim": "2.4.5",
-    "rc-tween-one": "2.7.3",
     "rc-queue-anim": "1.8.5",
+    "rc-tween-one": "2.7.3",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
@@ -51,7 +52,6 @@
     "sass": "^1.86.3"
   },
   "resolutions": {
-  "rc-tween-one": "2.7.3"
-}
-
+    "rc-tween-one": "2.7.3"
+  }
 }

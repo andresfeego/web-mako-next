@@ -7,11 +7,20 @@ import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctio
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
 import useDataStore from '@/components/Stores/useDataStore';
 import { getSlides, getListaMunicipios, getSubcategoria2Xid } from '@/components/Inicialized/data/helpersGetDB';
+import { useRouter } from 'next/router'; // ✅ agregado
 
 const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subcatdos, idCat, empresa, mensaje, categoriaCompleta }) => {
+  const router = useRouter(); // ✅ agregado
   const categoriaStore = useDataStore((state) => state.search.categoria);
   const setSearch = useDataStore((state) => state.setSearch);
   const setUx = useDataStore((state) => state.setUx);
+  const initFiltrosDesdeQuery = useDataStore((state) => state.initFiltrosDesdeQuery); // ✅ agregado
+
+  useEffect(() => {
+    if (router.isReady) {
+      initFiltrosDesdeQuery(router.query); // ✅ aquí se cargan los filtros desde la URL
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     if (idCat && categoriaStore !== idCat) {
@@ -67,12 +76,12 @@ export async function getServerSideProps(ctx) {
   const props = { props: {} };
 
   const resSlides = await getSlides();
-  const slidesJson = await resSlides.json();
+  const slidesJson = await resSlides;
   props.props.slides = slidesJson;
   props.props.empresas = [];
 
   const response = await getListaMunicipios();
-  const responseJson = await response.json();
+  const responseJson = await response;
   props.props.municipios = responseJson;
 
   const idCat = ctx.query.id;
@@ -81,7 +90,7 @@ export async function getServerSideProps(ctx) {
   const subcatdos = ctx.query.subcatdos;
 
   const responseCat = await getSubcategoria2Xid(idCat);
-  const responseCatJson = await responseCat.json();
+  const responseCatJson = await responseCat;
 
   props.props = {
     ...props.props,

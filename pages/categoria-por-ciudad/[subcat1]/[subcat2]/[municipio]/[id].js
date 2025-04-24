@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import Header from '../../../../../components/Home/Header/Header';
 import ListaEmpresas from "../../../../../components/Home/Contenido/ListaEmpresas";
 import request from "superagent";
@@ -9,12 +9,23 @@ import { MaysPrimera } from '../../../../../components/Inicialized/GlobalFunctio
 import { nuevoMensaje, tiposAlertas } from '../../../../../components/Inicialized/Toast';
 import useDataStore from '@/components/Stores/useDataStore';
 import { getSlides, getListaMunicipios, getSubcategoria2Xid } from '@/components/Inicialized/data/helpersGetDB';
+import { useRouter } from 'next/router'; // ✅ Agregado
 
 const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio, categoriaCompleta }) => {
+  const router = useRouter(); // ✅ Agregado
   const ciudad = useDataStore((state) => state.search.ciudad);
   const setSearch = useDataStore((state) => state.setSearch);
   const setUx = useDataStore((state) => state.setUx);
+  const initFiltrosDesdeQuery = useDataStore((state) => state.initFiltrosDesdeQuery); // ✅ Agregado
 
+  // ✅ Poblar desde la URL al cargar
+  useEffect(() => {
+    if (router.isReady) {
+      initFiltrosDesdeQuery(router.query);
+    }
+  }, [router.isReady]);
+
+  // Mantiene la lógica previa de categoría/ciudad
   useEffect(() => {
     if (municipio) {
       if (ciudad !== municipio) {
@@ -66,15 +77,15 @@ const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio, cate
 };
 
 export async function getServerSideProps(ctx) {
-  const props = { props: {} }
+  const props = { props: {} };
 
   const resSlides = await getSlides();
-  const slidesJson = await resSlides.json();
+  const slidesJson = await resSlides;
   props.props.slides = slidesJson;
   props.props.empresas = [];
 
   const resMunicipios = await getListaMunicipios();
-  const municipiosJson = await resMunicipios.json();
+  const municipiosJson = await resMunicipios;
   props.props.municipios = municipiosJson;
 
   const idCat = ctx.query.id;
@@ -82,7 +93,7 @@ export async function getServerSideProps(ctx) {
   const municipio = ctx.query.municipio;
 
   const resCat = await getSubcategoria2Xid(idCat);
-  const resCatJson = await resCat.json();
+  const resCatJson = await resCat;
 
   props.props = {
     ...props.props,

@@ -24,3 +24,7 @@ export async function saveBit(data) {
   const response = await setDB('/bitacora/nuevoEvento', data);
   return response;
 }
+
+export async function logoutUsuario() {
+  return await setDB('/usuario/logout', { method: 'POST' });
+}

@@ -1,4 +1,3 @@
-
 import styles from './MenuUsuario.module.scss';
 import PersonIcon from '@material-ui/icons/Person';
 import Modal from '@material-ui/core/Modal';
@@ -10,60 +9,44 @@ import LoginUsuario from '../../../Generales/Login/LoginUsuario';
 import { EvBiClickButton } from '../../../Inicialized/Bitacora';
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuPrincipal from './MenuPrincipal';
-import useUsuarioStore from '@/components/Stores/useUsuarioStore';
-
-
-
+import useSesionValida from '@/hooks/useSesionValida';
 
 const MenuUsuario = (props) => {
+  const { autenticado, cargando } = useSesionValida();
+  const [open, setOpen] = React.useState(false);
 
-    const user = useUsuarioStore((state) => state.usuario);
+  function handleOpen() {
+    EvBiClickButton('Menu pincipal', 'Abrir menu login');
+    setOpen(true);
+  }
 
-    const [open, setOpen] = React.useState(false);
-    function handleOpen() {
-        setOpen(true);
-    };
-    function handleClose() {
-        setOpen(false);
-    };
+  function handleClose() {
+    EvBiClickButton('Menu pincipal', 'Cerrar menu login');
+    setOpen(false);
+  }
 
-    return (
-        <React.Fragment>
+  if (cargando) return null;
 
-            {user ?
-                <GiHamburgerMenu onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 6 }} />
-                :
-                <PersonIcon onClick={() => { EvBiClickButton('Menu pincipal', 'Abrir menu login'); handleOpen() }} className={styles.iconMenuPrincipal} sx={{ fontSize: 6 }} />
+  return (
+    <React.Fragment>
+      {autenticado
+        ? <GiHamburgerMenu onClick={handleOpen} className={styles.iconMenuPrincipal} />
+        : <PersonIcon onClick={handleOpen} className={styles.iconMenuPrincipal} />
+      }
+
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={{ ...basico }}>
+          <CloseIcon className="cerrarModal" onClick={handleClose} />
+          <div className="contenidoModal">
+            {autenticado
+              ? <MenuPrincipal setOpen={setOpen} />
+              : <LoginUsuario setOpen={setOpen} />
             }
-
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-
-            >
-                <Box sx={{ ...basico }}>
-                    <div>
-                        <CloseIcon className='cerrarModal' onClick={() => { EvBiClickButton('Menu pincipal', 'Cerrar menu login'); handleClose() }} />
-                        <div className='contenidoModal'>
-                            {user ?
-                                <MenuPrincipal setOpen={setOpen} />
-                                :
-                                <LoginUsuario setOpen={setOpen} />
-                            }
-                        </div>
-                    </div>
-                </Box>
-            </Modal>
-
-        </React.Fragment>
-    );
-}
-
-
+          </div>
+        </Box>
+      </Modal>
+    </React.Fragment>
+  );
+};
 
 export default MenuUsuario;
-
-
-

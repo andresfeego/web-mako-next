@@ -8,11 +8,20 @@ import { MaysPrimera } from '../../../../components/Inicialized/GlobalFunctions'
 import { nuevoMensaje, tiposAlertas } from '../../../../components/Inicialized/Toast';
 import useDataStore from '@/components/Stores/useDataStore';
 import { getSlides, getListaMunicipios } from '@/components/Inicialized/data/helpersGetDB';
+import { useRouter } from 'next/router'; // ✅ agregado
 
 const Index = ({ slides, empresas, municipios, idCiudad, departamento, municipio, empresa, mensaje }) => {
+  const router = useRouter(); // ✅ agregado
   const ciudadStore = useDataStore((state) => state.search.ciudad);
   const setSearch = useDataStore((state) => state.setSearch);
   const setUx = useDataStore((state) => state.setUx);
+  const initFiltrosDesdeQuery = useDataStore((state) => state.initFiltrosDesdeQuery); // ✅ agregado
+
+  useEffect(() => {
+    if (router.isReady) {
+      initFiltrosDesdeQuery(router.query);
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     if (municipio && ciudadStore !== municipio) {
@@ -70,13 +79,13 @@ export async function getServerSideProps(ctx) {
   const props = { props: {} };
 
   const resSlides = await getSlides();
-  const slidesJson = await resSlides.json();
+  const slidesJson = await resSlides;
   props.props.slides = slidesJson;
 
   props.props.empresas = [];
 
   const response = await getListaMunicipios();
-  const responseJson = await response.json();
+  const responseJson = await response;
   props.props.municipios = responseJson;
 
   const idCiudad = ctx.query.id;

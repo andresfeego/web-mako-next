@@ -6,6 +6,7 @@ export async function setDB(endpoint, data = {}, options = {}) {
   try {
     const res = await fetch(url, {
       method: 'POST',
+      credentials: 'include', 
       headers: isFormData
         ? { 'Accept': 'application/json', ...options.headers }
         : { 'Accept': 'application/json', 'Content-Type': 'application/json', ...options.headers },

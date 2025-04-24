@@ -146,3 +146,12 @@ export async function getSubcategoria2Xid(idCat) {
   const data = await getDB('/subcategoria2Xid/' + idCat, { method: 'GET' });
   return data;
 }
+
+export async function verificarSesionEnBackend() {
+  try {
+    const res = await getDB('/usuario/sessionActiva', { method: 'GET' });
+    return res.active ? res.userId : null;
+  } catch {
+    return null;
+  }
+}

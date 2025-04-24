@@ -9,11 +9,17 @@ import Empresa from '../../Contenido/Empresa';
 import Image from 'next/image';
 import { getEmpresas } from '@/components/Inicialized/data/helpersGetDB';
 import useDataStore from '@/components/Stores/useDataStore';
+import { useAplicarFiltros } from '@/components/utils/useAplicarFiltros';
+import { useRouter } from 'next/router';
 
 const BarraBusquedaEmpresa = (props) => {
+  const router = useRouter();
   const busqueda = useDataStore((state) => state.search.busqueda);
   const ciudad = useDataStore((state) => state.search.ciudad);
+  const categoria = useDataStore((state) => state.search.categoria);
+  const lblCategoria = useDataStore((state) => state.search.lblCategoria);
   const setSearch = useDataStore((state) => state.setSearch);
+  const aplicarFiltros = useAplicarFiltros();
 
   let buscarBar;
 
@@ -28,11 +34,13 @@ const BarraBusquedaEmpresa = (props) => {
     setSearch({ ciudad: ciudadValue });
     setBusCiudad(ciudadValue);
     setmostrarAuto(false);
+    aplicarFiltros();
   }
 
   function onClearCiudad() {
     setSearch({ ciudad: '' });
     setBusCiudad('');
+    aplicarFiltros();
   }
 
   function handleKeyDownCiudad(e) {
@@ -66,11 +74,13 @@ const BarraBusquedaEmpresa = (props) => {
 
   function onSubmit() {
     setSearch({ busqueda: busquedaB });
+    aplicarFiltros();
   }
 
   function onClear() {
     setSearch({ busqueda: '' });
     setBusqueda('');
+    aplicarFiltros();
   }
 
   function onChange(e) {
@@ -83,6 +93,22 @@ const BarraBusquedaEmpresa = (props) => {
     setmostrarAuto(false);
     getEmpresas(busqueda, ciudad, 0).then((response) => setListaEmpresas(response));
   }, [busqueda, ciudad]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const pathname = window.location.pathname;
+      const query = {};
+      if (busqueda?.trim()) query.busqueda = busqueda;
+      if (ciudad?.trim()) query.ciu = ciudad;
+      if (categoria && categoria !== '0') query.categoria = categoria;
+      if (lblCategoria?.trim()) query.lblCategoria = lblCategoria;
+
+      router.replace({ pathname, query }, undefined, { shallow: true });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [busqueda, ciudad, categoria, lblCategoria]);
 
   let estiloBuscando = { height: '0.1vw' };
   if (busqueda !== '' || ciudad !== '') estiloBuscando = { height: '11vw' };

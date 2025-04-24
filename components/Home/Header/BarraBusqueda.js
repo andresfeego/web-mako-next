@@ -3,6 +3,7 @@ import BtnSearch from '@material-ui/icons/Search';
 import BtnClose from '@material-ui/icons/Close';
 import { useState, useEffect } from 'react';
 import useDataStore from '@/components/Stores/useDataStore';
+import { useAplicarFiltros } from '@/components/utils/useAplicarFiltros';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 
 const BarraBusqueda = () => {
@@ -11,18 +12,22 @@ const BarraBusqueda = () => {
 
   const [busquedaB, setBusqueda] = useState(busqueda);
 
+  const aplicarFiltros = useAplicarFiltros(); // ✅ usar el custom hook aquí
+
   function handleKeyDown(e) {
     if (e.key === 'Enter') onSubmit();
   }
 
   function onSubmit() {
     setSearch({ busqueda: busquedaB });
+    aplicarFiltros();
     EvBiBusqueda('Barra busqueda', busquedaB);
   }
 
   function onClear() {
     setSearch({ busqueda: '' });
     setBusqueda('');
+    aplicarFiltros();
   }
 
   function onChange(e) {
@@ -35,7 +40,14 @@ const BarraBusqueda = () => {
 
   return (
     <div className={styles.barra}>
-      <input type="text" placeholder="Que buscas ?" className={styles.buscar} onKeyDown={handleKeyDown} value={busquedaB} onChange={onChange} />
+      <input
+        type="text"
+        placeholder="Que buscas ?"
+        className={styles.buscar}
+        onKeyDown={handleKeyDown}
+        value={busquedaB}
+        onChange={onChange}
+      />
       {busqueda === ''
         ? <div className={styles.botonBuscar} onClick={onSubmit}><BtnSearch style={{ width: '95%', height: '95%' }} /></div>
         : <div className={styles.botonBuscar} onClick={onClear}><BtnClose style={{ width: '90%', height: '90%' }} /></div>}

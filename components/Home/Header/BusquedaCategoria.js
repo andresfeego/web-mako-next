@@ -3,15 +3,19 @@ import styles from './BusquedaCategoria.module.scss';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 import Image from 'next/image';
 import useDataStore from '@/components/Stores/useDataStore';
+import { useAplicarFiltros } from '@/components/utils/useAplicarFiltros'; // ✅ Importar el hook
 
 const BusquedaCategorias = (props) => {
   const setSearch = useDataStore((state) => state.setSearch);
+  const aplicarFiltros = useAplicarFiltros(); // ✅ Usar el hook
 
   function cambiaCat(cat, label) {
     if (cat !== 0) EvBiBusqueda('Busqueda categoria', cat);
     setSearch({ categoria: cat, lblCategoria: label });
+    aplicarFiltros(); // ✅ Actualiza la URL con filtros
   }
 
+  
   return (
 		<ul className={styles.BusquedaCategorias}>
 
