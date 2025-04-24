@@ -7,12 +7,14 @@ import { MaysPrimera } from '../../Inicialized/GlobalFunctions';
 import { EvBiBusqueda } from '../../Inicialized/Bitacora';
 import useDataStore from '@/components/Stores/useDataStore';
 import { getListaMunicipios } from '@/components/Inicialized/data/helpersGetDB';
+import { useAplicarFiltros } from '@/components/utils/useAplicarFiltros'; 
 
 let buscarBar;
 
 const BusquedaCiudad = () => {
   const ciudad = useDataStore((state) => state.search.ciudad);
   const setSearch = useDataStore((state) => state.setSearch);
+  const aplicarFiltros = useAplicarFiltros();
 
   const [listaCiudades, setLC] = useState(null);
   const [listaCiudadesOriginal, setLCO] = useState(null);
@@ -30,6 +32,7 @@ const BusquedaCiudad = () => {
 
   function onSubmit(ciudad, id) {
     setSearch({ ciudad });
+    aplicarFiltros(); 
     EvBiBusqueda('Busqueda ciudad', id);
     setBusCiudad(ciudad);
     setmostrarAuto(false);
@@ -38,6 +41,7 @@ const BusquedaCiudad = () => {
   function onClear() {
     setSearch({ ciudad: '' });
     setBusCiudad('');
+    aplicarFiltros(); 
   }
 
   function handleKeyDown(e) {

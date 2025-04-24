@@ -43,14 +43,6 @@ module.exports = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      {
-        source: '/robots.txt',
-        destination: '/api/robots'
-      }
-    ];
-  },
   env: {
     HOST_NAME,
     HOST_NAME_MAKO: 'https://www.mako.guru/',

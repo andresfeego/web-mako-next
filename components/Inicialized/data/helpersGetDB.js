@@ -29,6 +29,13 @@ export async function loginUsuario(correo, pass) {
   });
 }
 
+export async function loginSocial(correo) {
+  return await getDB('/usuario/loginSocial', {
+    method: 'POST',
+    body: { correo }
+  });
+}
+
 export async function getRolesUsuario(idUser) {
   return await getDB('/usuario/rolesXid/' + idUser, { method: 'GET' });
 }
@@ -138,4 +145,13 @@ export async function getTodasLasEmpresas() {
 export async function getSubcategoria2Xid(idCat) {
   const data = await getDB('/subcategoria2Xid/' + idCat, { method: 'GET' });
   return data;
+}
+
+export async function verificarSesionEnBackend() {
+  try {
+    const res = await getDB('/usuario/sessionActiva', { method: 'GET' });
+    return res.active ? res.userId : null;
+  } catch {
+    return null;
+  }
 }

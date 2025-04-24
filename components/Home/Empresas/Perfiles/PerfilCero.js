@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Modal from '@material-ui/core/Modal';
 import DatosContacto from "../Contenido/DatosContacto.js";
 import Image from "next/image";
+import useDataStore from '@/components/Stores/useDataStore';
 
 const style = {
   position: 'absolute',
@@ -24,6 +25,23 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
   const router = useRouter();
   const [empresa, setEmpresa] = useState(Perfilempresa);
 
+  const { busqueda, ciudad, categoria, lblCategoria } = useDataStore.getState().search;
+
+  const handleClose = () => {
+    setOpen(false);
+
+    const query = {};
+    if (busqueda?.trim()) query.busqueda = busqueda;
+    if (ciudad?.trim()) query.ciu = ciudad;
+    if (categoria && categoria !== '0') query.categoria = categoria;
+    if (lblCategoria?.trim()) query.lblCategoria = lblCategoria;
+
+    router.push({
+      pathname: '/directorio-empresarial',
+      query
+    });
+  };
+
   if (!empresa) return null;
 
   const inactivo = inactivoEmp ? styles.inactivo : '';
@@ -31,25 +49,25 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
   return (
     <Modal
       open={open}
-      onClose={() => {
-        setOpen(false);
-        router.push('/directorio-empresarial');
-      }}
+      onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
         <div className={`${styles.perfilCero} ${inactivo}`}>
           <div className={styles.empresa}>
-            <div className={styles.close} onClick={() => {
-              setOpen(false);
-              router.push('/directorio-empresarial');
-            }} />
+            <div className={styles.close} onClick={handleClose} />
             <div className={styles.headerEmpresa}>
               <div className={styles.logo}>
-                <Image width={0} height={0} sizes="100vw" loading="lazy" quality='50'
+                <Image
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  loading="lazy"
+                  quality="50"
                   src={`https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`}
-                  alt={`Logo de la empresa ${empresa.nombre}`} />
+                  alt={`Logo de la empresa ${empresa.nombre}`}
+                />
               </div>
               <div className={styles.textHeader}>
                 <h2>{empresa.nombre}</h2>

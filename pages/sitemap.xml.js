@@ -2,49 +2,18 @@ import { getCategoriasConEmpresas, getCiudadesConEmpresas, getCiudadYCategoriaCo
 
 
 async function getCategorias() {
-
   const response = await getCategoriasConEmpresas();
-
-
-
-  if (response.ok) {
-    return await response.json()
-  } else {
-
-    return null
-  }
-
+  return response && Array.isArray(response) ? response : null;
 }
 
-
 async function getCiudades() {
-
   const response = await getCiudadesConEmpresas();
-
-
-
-  if (response.ok) {
-    return await response.json()
-  } else {
-
-    return null
-  }
-
+  return response && Array.isArray(response) ? response : null;
 }
 
 async function getCiuycat() {
-
   const response = await getCiudadYCategoriaConEmpresas();
-
-
-
-  if (response.ok) {
-    return await response.json()
-  } else {
-
-    return null
-  }
-
+  return response && Array.isArray(response) ? response : null;
 }
 
 function normalizarUrl(texto) {
@@ -162,14 +131,11 @@ export async function getServerSideProps({ res }) {
   const categorias = await getCategorias();
   const ciudades = await getCiudades();
   const ciuycat = await getCiuycat();
-  
-
 
   const pages = generateSitemap(empresas, categorias, ciudades, ciuycat);
   const sitemapContent = buildSitemapXml(pages);
 
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate');
-
   res.setHeader('Content-Type', 'text/xml');
   res.write(sitemapContent);
 

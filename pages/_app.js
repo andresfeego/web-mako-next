@@ -8,9 +8,39 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { customTheme } from "../components/Inicialized/ThemeMaterialUi";
 import Script from 'next/script'
 import { GoogleAnalytics } from "nextjs-google-analytics";
- 
+import ScreenSizeOverlay from '@/components/Dev/ScreenSizeOverlay';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
+import useUsuarioStore from '@/components/Stores/useUsuarioStore';
+import { verificarSesionActiva } from '@/components/utils/verificarSesion';
+import { useRouter } from 'next/router';
 
 const App = ({ Component, pageProps }) => {
+ 
+ 
+  const router = useRouter();
+
+  useEffect(() => {
+    verificarSesionActiva(); // Validación inicial
+
+    // Validación al cambiar de pestaña
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') verificarSesionActiva();
+    };
+
+    // Validación al cambiar de URL interna
+    const handleRouteChange = () => {
+      verificarSesionActiva();
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router]);
 
  
   return (
@@ -18,6 +48,7 @@ const App = ({ Component, pageProps }) => {
 
 
     <React.Fragment>
+      <ScreenSizeOverlay />
       <GoogleAnalytics trackPageViews />
       <ThemeProvider theme={customTheme}>
         <ToastContainer

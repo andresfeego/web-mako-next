@@ -102,7 +102,7 @@ export const nuevoMensaje = (icono,mensaje,auto) =>{
                         <CheckOutlinedIcon style={{marginRight: '5px'}}/>
                         {mensaje}
                     </div>,
-                type: toast.TYPE.SUCCESS,
+                type: "success",
                 autoClose: auto
               });
             break;
@@ -114,7 +114,7 @@ export const nuevoMensaje = (icono,mensaje,auto) =>{
                         <ReportProblemOutlinedIcon style={{marginRight: '5px'}}/>
                         {mensaje}
                     </div>,
-                type: toast.TYPE.WARNING,
+                type: "warning",
                 autoClose: auto
               });
             break;
@@ -126,7 +126,7 @@ export const nuevoMensaje = (icono,mensaje,auto) =>{
                         <HighlightOffOutlinedIcon style={{marginRight: '5px'}}/>
                         {mensaje}
                     </div>,
-                type: toast.TYPE.ERROR,
+                type: "error",
                 autoClose: auto
               });
             break;

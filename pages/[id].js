@@ -10,12 +10,23 @@ import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
 import Cargando from '../components/Inicialized/Cargando';
 import { getEmpresa } from '@/components/Inicialized/data/helpersGetDB';
+import useDataStore from '@/components/Stores/useDataStore'; // ✅ agregado
+import { useRouter } from 'next/router'; // ✅ agregado
 
 const ListaEmpresas = dynamic(() => import('../components/Home/Contenido/ListaEmpresas'), {
   ssr: false,
 });
 
 const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
+  const router = useRouter(); // ✅ agregado
+  const initFiltrosDesdeQuery = useDataStore((state) => state.initFiltrosDesdeQuery); // ✅ agregado
+
+  // ✅ Inicializar filtros si estamos en /directorio-empresarial
+  useEffect(() => {
+    if (router.isReady && router.query.id === 'directorio-empresarial') {
+      initFiltrosDesdeQuery(router.query);
+    }
+  }, [router.isReady]);
 
   function renderPerfil(tipo) {
     if (tipo == 0 || tipo == -1) {
