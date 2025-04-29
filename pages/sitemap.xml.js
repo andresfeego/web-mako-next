@@ -17,7 +17,7 @@ async function getCiuycat() {
 }
 
 function normalizarUrl(texto) {
-
+  
   texto= texto.toLowerCase().replace(/\s/g, '-')
   texto= texto.toLowerCase().replace(/\,/g, '')
   texto= texto.toLowerCase().replace(/\./g, '')
@@ -33,6 +33,8 @@ function normalizarUrl(texto) {
 
 
 function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, ciuycatConEmpresas) {
+  const lastmod = new Date().toISOString();;
+  console.log('lastmod', lastmod)
   const pages = [
     { loc: 'https://www.mako.guru/directorio-empresarial', 
   },
@@ -43,7 +45,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
     pages.push(
       {
         loc: `https://www.mako.guru/${empresa.codigo}`,
-        lastmod: empresa.fechaLastMod
+        lastmod: lastmod
       }
       )
 
@@ -59,7 +61,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       pages.push(
         {
           loc: `https://www.mako.guru/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
-        lastmod: categoriasConEmpresas.fechaLastMod
+        lastmod: lastmod
       }
         )
   
@@ -72,7 +74,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       pages.push(
         {
           loc: `https://www.mako.guru/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
-        lastmod: ciudadesConEmpresas.fechaLastMod
+        lastmod: lastmod
       }
         )
   
@@ -83,7 +85,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
       pages.push(
         {
           loc: `https://www.mako.guru/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
-        lastmod: ciuycatConEmpresas.fechaLastMod
+        lastmod: lastmod
       }
         )
   
