@@ -149,16 +149,20 @@ export async function getSubcategoria2Xid(idCat) {
 }
 
 export async function verificarSesionEnBackend() {
+  const userId = useUsuarioStore.getState().usuario;
+  return userId || null;
+  /* 
   const clearUsuario = useUsuarioStore.getState().clearUsuario;
   try {
     const res = await getDB('/usuario/sessionActiva', { method: 'GET' });
-    /* if (!res?.active) {
+    if (!res?.active) {
       clearUsuario(); // 🔥 limpia la sesión
       return null;
-    } */
+    } 
     return res.userId;
   } catch {
     clearUsuario(); // 🔐 por si falla por completo el fetch
     return null;
   }
+  */
 }
