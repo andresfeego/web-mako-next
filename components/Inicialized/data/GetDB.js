@@ -7,7 +7,7 @@ export async function getDB(endpoint, options = {}) {
 
   const config = {
     method,
-    credentials: 'include', // 🔐 Cookies activas
+    //credentials: 'include', // 🔐 Cookies activas
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
