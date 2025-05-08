@@ -47,6 +47,9 @@ module.exports = {
     HOST_NAME,
     HOST_NAME_MAKO: 'https://www.mako.guru/',
     NEXT_PUBLIC_ID_ANALYTICS: "G-5JYYZXZD6J",
-    DEV_ENV: true
+    DEV_ENV: true,
+    LOG_GETDB:false,
+    LOG_SETDB:false,
+    SCREEN_SIZE_OVERLAY: false,
   }
 };

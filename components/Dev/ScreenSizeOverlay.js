@@ -99,7 +99,7 @@ const ScreenSizeOverlay = () => {
     };
   };
 
-  if (process.env.NODE_ENV !== 'development' || !isClient) return null;
+  if (process.env.SCREEN_SIZE_OVERLAY == true || !isClient) return null;
 
   return (
     <div

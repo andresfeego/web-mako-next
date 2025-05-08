@@ -11,8 +11,10 @@ export const validaMail = (text, creandoUsuario) => {
             if (!expr.test(text)) {
                 resolve({ error: true, text: text, errorText: HelpTexts.formatoMail })
             } else {
+                console.log('creando usuario', creandoUsuario);
                 if (creandoUsuario) {
-                    usuarioExiste(user.user.email).then((result) => {
+                    usuarioExiste(text).then((result) => {
+                        console.log('result usuario existe', result)
                         if (result) {
                             resolve({ error: true, text: text, errorText: HelpTexts.usuarioExiste })
                         } else {

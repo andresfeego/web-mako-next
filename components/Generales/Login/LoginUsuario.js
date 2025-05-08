@@ -10,7 +10,9 @@ import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 import { loginSocial, usuarioExiste } from '@/components/Inicialized/data/helpersGetDB';
 import { nuevoMensaje, tiposAlertas } from '@/components/Inicialized/Toast';
+import dynamic from 'next/dynamic';
 
+const Success = dynamic(() => import('../../lottieAnimations/success'), { ssr: false });
 
 
 const LoginUsuario = ({setOpen}) => {
@@ -21,6 +23,8 @@ const LoginUsuario = ({setOpen}) => {
 
   const [menu, setMenu] = React.useState(0);
   const [accion, setAccion] = React.useState(0);
+  const [showSuccess, setShowSuccess] = React.useState(false);
+  const [showArrow, setShowArrow] = React.useState(true);
 
   async function handleAuth(provider) {
 
@@ -49,9 +53,12 @@ const LoginUsuario = ({setOpen}) => {
                     correo: dataUserGoogle.email,
                     genero: 0
                   }
-                  setUsuario(usuarioGoogle.id)
-                  setOpen(false)
-                  nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
+                  setShowSuccess(true); // ✅ mostrar animación
+                  setTimeout(() => {
+                    setShowSuccess(false); // ocultar animación
+                    setOpen(false);        // cerrar modal
+                    setUsuario(usuarioGoogle.id);
+                  }, 3000);
                   
                   break;
 
@@ -65,9 +72,13 @@ const LoginUsuario = ({setOpen}) => {
                     correo: dataUserFacebook.email,
                     genero: 0
                   }
-                  setUsuario(usuarioFacebook.id)
-                  setOpen(false)
-                  nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
+                  
+                  setShowSuccess(true); // ✅ mostrar animación
+                  setTimeout(() => {
+                    setShowSuccess(false); // ocultar animación
+                    setOpen(false);        // cerrar modal
+                    setUsuario(usuarioFacebook.id)
+                  }, 3000);
                   
                   break;
               
@@ -177,11 +188,11 @@ const LoginUsuario = ({setOpen}) => {
       case 1:
         return (
           <div className="buttons">
-            <ArrowBackIcon className='backModal' onClick={() => {
+            {showArrow && <ArrowBackIcon className='backModal' onClick={() => {
               EvBiClickButton('Menu pincipal', 'atras menu login')
               setMenu(0)
-            }} />
-            <LoginMako setOpen={setOpen}/>
+            }} />}
+            <LoginMako setOpen={setOpen} setShowArrow={setShowArrow}/>
           </div>
         )
 
@@ -228,13 +239,14 @@ const LoginUsuario = ({setOpen}) => {
 
 
   return (
-
-    <div className={styles.contentLogin}>
-      {RenderContenido()}
-    </div>
-
-
-  );
+         <div className={styles.contentLogin}>
+           {showSuccess ? (
+             <Success text={'Credenciales correctas! 😃'}/>
+           ) : (
+             RenderContenido()
+           )}
+         </div>
+       );
 }
 
 

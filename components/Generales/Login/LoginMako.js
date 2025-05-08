@@ -9,12 +9,16 @@ import { nuevoMensaje, tiposAlertas } from '../../Inicialized/Toast';
 import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
 import { loginUsuario } from '@/components/Inicialized/data/helpersGetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
+import dynamic from 'next/dynamic';
+import { toast } from 'react-toastify';
+
+const Success = dynamic(() => import('../../lottieAnimations/success'), { ssr: false });
+const FormSuccess = dynamic(() => import('../../lottieAnimations/formSuccess'), { ssr: false });
+
+var toastId = null; // Variable para almacenar la referencia del toast
 
 
-
-
-
-const LoginMako = ({ setOpen}) => {
+const LoginMako = ({ setOpen, setShowArrow}) => {
   const [menu, setMenu] = React.useState(0);
   const [inputCorreo, setCorreo] = React.useState({...correo, creando: true});
   const [inputContrasena, setContrasena] = React.useState(contrasena);
@@ -23,6 +27,7 @@ const LoginMako = ({ setOpen}) => {
   const [inputApellido, setApellido] = React.useState(apellido);
   const [inputGenero, setGenero] = React.useState(genero);
   const setUsuario = useUsuarioStore((state) => state.setUsuario);
+  const [showSuccess, setShowSuccess] = React.useState(false);
 
 
   function validaErros() {
@@ -86,7 +91,7 @@ const LoginMako = ({ setOpen}) => {
   }
 
   function handleLogin(){
-    nuevoMensaje(tiposAlertas.cargando, 'Validando credenciales')
+    toastId = nuevoMensaje(tiposAlertas.cargando, 'Validando credenciales')
     validaErrorLogin().then((result) => {
       login().then((result) => {
        if(result.error){
@@ -100,9 +105,19 @@ const LoginMako = ({ setOpen}) => {
           correo: result.correo,
           genero: result.genero
         }
-        setUsuario(usuario.id) 
-        setOpen(false)
-        nuevoMensaje(tiposAlertas.cargadoSuccess, 'Credenciales correctas')
+        
+        setTimeout(() => {
+          toast.dismiss(toastId);
+        }, 1000);
+
+        setShowArrow(false); // ✅ mostrar flecha
+        setShowSuccess(true); // ✅ mostrar animación
+        setTimeout(() => {
+          setShowSuccess(false); // ocultar animación
+          setOpen(false);        // cerrar modal
+          setUsuario(usuario.id) 
+        }, 3000);
+        
        }
       }).catch((err) => {
         console.log(err)
@@ -113,19 +128,27 @@ const LoginMako = ({ setOpen}) => {
   }
 
   function submit() {
-    nuevoMensaje(tiposAlertas.cargando, 'Creando cuenta de usuario')
+    toastId = nuevoMensaje(tiposAlertas.cargando, 'Creando cuenta de usuario')
     validaErros().then(() => {
       crearCuenta().then((result) => {
         const usuario = {
-          id: result,
+          id: result.userId,
           nombre: inputNombre.value,
           apellido: inputApellido.value,
           correo: inputCorreo.value,
           genero: inputGenero.value
         }
-        setUsuario(usuario.id) 
-        setOpen(false)
-        nuevoMensaje(tiposAlertas.cargadoSuccess, 'Cuenta creada de forma exitosa')
+        setTimeout(() => {
+          toast.dismiss(toastId);
+        }, 1000);
+
+        setShowArrow(false); // ✅ mostrar flecha
+        setShowSuccess(true); // ✅ mostrar animación
+        setTimeout(() => {
+          setShowSuccess(false); // ocultar animación
+          setOpen(false);        // cerrar modal
+          setUsuario(usuario.id) 
+        }, 3500);
       }).catch((err) => {
         nuevoMensaje(tiposAlertas.cargadoError, err)
       }
@@ -187,6 +210,9 @@ const LoginMako = ({ setOpen}) => {
         break;
 
       case 1:
+        if(!inputCorreo.creando){
+          setCorreo({...inputCorreo, creando: true})
+        }
         return (
           <div className={styles.container}>
 
@@ -291,12 +317,32 @@ const LoginMako = ({ setOpen}) => {
 
   }
 
+  function renderAnim(menu) {
+    switch (menu) {
+      case 0:
+        return (
+            <Success text={'Credenciales correctas! 😃'} />
+        )
+        break;
+      case 1:
+        return (
+            <FormSuccess text='Cuenta creada de forma exitosa' />
+        )
+        break;
+      default:
+        break;
+    }
+  }
+
+
   return (
     <div className={styles.contentLogin}>
-      {renderContenido(menu)}
+      {showSuccess ? (
+        renderAnim(menu)
+      ) : (
+        renderContenido(menu)
+      )}
     </div>
-
-
   );
 }
 

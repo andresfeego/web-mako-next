@@ -1,4 +1,5 @@
 import { getDB } from './GetDB';
+import useUsuarioStore  from '@/components/Stores/useUsuarioStore';
 
 export async function getEmpresas(busqueda, ciudad, categoria, signal, limInf = 0, limSup = 9000000000) {
   const options = {
@@ -148,10 +149,16 @@ export async function getSubcategoria2Xid(idCat) {
 }
 
 export async function verificarSesionEnBackend() {
+  const clearUsuario = useUsuarioStore.getState().clearUsuario;
   try {
     const res = await getDB('/usuario/sessionActiva', { method: 'GET' });
-    return res.active ? res.userId : null;
+    if (!res?.active) {
+      clearUsuario(); // 🔥 limpia la sesión
+      return null;
+    }
+    return res.userId;
   } catch {
+    clearUsuario(); // 🔐 por si falla por completo el fetch
     return null;
   }
 }
