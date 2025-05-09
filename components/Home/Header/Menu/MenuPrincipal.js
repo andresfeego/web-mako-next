@@ -78,16 +78,16 @@ const MenuPrincipal = ({ setOpen }) => {
         <MenuItem icon={<FaRegRegistered size={20} />} label="Mis registros" />
         <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones" badge={rol === "empresario" ? "Empresario" : null} />
         <MenuItem icon={<MdStorefront size={20} />} label="Mi comercio" />
-        <MenuItem icon={<MdLogout size={20} onClick={() => cerrarSesion(setOpen)} />}  className={`${styles.cerrarSesion}`} label="Cerrar sesión" />
+        <MenuItem icon={<MdLogout size={20}/>} onClick={() => cerrarSesion(setOpen)}  className={`${styles.cerrarSesion}`} label="Cerrar sesión" />
 
       </div>
     </div>
   );
 };
 
-function MenuItem({ icon, label, badge, className }) {
+function MenuItem({ icon, label, badge, className, onClick }) {
   return (
-    <div className={`${styles.menuItem} ${className || ""}`}>
+    <div className={`${styles.menuItem} ${className || ""}`} onClick={onClick} >
       <div className={styles.menuIconLabel}>
         {icon}
         <span>{label}</span>
