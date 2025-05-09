@@ -3,17 +3,19 @@ import { persist } from 'zustand/middleware';
 
 const useUsuarioStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       usuario: null,
-
       setUsuario: (usuario) => set({ usuario }),
-
       clearUsuario: () => set({ usuario: null }),
+
+      dataUsuario: null,
+      setDataUsuario: (data) => set({ dataUsuario: data }),
+      clearDataUsuario: () => set({ dataUsuario: null }),
     }),
     {
-      name: 'mako-usuario', 
+      name: 'mako-usuario',
       partialize: (state) => ({
-        usuario: state.usuario, 
+        usuario: state.usuario, // sólo esto se guarda en localStorage
       }),
     }
   )

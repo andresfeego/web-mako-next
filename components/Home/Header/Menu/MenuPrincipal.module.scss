@@ -1,3 +1,80 @@
-.menuPrincipal{
-    background-color: aqua;
-}
+.menuPrincipal {
+    background: white;
+    border-radius: 16px;
+    width: 320px;
+    max-width: 380px;
+    overflow: hidden;
+    padding-bottom: 16px;
+  }
+
+  .encabezado {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: $primary;
+    padding: 1rem;
+    border-radius: 16px 16px 0 0;
+    margin-top: -2px;
+  }
+  
+  .usuarioInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bienvenida {
+    font-size: 0.75rem;
+    color: #ccc;
+  }
+  
+  .nombre {
+    font-weight: 600;
+  }
+  
+  .menuItems {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .menuItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-inline: 20px;
+
+    &:hover {
+        background-color: #f2f2f2;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .menuIconLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .badge {
+    color: #d97706;
+    font-size: 0.75rem;
+  }
+  
+  .buttonMenu {
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  .cerrarSesion {
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-items: center;
+  }
+  

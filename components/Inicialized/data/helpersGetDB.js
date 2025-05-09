@@ -43,18 +43,11 @@ export async function getRolesUsuario(idUser) {
 
 export async function getUsuario(idUser) {
   const data = await getDB('/usuario/usuarioXid/' + idUser, { method: 'GET' });
-  const userReturn = data && data.length > 0 ? data[0] : null;
 
-  if (userReturn) {
-    const rolesDB = await getRolesUsuario(idUser);
-    if (rolesDB && rolesDB.length > 0) {
-      userReturn.roles = rolesDB.map(r => r.id_rol);
-      userReturn.rolesDB = rolesDB;
-    } else {
-      userReturn.roles = [5];
-      userReturn.rolesDB = [5];
-    }
-  }
+  const userReturn = data && typeof data === 'object' ? data : null;
+
+  console.log('data', data);
+  console.log('userReturn', userReturn);
 
   return userReturn;
 }
@@ -165,4 +158,15 @@ export async function verificarSesionEnBackend() {
     return null;
   }
   */
+}
+
+export async function cargarDataUsuario(idUser) {
+  const { setDataUsuario } = useUsuarioStore.getState();
+  const data = await getUsuario(idUser);
+
+  if (!data || typeof data !== "object") {
+    throw new Error("No se pudo obtener la información del usuario");
+  }
+
+  setDataUsuario(data);
 }

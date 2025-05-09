@@ -3,13 +3,14 @@ import PersonIcon from '@material-ui/icons/Person';
 import Modal from '@material-ui/core/Modal';
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import { basico } from '../../../Inicialized/ModalStyles';
+import { transparent } from '../../../Inicialized/ModalStyles';
 import CloseIcon from '@material-ui/icons/Close';
 import LoginUsuario from '../../../Generales/Login/LoginUsuario';
 import { EvBiClickButton } from '../../../Inicialized/Bitacora';
 import { GiHamburgerMenu } from "react-icons/gi";
 import MenuPrincipal from './MenuPrincipal';
 import useSesionValida from '@/hooks/useSesionValida';
+
 
 const MenuUsuario = (props) => {
   const { autenticado, cargando } = useSesionValida();
@@ -35,9 +36,9 @@ const MenuUsuario = (props) => {
       }
 
       <Modal open={open} onClose={handleClose}>
-        <Box sx={{ ...basico }}>
-          <CloseIcon className="cerrarModal" onClick={handleClose} />
-          <div className="contenidoModal">
+        <Box sx={{ ...transparent }}>
+          <CloseIcon className='cerrarModal'  onClick={handleClose} />
+          <div className={styles.contenidoModal}>
             {autenticado
               ? <MenuPrincipal setOpen={setOpen} />
               : <LoginUsuario setOpen={setOpen} />
