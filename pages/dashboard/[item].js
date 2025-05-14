@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useUsuarioStore from "@/components/Stores/useUsuarioStore";
 import dynamic from "next/dynamic";
-import Sidebar from "@/components/Dashboard/Sidebar/SideBar";
+import Sidebar from "@/components/Dashboard/SideBar/SideBar";
 import  styles  from "./DashboardLayout.module.scss";
 
 // Componentes cargados dinámicamente
