@@ -11,11 +11,19 @@ const useUsuarioStore = create(
       dataUsuario: null,
       setDataUsuario: (data) => set({ dataUsuario: data }),
       clearDataUsuario: () => set({ dataUsuario: null }),
+
+      uiPermisos: [],
+      setUiPermisos: (permisos) => set({ uiPermisos: permisos }),
+      clearUiPermisos: () => set({ uiPermisos: [] }),
+
     }),
+
+    
     {
       name: 'mako-usuario',
       partialize: (state) => ({
-        usuario: state.usuario, // sólo esto se guarda en localStorage
+        usuario: state.usuario,
+        uiPermisos: state.uiPermisos,
       }),
     }
   )

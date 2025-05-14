@@ -18,7 +18,7 @@ const FormSuccess = dynamic(() => import('../../lottieAnimations/formSuccess'), 
 var toastId = null; // Variable para almacenar la referencia del toast
 
 
-const LoginMako = ({ setOpen, setShowArrow}) => {
+const LoginMako = ({ setOpen = () => {}, setShowArrow}) => {
   const [menu, setMenu] = React.useState(0);
   const [inputCorreo, setCorreo] = React.useState({...correo, creando: true});
   const [inputContrasena, setContrasena] = React.useState(contrasena);
@@ -27,6 +27,7 @@ const LoginMako = ({ setOpen, setShowArrow}) => {
   const [inputApellido, setApellido] = React.useState(apellido);
   const [inputGenero, setGenero] = React.useState(genero);
   const setUsuario = useUsuarioStore((state) => state.setUsuario);
+  const setUiPermisos = useUsuarioStore((state) => state.setUiPermisos);
   const [showSuccess, setShowSuccess] = React.useState(false);
 
 
@@ -55,7 +56,9 @@ const LoginMako = ({ setOpen, setShowArrow}) => {
     return new Promise((resolve, reject) => {
       nuevoUsuario(inputNombre.value, inputApellido.value, inputCorreo.value, inputContrasena.value, inputGenero.value, '', '' ).then((result) => {
         resolve(result)
+        console.log('nuevosuario: ' + result)
       }).catch((err) => {
+        console.log('nuevosuario: ' + err)
         reject(err)
       })
     })
@@ -99,11 +102,9 @@ const LoginMako = ({ setOpen, setShowArrow}) => {
        }else{
         console.log(result)
         const usuario = {
-          id: result.userId,
-          nombre: result.nombres,
-          apellido: result.apellidos,
-          correo: result.correo,
-          genero: result.genero
+           id: result.userId,
+           uiPermisos: result.uiPermisos
+
         }
         
         setTimeout(() => {
@@ -116,7 +117,8 @@ const LoginMako = ({ setOpen, setShowArrow}) => {
           setShowSuccess(false); // ocultar animación
           setOpen(false);        // cerrar modal
           setUsuario(usuario.id) 
-        }, 3000);
+          setUiPermisos(usuario.uiPermisos)
+        }, 1500);
         
        }
       }).catch((err) => {
@@ -133,10 +135,7 @@ const LoginMako = ({ setOpen, setShowArrow}) => {
       crearCuenta().then((result) => {
         const usuario = {
           id: result.userId,
-          nombre: inputNombre.value,
-          apellido: inputApellido.value,
-          correo: inputCorreo.value,
-          genero: inputGenero.value
+          uiPermisos: result.uiPermisos,
         }
         setTimeout(() => {
           toast.dismiss(toastId);
@@ -147,10 +146,11 @@ const LoginMako = ({ setOpen, setShowArrow}) => {
         setTimeout(() => {
           setShowSuccess(false); // ocultar animación
           setOpen(false);        // cerrar modal
-          setUsuario(usuario.id) 
-        }, 3500);
+          setUsuario(usuario.id);
+          setUiPermisos(usuario.uiPermisos); 
+        }, 2000);
       }).catch((err) => {
-        nuevoMensaje(tiposAlertas.cargadoError, err)
+        nuevoMensaje(tiposAlertas.cargadoError, 'Errrror: ')
       }
       )
     }).catch((err) => {

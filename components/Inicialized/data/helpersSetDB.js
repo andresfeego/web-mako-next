@@ -16,7 +16,7 @@ export async function uploadLogo(image) {
 export async function nuevoUsuario(nombre, apellido, correo, pass, genero, tkgoogle, tkfacebook) {
   const data = { nombre, apellido, correo, pass, genero, tkgoogle, tkfacebook };
   const response = await setDB('/usuario/nuevoUsuario', data);
-  return response?.insertId;
+  return response;
 }
 
 export async function saveBit(data) {

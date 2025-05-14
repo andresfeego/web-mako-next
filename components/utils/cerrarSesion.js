@@ -10,6 +10,8 @@ export async function cerrarSesion(setOpen) {
   }
 
   const clearUsuario = useUsuarioStore.getState().clearUsuario;
+  const clearUiPermisos = useUsuarioStore.getState().clearUiPermisos;
   clearUsuario(); // limpia el Zustand
+  clearUiPermisos();
   if (setOpen) setOpen(false);
 }

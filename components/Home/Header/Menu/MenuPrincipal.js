@@ -12,13 +12,12 @@ import {
   MdLogout
 } from "react-icons/md";
 import { FaRegRegistered } from "react-icons/fa";
-
+import MenuItem from './MenuItem';
 import { cargarDataUsuario } from '@/components/Inicialized/data/helpersGetDB';
 
 const MenuPrincipal = ({ setOpen }) => {
   const idUsuario = useUsuarioStore((state) => state.usuario);
   const dataUsuario = useUsuarioStore((state) => state.dataUsuario);
-  const setDataUsuario = useUsuarioStore((state) => state.setDataUsuario);
   const clearDataUsuario = useUsuarioStore((state) => state.clearDataUsuario);
 
   const [estadoCarga, setEstadoCarga] = useState("cargando"); // "cargando", "ok", "error"
@@ -72,29 +71,19 @@ const MenuPrincipal = ({ setOpen }) => {
 
       {/* Ítems del menú */}
       <div className={styles.menuItems}>
-        <MenuItem icon={<MdAccountCircle size={20} />} label="Mi cuenta" />
+        <MenuItem icon={<MdAccountCircle size={20} />} label="Mi cuenta" ruta="/dashboard/perfil"/>
         <MenuItem icon={<MdAddBusiness size={20} />} label="Registrar comercio" />
-        <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis favoritos" badge={rol === "asesor" ? "Asesor" : null} />
+        <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis favoritos" badge={"Nuevo"} />
         <MenuItem icon={<FaRegRegistered size={20} />} label="Mis registros" />
-        <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones" badge={rol === "empresario" ? "Empresario" : null} />
+        <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones"   ruta="/dashboard/perfil"/>
         <MenuItem icon={<MdStorefront size={20} />} label="Mi comercio" />
-        <MenuItem icon={<MdLogout size={20}/>} onClick={() => cerrarSesion(setOpen)}  className={`${styles.cerrarSesion}`} label="Cerrar sesión" />
+        <MenuItem icon={<MdLogout size={20}/>} onClick={() => cerrarSesion(setOpen)}  className={`${styles.cerrarSesion}`} label="Cerrar sesión"   tooltip="Salir de tu cuenta"
+ />
 
       </div>
     </div>
   );
 };
 
-function MenuItem({ icon, label, badge, className, onClick }) {
-  return (
-    <div className={`${styles.menuItem} ${className || ""}`} onClick={onClick} >
-      <div className={styles.menuIconLabel}>
-        {icon}
-        <span>{label}</span>
-      </div>
-      {badge && <span className={styles.badge}>{badge}</span>}
-    </div>
-  );
-}
 
 export default MenuPrincipal;

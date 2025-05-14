@@ -1,0 +1,92 @@
+.sidebar {
+  width: 240px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: visible;
+
+  &.collapsed {
+    width: 98px;
+
+    .menuIconLabel {
+      justify-content: center;
+    }
+
+    .label {
+      display: none;
+    }
+  }
+}
+
+.toggleButton {
+  position: absolute;
+  top: 1rem;
+  right: -15px;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.menuIconLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  font-size: 14px;
+}
+
+.tituloMako {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  font-size: 0.5em;
+  margin-bottom: 16px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tituloMako .imgMakoLogo{
+  width: 100px;
+  height: auto;
+  &.collapsed {
+    display: none;
+  }
+}
+
+.imgMakoLogoResponsive{
+  width: 30px;
+  height: auto;
+  display: none;
+  &.collapsed {
+    display: initial;
+  }
+}
+

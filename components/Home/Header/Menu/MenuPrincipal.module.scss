@@ -35,18 +35,15 @@
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
   }
   
   .menuItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    padding: 1rem 0.5rem;
     cursor: pointer;
     transition: background 0.2s, box-shadow 0.2s;
-    margin-inline: 20px;
 
     &:hover {
         background-color: #f2f2f2;
@@ -78,3 +75,26 @@
     justify-items: center;
   }
   
+  .menuItem.collapsed {
+  justify-content: center;
+  margin-inline: 0; // sin sangría lateral
+  padding: 0.75rem;
+
+  .menuIconLabel {
+    justify-content: center;
+    gap: 0; // sin separación entre ícono y texto
+  }
+
+  .label {
+    display: none; // asegurarse que texto esté oculto
+  }
+
+  .badge {
+    display: none; // no mostrar badges tampoco
+  }
+}
+
+.menuItem.active {
+  background-color: $primaryLigth; // 🎨 fondo claro (ajústalo a tu paleta)
+  font-weight: 600;
+}

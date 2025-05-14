@@ -15,11 +15,12 @@ import dynamic from 'next/dynamic';
 const Success = dynamic(() => import('../../lottieAnimations/success'), { ssr: false });
 
 
-const LoginUsuario = ({setOpen}) => {
+const LoginUsuario = ({setOpen = () => {}}) => {
  
 
   const user = useUsuarioStore((state) => state.usuario);
   const setUsuario = useUsuarioStore((state) => state.setUsuario);
+  const setUiPermisos = useUsuarioStore((state) => state.setUiPermisos);
 
   const [menu, setMenu] = React.useState(0);
   const [accion, setAccion] = React.useState(0);
@@ -41,24 +42,20 @@ const LoginUsuario = ({setOpen}) => {
                 nuevoMensaje(tiposAlertas.error, resp.message);
                 return;
               }
-              console.log(result)
               switch (provider) {
                 case 'google':
-                  
                   const dataUserGoogle = user._tokenResponse
                   const usuarioGoogle = {
-                    id: result.id,
-                    nombre: dataUserGoogle.firstName,
-                    apellido: dataUserGoogle.lastName,
-                    correo: dataUserGoogle.email,
-                    genero: 0
+                    id: resp.userId,
+                    uiPermisos: resp.uiPermisos,
                   }
                   setShowSuccess(true); // ✅ mostrar animación
                   setTimeout(() => {
                     setShowSuccess(false); // ocultar animación
                     setOpen(false);        // cerrar modal
                     setUsuario(usuarioGoogle.id);
-                  }, 3000);
+                    setUiPermisos(usuarioGoogle.uiPermisos)
+                  }, 1500);
                   
                   break;
 
@@ -78,7 +75,7 @@ const LoginUsuario = ({setOpen}) => {
                     setShowSuccess(false); // ocultar animación
                     setOpen(false);        // cerrar modal
                     setUsuario(usuarioFacebook.id)
-                  }, 3000);
+                  }, 1500);
                   
                   break;
               
@@ -92,21 +89,21 @@ const LoginUsuario = ({setOpen}) => {
                   const dataUserGoogle = user._tokenResponse
                   nuevoUsuario(dataUserGoogle.firstName, dataUserGoogle.lastName, dataUserGoogle.email, '', 0, user.user.uid, '').then( async(result) => {
                     const resp = await loginSocial(dataUserGoogle.email);
-                    console.log(result)
                     if (resp?.error) {
                       nuevoMensaje(tiposAlertas.error, resp.message);
                       return;
                     }
                     const usuarioGoogle = {
-                      id: result,
-                      nombre: dataUserGoogle.firstName,
-                      apellido: dataUserGoogle.lastName,
-                      correo: dataUserGoogle.email,
-                      genero: 0
+                      id: resp.userId,
+                      uiPermisos: resp.uiPermisos,
                     }
-                    setUsuario(usuarioGoogle.id)
-                    setOpen(false)
-                    nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
+                    setShowSuccess(true); // ✅ mostrar animación
+                    setTimeout(() => {
+                      setShowSuccess(false); // ocultar animación
+                      setOpen(false);        // cerrar modal
+                      setUsuario(usuarioGoogle.id);
+                      setUiPermisos(usuarioGoogle.uiPermisos)
+                    }, 1500);
                   })
                   
                   break;
