@@ -3,7 +3,7 @@ import stylesGeneral from '../../Listas.module.scss';
 import styles from './InterfacesPorPermiso.module.scss';
 import TextField from '@material-ui/core/TextField';
 import ModalEditarRoles from './Components/ModalEditarRoles';
-import CrearEditarInterface from './Components/CrearEditarInterface';
+import CrearEditarInterface from '@/components/Solara/Laboratorio/RolesInterfaces/Components/CrearEditarInterface';
 import { getUiPermissions } from '@/components/Inicialized/data/helpersGetDB';
 
 const InterfacesPorPermiso = () => {
