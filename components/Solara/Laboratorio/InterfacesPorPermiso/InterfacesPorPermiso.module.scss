@@ -1,0 +1,50 @@
+.controles {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btnCrear {
+  background-color: $primary;
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: $white0;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($primary, 8%);
+  }
+}
+
+.listaInterfaces {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.interfaceItem {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: $gray1;
+  color: $white0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+
+.tipo {
+  font-size: 0.85em;
+  color: $gray3;
+  margin-left: 6px;
+}
+
+.descripcion {
+  font-size: 0.9em;
+  color: $gray2;
+  margin-top: 4px;
+}

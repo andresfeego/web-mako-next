@@ -170,3 +170,34 @@ export async function cargarDataUsuario(idUser) {
 
   setDataUsuario(data);
 }
+
+export async function getUsuarios() {
+  return await getDB('/usuario/listarUsuarios', { method: 'GET' });
+}
+
+export async function getRolesDisponibles() {
+  return await getDB('/usuario/listarRolesDisponibles', { method: 'GET' });
+}
+
+export async function getRolesPorUsuario(idUsuario) {
+  return await getDB('/usuario/rolesXid/' + idUsuario, { method: 'GET' });
+}
+
+// Listar todos los tipos de interfaces (botón, componente, etc.)
+export async function getTiposInterfaces() {
+  return await getDB('/interface/listarTiposInterfaces', { method: 'GET' });
+}
+
+// Listar todos los ui_permissions registrados
+export async function getUiPermissions() {
+  return await getDB('/interface/listarUiPermissions', { method: 'GET' });
+}
+
+// Obtener los ui_permissions asignados a un rol específico
+export async function getUiPermissionsPorRol(idRol) {
+  return await getDB(`/interface/uiPermissionsPorRol/${idRol}`, { method: 'GET' });
+}
+
+export async function getRolesPorUiPermission(idUiPermission) {
+  return await getDB(`/interface/rolesPorUiPermission/${idUiPermission}`, { method: 'GET' });
+}

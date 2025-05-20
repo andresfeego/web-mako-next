@@ -28,3 +28,33 @@ export async function saveBit(data) {
 export async function logoutUsuario() {
   return await setDB('/usuario/logout', { method: 'POST' });
 }
+
+export async function guardarRolesUsuario(idUsuario, roles) {
+  return await setDB('/usuario/actualizarRolesUsuario', {
+    method: 'POST',
+    body: { idUsuario, roles }
+  });
+}
+
+// Crear una nueva interfaz (slug + descripción + tipo)
+export async function crearUiPermission(slug, descripcion, id_tipo) {
+  return await setDB('/interface/crearUiPermission', {
+    method: 'POST',
+    body: { slug, descripcion, id_tipo }
+  });
+}
+
+// Asignar o actualizar permisos (ui_permissions) a un rol específico
+export async function actualizarUiPermissionsRol(idRol, permisos) {
+  return await setDB('/interface/actualizarUiPermissionsRol', {
+    method: 'POST',
+    body: { idRol, permisos }
+  });
+}
+
+export async function actualizarRolesDeUiPermission(idUiPermission, roles) {
+  return await setDB('/interface/actualizarRolesDeUiPermission', {
+    method: 'POST',
+    body: { idUiPermission, roles }
+  });
+}

@@ -1,0 +1,32 @@
+.buscador {
+  margin-bottom: 20px;
+}
+
+.listaUsuarios {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.usuarioItem {
+  padding: 10px 14px;
+  background-color: $gray1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: $white0;
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+
+.correo {
+  font-size: 0.9em;
+  color: $gray3;
+}
+
+.id {
+  font-size: 0.8em;
+  color: $gray3;
+}
