@@ -2,7 +2,7 @@
 import { logoutUsuario } from '@/components/Inicialized/data/helpersSetDB';
 import useUsuarioStore from '@/components/Stores/useUsuarioStore';
 
-export async function cerrarSesion(setOpen) {
+export async function cerrarSesion(setOpen = ()=>{}) {
   try {
     await logoutUsuario(); // 🔥 borra la cookie desde backend
   } catch (err) {

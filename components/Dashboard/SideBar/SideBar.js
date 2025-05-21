@@ -1,12 +1,28 @@
 import { useState } from "react";
 import styles from "./Sidebar.module.scss";
-import { MdChevronLeft, MdChevronRight, MdPerson, MdAttachMoney, MdStorefront } from "react-icons/md";
+
+import {
+  MdAccountCircle,
+  MdAddBusiness,
+  MdFavoriteBorder,
+  MdAttachMoney,
+  MdStorefront,
+  MdLogout,
+  MdChevronLeft, 
+  MdChevronRight, 
+  
+} from "react-icons/md";
+import { FaRegRegistered } from "react-icons/fa";
 import MenuItem from "@/components/Home/Header/Menu/MenuItem";
 import Link from 'next/link'
 import Image from "next/image"
+import Separador from "@/components/ui/Separador";
+import { cerrarSesion } from "@/components/utils/cerrarSesion";
+import useUsuarioStore from "@/components/Stores/useUsuarioStore";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const idUsuario = useUsuarioStore((state) => state.usuario);
 
   return (
     <div className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
@@ -23,9 +39,17 @@ const Sidebar = () => {
                 </Link>
         </div>
 
-      <MenuItem icon={<MdPerson size={20} />} label="Perfil" ruta="/dashboard/perfil" tooltip="Ver y editar tus datos" collapsed={collapsed} />
-      <MenuItem icon={<MdAttachMoney size={20} />} label="Planes" ruta="/dashboard/planes" tooltip="Gestionar tu plan actual" collapsed={collapsed} />
-      <MenuItem icon={<MdStorefront size={20} />} label="Mis Comercios" ruta="/dashboard/mis-comercios" permiso="ver_comercios" tooltip="Accede a tus comercios" collapsed={collapsed} />
+         <MenuItem icon={<MdAccountCircle size={20} />} label="Mi cuenta" ruta="/dashboard/perfil" collapsed={collapsed}/>
+         <MenuItem icon={<MdAddBusiness size={20} />} label="Registrar comercio" ruta="/dashboard/registar_comercio" collapsed={collapsed}/>
+         <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis favoritos" ruta="/dashboard/mis_favoritos" collapsed={collapsed}/>
+         
+         <Separador texto="Asesor" tamano="sm" rolRequerido={'Asesor'} collapsed={collapsed}/>
+         <MenuItem icon={<FaRegRegistered size={20} />} label="Mis registros" ruta="/dashboard/mis_registros" badge={"Nuevo"} permiso={'mis_registros_asesor_menu_item'} collapsed={collapsed}/>
+         <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones"  ruta="/dashboard/mis_comisiones" permiso={'mis_comisiones_asesor_menu_item'} collapsed={collapsed}/>
+         
+         <Separador texto="Empresario" tamano="sm" rolRequerido={'Empresario'} collapsed={collapsed}/>
+         <MenuItem icon={<MdStorefront size={20} />} label="Mi comercio" ruta="/dashboard/mis_comercio" permiso={'mis_comercio_menu_item'} collapsed={collapsed}/>
+         {idUsuario && <MenuItem icon={<MdLogout size={20}/>} onClick={() => cerrarSesion()}  className={`${styles.cerrarSesion}`} label="Cerrar sesión"   tooltip="Salir de tu cuenta" collapsed={collapsed}/>}
     </div>
   );
 };

@@ -41,7 +41,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className={styles.dashboardContainer}>
+    <div className={styles.dashboardContainer} id="dashboardContainer">
       <Sidebar />
       <div className={styles.dashboardContent}>
         {renderContenido()}

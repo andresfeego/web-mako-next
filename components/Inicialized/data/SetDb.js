@@ -24,9 +24,15 @@ export async function setDB(endpoint, data = {}, options = {}) {
     });
 
     if (!res.ok) {
-      const errorBody = await res.text();
-      throw new Error(`[setDB] HTTP ${res.status}: ${errorBody}`);
-    }
+  let errorData;
+  try {
+    errorData = await res.json();
+  } catch {
+    const errorText = await res.text();
+    errorData = { error: errorText };
+  }
+  throw errorData; // 🔁 esto es clave para que el componente lo capture como objeto
+}
 
     const json = await res.json();
 

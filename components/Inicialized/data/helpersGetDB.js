@@ -201,3 +201,14 @@ export async function getUiPermissionsPorRol(idRol) {
 export async function getRolesPorUiPermission(idUiPermission) {
   return await getDB(`/interface/rolesPorUiPermission/${idUiPermission}`, { method: 'GET' });
 }
+
+export async function actualizarPermisos(idUsuario) {
+  try {
+    const permisos = await getDB(`/usuario/uiPermisosXid/${idUsuario}`, { method: 'GET' });
+    useUsuarioStore.getState().setUiPermisos(permisos); // 🚨 debe existir esta función en el store
+    return true;
+  } catch (err) {
+    console.error('[actualizarPermisos] Error obteniendo permisos:', err);
+    return false;
+  }
+}

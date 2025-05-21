@@ -27,8 +27,9 @@
 
 .interfaceItem {
   padding: 12px 16px;
+  position: relative;
   border-radius: 8px;
-  background-color: $gray1;
+  background-color: $grayBlue4;
   color: $white0;
   cursor: pointer;
 
@@ -47,4 +48,11 @@
   font-size: 0.9em;
   color: $gray2;
   margin-top: 4px;
+}
+
+.menuWrapper {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
 }

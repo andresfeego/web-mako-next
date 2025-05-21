@@ -1,0 +1,58 @@
+// SeparadorTitulo.module.scss
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  margin-top: 24px;
+}
+
+.wrapperConMargenes {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+
+.collapsedWrapper {
+  justify-content: flex-start !important;
+  margin: 8px 0 0px 0;
+}
+
+.textoColapsado {
+  position: initial !important;
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+.linea {
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.textoBase {
+  font-weight: 600;
+  color: $primary;
+  line-height: 1; // 🔥 importante para centrar mejor
+  white-space: nowrap;
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  margin-right: 16px;
+}
+
+.textoSm {
+  font-size: 14px;
+}
+
+.textoMd {
+  font-size: 16px;
+}
+
+.textoLg {
+  font-size: 20px;
+}
+
+.textoXl {
+  font-size: 24px;
+}

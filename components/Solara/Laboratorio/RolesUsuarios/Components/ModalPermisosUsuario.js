@@ -9,7 +9,7 @@ import {
   Checkbox,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { basico } from '@/components/Inicialized/ModalStyles';
+import { transparent } from '@/components/Inicialized/ModalStyles';
 import styles from './ModalPermisosUsuario.module.scss';
 
 import {
@@ -65,7 +65,7 @@ const ModalPermisosUsuario = ({ usuario, onClose }) => {
 
   return (
     <Modal open={true} onClose={onClose}>
-      <Box sx={{ ...basico }}>
+      <Box sx={{ ...transparent }}>
         <CloseIcon className="cerrarModal" onClick={onClose} />
         <div className={styles.contenidoModal}>
           <Typography variant="h6" gutterBottom>

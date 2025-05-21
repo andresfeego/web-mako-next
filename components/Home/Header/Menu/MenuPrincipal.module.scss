@@ -5,6 +5,7 @@
     max-width: 380px;
     overflow: hidden;
     padding-bottom: 16px;
+    min-height: 550px;
   }
 
   .encabezado {
@@ -44,7 +45,7 @@
     padding: 1rem 32px;
     cursor: pointer;
     transition: background 0.2s, box-shadow 0.2s;
-
+   
     &:hover {
         background-color: #f2f2f2;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -55,10 +56,13 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    white-space: nowrap; // 🔥 evita el wrap
+    overflow: hidden;    // 🔒 asegura que no desborde
+    text-overflow: ellipsis;
   }
   
   .badge {
-    color: #d97706;
+    color: $secondary;
     font-size: 0.75rem;
   }
   
@@ -68,11 +72,14 @@
   }
   
   .cerrarSesion {
-    color: #ccc;
+    color: $gray1-5;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-items: center;
+    position: absolute;
+    bottom: 8px;
+    right: 0;
   }
   
   .menuItem.collapsed {

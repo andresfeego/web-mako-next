@@ -58,3 +58,16 @@ export async function actualizarRolesDeUiPermission(idUiPermission, roles) {
     body: { idUiPermission, roles }
   });
 }
+
+export async function actualizarUiPermission(id, descripcion, id_tipo) {
+  return await setDB('/interface/actualizarUiPermission', {
+    method: 'POST',
+    body: { id, descripcion, id_tipo }
+  });
+}
+
+export async function eliminarUiPermission(id) {
+  return await setDB(`/interface/eliminarUiPermission/${id}`, {
+    method: 'DELETE'
+  });
+}

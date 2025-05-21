@@ -13,7 +13,8 @@ import {
 } from "react-icons/md";
 import { FaRegRegistered } from "react-icons/fa";
 import MenuItem from './MenuItem';
-import { cargarDataUsuario } from '@/components/Inicialized/data/helpersGetDB';
+import { actualizarPermisos, cargarDataUsuario } from '@/components/Inicialized/data/helpersGetDB';
+import Separador from "@/components/ui/Separador";
 
 const MenuPrincipal = ({ setOpen }) => {
   const idUsuario = useUsuarioStore((state) => state.usuario);
@@ -29,7 +30,10 @@ const MenuPrincipal = ({ setOpen }) => {
 
     cargarDataUsuario(idUsuario)
       .then(() => {
-        if (!cancelado) setEstadoCarga("ok");
+        if (!cancelado) {
+        setEstadoCarga("ok");
+        actualizarPermisos(idUsuario); // 🔥 aquí actualizas los permisos siempre que se abra
+      }
       })
       .catch(() => {
         if (!cancelado) setEstadoCarga("error");
@@ -73,12 +77,15 @@ const MenuPrincipal = ({ setOpen }) => {
       <div className={styles.menuItems}>
         <MenuItem icon={<MdAccountCircle size={20} />} label="Mi cuenta" ruta="/dashboard/perfil"/>
         <MenuItem icon={<MdAddBusiness size={20} />} label="Registrar comercio" />
-        <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis favoritos" badge={"Nuevo"} />
-        <MenuItem icon={<FaRegRegistered size={20} />} label="Mis registros" />
-        <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones"   ruta="/dashboard/perfil"/>
-        <MenuItem icon={<MdStorefront size={20} />} label="Mi comercio" />
-        <MenuItem icon={<MdLogout size={20}/>} onClick={() => cerrarSesion(setOpen)}  className={`${styles.cerrarSesion}`} label="Cerrar sesión"   tooltip="Salir de tu cuenta"
- />
+        <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis favoritos" />
+        
+        <Separador texto="Asesor" tamano="sm" rolRequerido={'Asesor'} conMargenes={true}/>
+        <MenuItem icon={<FaRegRegistered size={20} />} label="Mis registros" badge={"Nuevo"} permiso={'mis_registros_asesor_menu_item'}/>
+        <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones"  ruta="/dashboard/perfil" permiso={'mis_comisiones_asesor_menu_item'}/>
+        
+        <Separador texto="Empresario" tamano="sm" rolRequerido={'Empresario'} conMargenes={true}/>
+        <MenuItem icon={<MdStorefront size={20} />} label="Mi comercio" permiso={'mis_comercio_menu_item'}/>
+        <MenuItem icon={<MdLogout size={20}/>} onClick={() => cerrarSesion(setOpen)}  className={`${styles.cerrarSesion}`} label="Cerrar sesión"   tooltip="Salir de tu cuenta"/>
 
       </div>
     </div>
