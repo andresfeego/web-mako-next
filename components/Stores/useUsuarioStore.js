@@ -8,6 +8,10 @@ const useUsuarioStore = create(
       setUsuario: (usuario) => set({ usuario }),
       clearUsuario: () => set({ usuario: null }),
 
+      listaCiudades: [],
+      setlistaCiudades: (listaCiudades) => set({ listaCiudades }),
+      clearlistaCiudades: () => set({ listaCiudades: [] }),
+
       dataUsuario: null,
       setDataUsuario: (data) => set({ dataUsuario: data }),
       clearDataUsuario: () => set({ dataUsuario: null }),
@@ -24,6 +28,7 @@ const useUsuarioStore = create(
       partialize: (state) => ({
         usuario: state.usuario,
         uiPermisos: state.uiPermisos,
+        listaCiudades: state.listaCiudades,
       }),
     }
   )

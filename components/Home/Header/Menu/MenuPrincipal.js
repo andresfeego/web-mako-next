@@ -11,6 +11,7 @@ import {
   MdStorefront,
   MdLogout
 } from "react-icons/md";
+import { GiRaccoonHead } from "react-icons/gi";
 import { FaRegRegistered } from "react-icons/fa";
 import MenuItem from './MenuItem';
 import { actualizarPermisos, cargarDataUsuario } from '@/components/Inicialized/data/helpersGetDB';
@@ -75,10 +76,15 @@ const MenuPrincipal = ({ setOpen }) => {
 
       {/* Ítems del menú */}
       <div className={styles.menuItems}>
+
+
         <MenuItem icon={<MdAccountCircle size={20} />} label="Mi cuenta" ruta="/dashboard/perfil"/>
         <MenuItem icon={<MdAddBusiness size={20} />} label="Registrar comercio" />
-        <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis favoritos" />
+        <MenuItem icon={<MdFavoriteBorder size={20} />} label="Mis directorio" />
         
+        <Separador texto="Administrador" tamano="sm" rolRequerido={'Administrador'} conMargenes={true}/>
+        <MenuItem icon={<GiRaccoonHead size={20} />} label="Solara" ruta="/solara/home" permiso={'solara_btn'}/>
+
         <Separador texto="Asesor" tamano="sm" rolRequerido={'Asesor'} conMargenes={true}/>
         <MenuItem icon={<FaRegRegistered size={20} />} label="Mis registros" badge={"Nuevo"} permiso={'mis_registros_asesor_menu_item'}/>
         <MenuItem icon={<MdAttachMoney size={20} />} label="Mis comisiones"  ruta="/dashboard/perfil" permiso={'mis_comisiones_asesor_menu_item'}/>

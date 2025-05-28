@@ -1,0 +1,18 @@
+/* Modales MUI ya traen padding; solo detallamos lista de teléfonos */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.listaTelefonos {
+  margin-top: 8px;
+}
+
+.telefonoFila {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-items: flex-end;
+}

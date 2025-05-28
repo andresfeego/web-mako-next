@@ -1,0 +1,21 @@
+.itemWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;   /* etiqueta a la izquierda */
+  margin-bottom: 8px;
+  background: #fff;
+  border: solid 1px $gray1;
+  border-radius: 30px;
+  padding: 3px;
+}
+.label {
+  margin-right: 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.fab {
+    background-color: $white0;
+}

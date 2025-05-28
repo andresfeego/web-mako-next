@@ -56,6 +56,67 @@ body .MuiBox-root:first-child {
     font-size: 1em !important;
   }
 
+  
+  /* Paper dentro de Dialog (soporta variantes fullscreen, scroll etc.) */
+  .MuiDialog-paper {
+    border-radius: 16px !important;
+    padding: 36px !important;
+  }
+
+  /* ════════════════════════════════════════════════
+   ConfirmEmpresaModal – estilos
+   ════════════════════════════════════════════════ */
+
+/* Quita exceso de padding del título */
+.MuiDialogTitle-root {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+  padding: 20px 24px 12px;
+}
+
+/* Contenido – columna compacta */
+.MuiDialogContent-root {
+  padding: 0 24px 8px;
+}
+
+/* Radio group */
+.MuiFormControlLabel-root {
+  margin: 4px 0;
+  align-items: flex-start;          /* alinea texto arriba del radio */
+  .MuiTypography-root {
+    font-size: 0.88rem;
+    line-height: 1.3;
+  }
+}
+
+/* Botones del footer */
+.MuiDialogActions-root {
+  padding: 16px 24px 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Primario (Agregar) */
+.MuiButton-containedPrimary {
+  background: $primary;             /* tu color primario */
+  border-radius: 20px;
+  padding: 6px 20px;
+  text-transform: none;
+}
+
+/* Secundario (Crear nueva) */
+.MuiButton-text {
+  color: $gray2;
+  text-transform: none;
+}
+
+/* Opcional: ancho máx. 480 px para el paper */
+.MuiDialog-paperWidthXs {
+  max-width: 480px;
+}
+
+
   .MuiFormLabel-root, #ciudades {
     font-family: caviar !important;
   }

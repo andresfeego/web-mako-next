@@ -71,3 +71,41 @@ export async function eliminarUiPermission(id) {
     method: 'DELETE'
   });
 }
+
+/* =========================================================================
+   EMPRESAS · Favoritos
+   ======================================================================= */
+
+/**
+ * Paso 1 – envío inicial para validar teléfonos o crear empresa rápido.
+ * confirm      → false  (si es la primera llamada)
+ * confirm      → true   (segunda llamada: crear nueva o marcar favorito)
+ */
+export async function crearEmpresaRapida(payload) {
+  /*
+    payload esperado:
+    {
+      idUsuario:   Number,           // obligatorio
+      nombre:      String,           // obligatorio
+      telefonos:   [String],         // >=1
+      nota:        String,
+      notificar:   0 | 1,
+      id_municipio: Number,
+      confirm:     false | true,
+      codigoEmpresaConfirmada: String  // solo si confirm === true
+    }
+  */
+  return await setDB('/empresas/crearEmpresaRapida', {
+    method: 'POST',
+    body: payload,
+  });
+}
+
+/**
+ * Paso 2 – marcar directamente como favorito una empresa existente
+ * (si finalmente decides separar endpoint /favoritos/crear)
+ */
+export async function crearFavorito(idUsuario, codigo_empresa, label, nota = '', notificar = 0, origen = 'web') {
+  const body = { idUsuario, codigo_empresa, label, nota, notificar, origen };
+  return await setDB('/favoritos/crear', { method: 'POST', body });
+}

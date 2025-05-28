@@ -1,0 +1,36 @@
+/* components/ui/FloatingDial.module.scss */
+.wrapper {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column; /* acciones verticales */
+  align-items: flex-end;  /* alinea FABs a la derecha */
+}
+
+.actionContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse; /* etiqueta ← FAB */
+  margin-bottom: 8px;
+}
+
+.label {
+  margin-right: 8px;          /* separación etiqueta–FAB */
+  padding: 4px 10px;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  pointer-events: none;       /* evita clics en la etiqueta */
+}
+
+.mainFab {
+  /* estilos extra si los necesitas */
+}
+
+.actionFab {
+  /* estilos extra para FABs secundarios si los necesitas */
+}

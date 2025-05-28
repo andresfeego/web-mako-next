@@ -12,6 +12,8 @@ import Cargando from '../components/Inicialized/Cargando';
 import { getEmpresa } from '@/components/Inicialized/data/helpersGetDB';
 import useDataStore from '@/components/Stores/useDataStore'; // ✅ agregado
 import { useRouter } from 'next/router'; // ✅ agregado
+import FloatingButton from '@/components/ui/FloatingButton';
+import FloatingDial from '@/components/ui/FloatingDial';
 
 const ListaEmpresas = dynamic(() => import('../components/Home/Contenido/ListaEmpresas'), {
   ssr: false,
@@ -27,6 +29,10 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
       initFiltrosDesdeQuery(router.query);
     }
   }, [router.isReady]);
+
+  const handleClick = () => {
+    console.log('FAB presionado');
+  };
 
   function renderPerfil(tipo) {
     if (tipo == 0 || tipo == -1) {
@@ -97,6 +103,8 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
       <Header />
       <Filtros />
       <ListaEmpresas />
+      <FloatingDial />
+
     </div>
   );
 };
