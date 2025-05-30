@@ -109,3 +109,20 @@ export async function crearFavorito(idUsuario, codigo_empresa, label, nota = '',
   const body = { idUsuario, codigo_empresa, label, nota, notificar, origen };
   return await setDB('/favoritos/crear', { method: 'POST', body });
 }
+
+
+/**
+ * Envía las imágenes al backend para que GPT extraiga los datos.
+ * @param {File[]} files  – Array con 1 o 2 File (frente, respaldo)
+ * @returns {Promise<Object>}  JSON con nombre, slogan, etc.
+ */
+
+export async function extraerDatosTarjeta(files) {
+  if (!files?.length) throw new Error('No se proporcionaron imágenes.');
+
+  const formData = new FormData();
+  files.forEach((f) => formData.append('images', f));
+
+  //  ⬇️  SIN objeto envoltorio
+  return await setDB('/gpt/extraerDatosTarjeta', formData);
+}
