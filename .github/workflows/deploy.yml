@@ -1,0 +1,41 @@
+name: Deploy (Mako)
+
+on:
+  push:
+    branches:
+      - lab
+      - master
+
+concurrency:
+  group: mako-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Decide environment
+        id: env
+        run: |
+          if [[ "${GITHUB_REF_NAME}" == "lab" ]]; then
+            echo "env=lab" >> $GITHUB_OUTPUT
+          elif [[ "${GITHUB_REF_NAME}" == "master" ]]; then
+            echo "env=prod" >> $GITHUB_OUTPUT
+          else
+            echo "env=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy via SSH
+        if: steps.env.outputs.env != 'unknown'
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.MAKO_DEPLOY_HOST }}
+          username: ${{ secrets.MAKO_DEPLOY_USER }}
+          key: ${{ secrets.MAKO_DEPLOY_KEY }}
+          script_stop: true
+          command_timeout: 30m
+          script: |
+            set -euo pipefail
+            echo "Deploying mako-web (${{ steps.env.outputs.env }}) on $(hostname)..."
+            /opt/stacks/mako/deploy.sh ${{ steps.env.outputs.env }}
