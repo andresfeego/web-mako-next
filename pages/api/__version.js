@@ -10,14 +10,14 @@ export default async function handler(req, res) {
     nodeEnv: process.env.NODE_ENV || null,
   }
 
-  // Runtime: validate end-to-end (front -> backend -> DB)
-  // We keep this best-effort so /__version never breaks the page.
+  // Runtime: end-to-end check (front -> backend -> DB)
+  // We resolve via current host to avoid env/base URL mismatches.
   let runtime = null
   try {
-    const hostBase = process.env.HOST_NAME_MAKO || ''
-    if (hostBase) {
-      const url = new URL('api/responseMako/__runtime', hostBase)
-      const r = await fetch(url.toString(), { cache: 'no-store' })
+    const host = req.headers.host
+    if (host) {
+      const url = `https://${host}/api/responseMako/__runtime`
+      const r = await fetch(url, { cache: 'no-store' })
       if (r.ok) runtime = await r.json()
       else runtime = { ok: false, error: 'runtime_http_' + r.status }
     }
