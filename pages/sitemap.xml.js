@@ -34,9 +34,10 @@ function normalizarUrl(texto) {
 
 function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, ciuycatConEmpresas) {
   const lastmod = new Date().toISOString();;
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
   console.log('lastmod', lastmod)
   const pages = [
-    { loc: 'https://www.mako.guru/directorio-empresarial', 
+    { loc: `${siteUrl}/directorio-empresarial`, 
   },
   ];
 
@@ -44,7 +45,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
 
     pages.push(
       {
-        loc: `https://www.mako.guru/${empresa.codigo}`,
+        loc: `${siteUrl}/${empresa.codigo}`,
         lastmod: lastmod
       }
       )
@@ -60,7 +61,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
 
       pages.push(
         {
-          loc: `https://www.mako.guru/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
+          loc: `${siteUrl}/categorias/${normalizarUrl(categoriasConEmpresas.nombre)}/${normalizarUrl(categoriasConEmpresas.nombreSub1)}/${normalizarUrl(categoriasConEmpresas.nombreSub2)}/${categoriasConEmpresas.id}`,
         lastmod: lastmod
       }
         )
@@ -73,7 +74,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
   
       pages.push(
         {
-          loc: `https://www.mako.guru/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
+          loc: `${siteUrl}/ciudades/${normalizarUrl(ciudadesConEmpresas.nombreDep)}/${normalizarUrl(ciudadesConEmpresas.nombre)}/${ciudadesConEmpresas.id}`,
         lastmod: lastmod
       }
         )
@@ -84,7 +85,7 @@ function generateSitemap(empresas, categoriasConEmpresas, ciudadesConEmpresas, c
     ciuycatConEmpresas.map(ciuycatConEmpresas => {
       pages.push(
         {
-          loc: `https://www.mako.guru/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
+          loc: `${siteUrl}/categoria-por-ciudad/${normalizarUrl(ciuycatConEmpresas.nombreSub1)}/${normalizarUrl(ciuycatConEmpresas.nombreSub2)}/${normalizarUrl(ciuycatConEmpresas.nombre)}/${ciuycatConEmpresas.id}`,
         lastmod: lastmod
       }
         )
@@ -148,8 +149,6 @@ export async function getServerSideProps({ res }) {
     props: {},
   };
 }
-
-
 
 
 

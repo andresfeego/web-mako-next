@@ -47,16 +47,16 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
           <meta name="keywords" content={empresa.palabras_clave} />
           <link rel="canonical" href={process.env.HOST_NAME_MAKO + empresa.codigo} />
           <meta name="robots" content="index, follow" />
-          <meta name="author" content="www.mako.guru" />
+          <meta name="author" content={process.env.NEXT_PUBLIC_SITE_HOST || 'localhost'} />
           <meta name="audience" content="Everyone" />
           <meta property="og:title" content={`.: Mako.guru :. Directorio empresarial -  ${empresa.nombre}`} />
           <meta property="og:description" content={empresa.descripcion} />
           <meta property="og:url" content={process.env.HOST_NAME_MAKO + empresa.codigo} />
-          <meta property="og:image" content={`https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`} />
+          <meta property="og:image" content={`${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`} />
           <meta property="og:locale" content="es_ES" />
           <meta name="twitter:title" content={`.: Mako.guru :. Directorio empresarial -  ${empresa.nombre}`} />
           <meta name="twitter:description" content={empresa.descripcion} />
-          <meta name="twitter:image" content={`https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`} />
+          <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`} />
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
       ];
@@ -86,7 +86,7 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
           <meta name="keywords" content='directorio telefonico, directorio empresarial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja' />
           <link rel="canonical" href={process.env.HOST_NAME_MAKO + 'directorio-empresarial'} />
           <meta name="robots" content="index, follow" />
-          <meta name="author" content="www.mako.guru" />
+          <meta name="author" content={process.env.NEXT_PUBLIC_SITE_HOST || 'localhost'} />
           <meta name="audience" content="Everyone" />
           <meta name="facebook-domain-verification" content="6f5ij55sc8w96zyf4g559gj0ex6ajb" />
           <meta property="og:title" content=".: Mako.guru :. Directorio empresarial - un directorio con superpoderes" />

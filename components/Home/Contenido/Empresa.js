@@ -11,7 +11,7 @@ const Empresa = (props) => {
     const empresa = props.empresa
     
 
-    const urllogo = 'https://www.feegosystem.com/scrAppServer/images/' + empresa.url_logo;
+    const urllogo = `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`;
 
 
     return (

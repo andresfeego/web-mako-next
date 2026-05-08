@@ -45,7 +45,7 @@ const Index = ({ slides, empresas, municipios, tipo, categoria, subcatuno, subca
             <meta name="description" content={`.: Mako.guru :. Empresas de ${subcatdos} en Colombia -- 📖✔ Listado de empresas de ${subcatdos} con números de contacto, Whatsapp, correos, direcciones, como llegar, mapa, horarios, medios de pago y teléfonos para Colombia👆`} />
             <meta name="keywords" content={` ${categoriaCompleta.palabras_clave}, directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, bogota, medellin, sogamoso, duitama, tunja, ${subcatdos}`} />
             <meta name="robots" content="index, follow" />
-            <meta name="author" content="www.mako.guru" />
+            <meta name="author" content={process.env.NEXT_PUBLIC_SITE_HOST || 'localhost'} />
             <meta name="audience" content="Everyone" />
             <meta property="og:title" content={`.: Mako.guru :. Empresas de ${subcatdos} en Colombia`} />
             <meta property="og:description" content={`📖✔ Listado de empresas de ${subcatdos} con números de contacto para Colombia👆`} />
