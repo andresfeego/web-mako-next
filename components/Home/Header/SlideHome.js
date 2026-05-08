@@ -16,8 +16,8 @@ function Item(props, styles ) {
 
    
 
-    var urlFondo = `https://www.feegosystem.com/scrAppServer/images/slides/${props.img}`
-    var urlLogo = "url(https://www.feegosystem.com/scrAppServer/images/logos/" + props.descUno + ".png)"
+    var urlFondo = `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/slides/${props.img}`
+    var urlLogo = `url(${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/logos/${props.descUno}.png)`
     var urlDestino = `/categorias/${props.descDos}/${props.descUno}`
     if (props.tipoLink == 2) {
 
@@ -26,7 +26,7 @@ function Item(props, styles ) {
         <Element prefixCls="banner-user-elem" key={props.idSlide}>
 
             {props.tipoLink == 1 ?
-                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: 'url(https://www.feegosystem.com/scrAppServer/images/logo_Mako_Directorio_Comercial_Colombia_512x512-2.webp)', backgroundSize: 'cover', backgroundPosition: 'center', }} />
+                <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/logo_Mako_Directorio_Comercial_Colombia_512x512-2.webp)`, backgroundSize: 'cover', backgroundPosition: 'center', }} />
                 :
                 <TweenOne animation={{ y: 50, opacity: 0, type: 'from', delay: 200 }} className={styles.iconoEmpresa} style={{ backgroundImage: urlLogo, backgroundSize: 'cover', backgroundPosition: 'center',}} />
             }

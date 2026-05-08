@@ -39,18 +39,18 @@ const PerfilUno = ({ perfilEmpresa, municipios, empresas, slides }) => {
         <meta name="keywords" content={empresa.palabras_clave} />
         <link rel="canonical" href={process.env.HOST_NAME_MAKO + urlEmpresa} />
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="www.mako.guru" />
+        <meta name="author" content={process.env.NEXT_PUBLIC_SITE_HOST || 'localhost'} />
         <meta name="audience" content="Everyone" />
 
         <meta property="og:title" content={`${empresa.nombre} - .: Mako.guru :. Directorio empresarial`} />
         <meta property="og:description" content={empresa.slogan + ' - ' + empresa.descripcion} />
         <meta property="og:url" content={process.env.HOST_NAME_MAKO + empresa.codigo} />
-        <meta property="og:image" content={`https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`} />
         <meta property="og:locale" content="es_ES" />
 
         <meta name="twitter:title" content={`${empresa.nombre} - .: Mako.guru :. Directorio empresarial`} />
         <meta name="twitter:description" content={empresa.slogan + ' - ' + empresa.descripcion} />
-        <meta name="twitter:image" content={`https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`} />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 

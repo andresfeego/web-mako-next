@@ -80,7 +80,7 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
         {telefono.tipo == 0 ?
           <div className={styles.rowInfo}>
             <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`}><MdMobileFriendly className={styles.infoIcon} /></a>
-            {telefono.wp == 1 ? <a target="_blank" title={`Enviar mensaje de Whatsapp al ${telefono.telefono}`} href={'https://wa.me/+57' + telefono.telefono + '/?text=Hola te contacto desde tu perfil en  https://www.mako.guru/' + empresa.codigo}><WhatsAppIcon className={styles.whatsapp} /></a> : null}
+            {telefono.wp == 1 ? <a target="_blank" title={`Enviar mensaje de Whatsapp al ${telefono.telefono}`} href={`https://wa.me/+57${telefono.telefono}/?text=Hola te contacto desde tu perfil en ${siteUrl}/${empresa.codigo}`}><WhatsAppIcon className={styles.whatsapp} /></a> : null}
             <a href={'tel:' + telefono.telefono} title={`Realizar llamada al: ${telefono.telefono}`} className={styles.tel}><span>llamar </span>{telefono.telefono}</a>
           </div>
           :
@@ -124,7 +124,8 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
 
   const lblAbrirMapa = abrirMapa ? <MdOutlineHighlightOff /> : <MdArrowCircleUp />;
   const estiloMapa = abrirMapa ? styles.mapaAbierto : '';
-  const urlLogo = `https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`;
+  const urlLogo = `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`;
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
 
   return (
     <div className={styles.info}>

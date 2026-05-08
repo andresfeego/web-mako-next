@@ -48,7 +48,7 @@ const Index = ({ slides, empresas, municipios, idCat, subcatdos, municipio, cate
           <meta name="description" content={`.: Mako.guru :. Directorio comercial 📖✔ Encuentra aqui un Listado de empresas de ${subcatdos} en ${MaysPrimera(municipio)} Colombia con números de contacto, Whatsapp, correos, direcciones, como llegar, mapa, horarios, medios de pago y teléfonos.`} />
           <meta name="keywords" content={` ${categoriaCompleta.palabras_clave}, directorio telefonico, directorio empresarial, directorio comercial, numeros de contacto empresas, colombia, ${MaysPrimera(municipio)}`} />
           <meta name="robots" content="index, follow" />
-          <meta name="author" content="www.mako.guru" />
+          <meta name="author" content={process.env.NEXT_PUBLIC_SITE_HOST || 'localhost'} />
           <meta name="audience" content="Everyone" />
           <meta property="og:title" content={`.: Mako.guru :.📖✔ Listado de empresas de ${subcatdos} en ${MaysPrimera(municipio)}`} />
           <meta property="og:description" content={`.: Mako.guru :.📖✔ Listado de empresas de ${subcatdos} en ${MaysPrimera(municipio)} con números de contacto para Colombia👆`} />

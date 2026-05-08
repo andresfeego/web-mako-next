@@ -65,7 +65,7 @@ const PerfilCero = ({ inactivoEmp, Perfilempresa }) => {
                   sizes="100vw"
                   loading="lazy"
                   quality="50"
-                  src={`https://www.feegosystem.com/scrAppServer/images/${empresa.url_logo}`}
+                  src={`${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`}
                   alt={`Logo de la empresa ${empresa.nombre}`}
                 />
               </div>
