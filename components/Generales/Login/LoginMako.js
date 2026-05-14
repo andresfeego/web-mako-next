@@ -2,7 +2,7 @@
 import { Box, Button, MenuItem, Select, InputLabel, TextField, FormControl, FormHelperText } from '@material-ui/core';
 import styles from './LoginMako.module.scss';
 import React from 'react';
-import { EvBiClickButton } from '../../Inicialized/Bitacora';
+import { EvBiClickButton, EvBiLoginFailed, EvBiLoginStarted, EvBiLoginSucceeded } from '../../Inicialized/Bitacora';
 import { apellido, confirContrasena, contrasena, correo, genero, nombre } from "../../Inicialized/CamposForm";
 import { onChangeHandler, validaErrosForm } from '../../Inicialized/HandleForms';
 import { nuevoMensaje, tiposAlertas } from '../../Inicialized/Toast';
@@ -29,6 +29,11 @@ const LoginMako = ({ setOpen = () => {}, setShowArrow}) => {
   const setUsuario = useUsuarioStore((state) => state.setUsuario);
   const setUiPermisos = useUsuarioStore((state) => state.setUiPermisos);
   const [showSuccess, setShowSuccess] = React.useState(false);
+
+  const extractUserId = (resp) => {
+    if (!resp) return null
+    return resp.userId || resp.idUsuario || resp.id || resp?.data?.userId || resp?.data?.id || null
+  }
 
 
   function validaErros() {
@@ -94,15 +99,17 @@ const LoginMako = ({ setOpen = () => {}, setShowArrow}) => {
   }
 
   function handleLogin(){
+    EvBiLoginStarted('mako_form')
     toastId = nuevoMensaje(tiposAlertas.cargando, 'Validando credenciales')
     validaErrorLogin().then((result) => {
       login().then((result) => {
        if(result.error){
+        EvBiLoginFailed('mako_form', result?.message || `error_${result?.error || 'login'}`)
         nuevoMensaje(tiposAlertas.cargadoError, result.message)
        }else{
-        console.log(result)
+        const idUsuario = extractUserId(result)
         const usuario = {
-           id: result.userId,
+           id: idUsuario,
            uiPermisos: result.uiPermisos
 
         }
@@ -119,12 +126,15 @@ const LoginMako = ({ setOpen = () => {}, setShowArrow}) => {
           setUsuario(usuario.id) 
           setUiPermisos(usuario.uiPermisos)
         }, 1500);
+        EvBiLoginSucceeded('mako_form', idUsuario)
         
        }
       }).catch((err) => {
+        EvBiLoginFailed('mako_form', err?.message || 'network_error')
         console.log(err)
       })
     }).catch((err) =>{
+      EvBiLoginFailed('mako_form', 'validation_error')
       nuevoMensaje(tiposAlertas.cargadoError, 'Verificar credenciales ingresadas')
     })
   }
@@ -350,6 +360,4 @@ const LoginMako = ({ setOpen = () => {}, setShowArrow}) => {
 
 
 export default LoginMako;
-
-
 

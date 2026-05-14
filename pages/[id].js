@@ -10,6 +10,7 @@ import { nuevoMensaje, tiposAlertas } from '../components/Inicialized/Toast';
 import { EvBiVisita } from "../components/Inicialized/Bitacora";
 import Cargando from '../components/Inicialized/Cargando';
 import { getEmpresa } from '@/components/Inicialized/data/helpersGetDB';
+import { incrementarVisitaEmpresa } from '@/components/Inicialized/data/helpersSetDB';
 import useDataStore from '@/components/Stores/useDataStore'; // ✅ agregado
 import { useRouter } from 'next/router'; // ✅ agregado
 import FloatingButton from '@/components/ui/FloatingButton';
@@ -72,6 +73,7 @@ const Index = ({ tipo, saveIdComercio, codigo, empresa, mensaje, env }) => {
   useEffect(() => {
     if (tipo.length !== 0 && (tipo === 0 || tipo === -1)) {
       EvBiVisita(empresa.codigo);
+      incrementarVisitaEmpresa(empresa.codigo).catch(() => {});
     }
   }, [empresa]);
 

@@ -126,6 +126,9 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
   const estiloMapa = abrirMapa ? styles.mapaAbierto : '';
   const urlLogo = `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/${empresa.url_logo}`;
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+  const latNum = Number(empresa?.lat);
+  const lngNum = Number(empresa?.lng);
+  const hasValidCoordinates = Number.isFinite(latNum) && Number.isFinite(lngNum) && latNum !== 0 && lngNum !== 0;
 
   return (
     <div className={styles.info}>
@@ -162,13 +165,21 @@ const DatosContacto = ({ Perfilempresa, styles }) => {
         </div>
       </div>
 
-      {empresa.lat !== 0 && empresa.lng !== 0 &&
-        <div className={`${styles.mapa} ${estiloMapa}`}>
-          <div className={styles.mapaContainer}>
-            <div className={styles.abrirmapa} onClick={abrirMapaF}>{lblAbrirMapa}</div>
-            <MapaContacto nombreEmpresa={empresa.nombre} lat={empresa.lat} lng={empresa.lng} urlLogo={urlLogo} />
-          </div>
-        </div>}
+      <div className={`${styles.mapa} ${estiloMapa}`}>
+        <div className={styles.mapaContainer}>
+          <div className={styles.abrirmapa} onClick={abrirMapaF}>{lblAbrirMapa}</div>
+          {abrirMapa && (
+            hasValidCoordinates ? (
+              <MapaContacto nombreEmpresa={empresa.nombre} lat={latNum} lng={lngNum} urlLogo={urlLogo} />
+            ) : (
+              <div className={styles.noLocationMapState}>
+                <CiLocationOn className={styles.infoIcon} />
+                <span className={styles.noLocation}>Sin ubicación disponible</span>
+              </div>
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 };
