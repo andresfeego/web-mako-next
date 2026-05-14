@@ -27,7 +27,7 @@ const SlideEmpresa = ({ empresa, slides }) => {
     }, [empresa.codigo])
 
     function Item(item) {
-        var urlFondo = "url(https://www.feegosystem.com/scrAppServer/images/empresas/" + empresa.codigo + "/" + item.url + ".jpg)"
+        var urlFondo = `url(${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/empresas/${empresa.codigo}/${item.url}.jpg)`
 
         return (
             <Element key={"Elem" + item.id} prefixCls="banner-user-elem">
@@ -59,7 +59,7 @@ const SlideEmpresa = ({ empresa, slides }) => {
           console.log('categoria');
 
             if (categoria != '') {
-                var urlFondo = "url(https://www.feegosystem.com/scrAppServer/images/categorias/" + categoria + ".jpg)";
+                var urlFondo = `url(${process.env.NEXT_PUBLIC_FILES_BASE_URL}/images/categorias/${categoria}.jpg)`;
 
                 return (
                     <Element key={"fondo1" + categoria} prefixCls="banner-user-elem">
@@ -104,4 +104,3 @@ const SlideEmpresa = ({ empresa, slides }) => {
 }
 
 export default SlideEmpresa
-
