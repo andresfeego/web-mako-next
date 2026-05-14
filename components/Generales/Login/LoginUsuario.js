@@ -3,7 +3,7 @@ import styles from './MenuUsuario.module.scss';
 import React, { useEffect } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LoginMako from './LoginMako';
-import { EvBiClickButton } from '../../Inicialized/Bitacora';
+import { EvBiClickButton, EvBiLoginFailed, EvBiLoginStarted, EvBiLoginSucceeded } from '../../Inicialized/Bitacora';
 import { authProvider } from '../../../services/firebase';
 import { FaGoogle } from 'react-icons/fa';
 import { nuevoUsuario } from '@/components/Inicialized/data/helpersSetDB';
@@ -27,7 +27,13 @@ const LoginUsuario = ({setOpen = () => {}}) => {
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [showArrow, setShowArrow] = React.useState(true);
 
+  const extractUserId = (resp) => {
+    if (!resp) return null;
+    return resp.userId || resp.idUsuario || resp.id || resp?.data?.userId || resp?.data?.id || null;
+  };
+
   async function handleAuth(provider) {
+    EvBiLoginStarted(provider)
 
     try {
 
@@ -39,14 +45,16 @@ const LoginUsuario = ({setOpen = () => {}}) => {
               const resp = await loginSocial(user._tokenResponse.email);
 
               if (resp?.error) {
+                EvBiLoginFailed(provider, resp?.message || `error_${resp?.error || 'social_login'}`)
                 nuevoMensaje(tiposAlertas.error, resp.message);
                 return;
               }
               switch (provider) {
                 case 'google':
                   const dataUserGoogle = user._tokenResponse
+                  const idUsuario = extractUserId(resp)
                   const usuarioGoogle = {
-                    id: resp.userId,
+                    id: idUsuario,
                     uiPermisos: resp.uiPermisos,
                   }
                   setShowSuccess(true); // ✅ mostrar animación
@@ -56,6 +64,7 @@ const LoginUsuario = ({setOpen = () => {}}) => {
                     setUsuario(usuarioGoogle.id);
                     setUiPermisos(usuarioGoogle.uiPermisos)
                   }, 1500);
+                  EvBiLoginSucceeded(provider, idUsuario)
                   
                   break;
 
@@ -90,11 +99,13 @@ const LoginUsuario = ({setOpen = () => {}}) => {
                   nuevoUsuario(dataUserGoogle.firstName, dataUserGoogle.lastName, dataUserGoogle.email, '', 0, user.user.uid, '').then( async(result) => {
                     const resp = await loginSocial(dataUserGoogle.email);
                     if (resp?.error) {
+                      EvBiLoginFailed(provider, resp?.message || `error_${resp?.error || 'social_login'}`)
                       nuevoMensaje(tiposAlertas.error, resp.message);
                       return;
                     }
+                    const idUsuario = extractUserId(resp)
                     const usuarioGoogle = {
-                      id: resp.userId,
+                      id: idUsuario,
                       uiPermisos: resp.uiPermisos,
                     }
                     setShowSuccess(true); // ✅ mostrar animación
@@ -104,6 +115,7 @@ const LoginUsuario = ({setOpen = () => {}}) => {
                       setUsuario(usuarioGoogle.id);
                       setUiPermisos(usuarioGoogle.uiPermisos)
                     }, 1500);
+                    EvBiLoginSucceeded(provider, idUsuario)
                   })
                   
                   break;
@@ -115,12 +127,13 @@ const LoginUsuario = ({setOpen = () => {}}) => {
                     const resp = await loginSocial(dataUserFacebook.email);
 
                     if (resp?.error) {
+                      EvBiLoginFailed(provider, resp?.message || `error_${resp?.error || 'social_login'}`)
                       nuevoMensaje(tiposAlertas.error, resp.message);
                       return;
                     }
 
                     const usuarioFacebook = {
-                      id: result,
+                      id: extractUserId(resp) || extractUserId(result),
                       nombre: dataUserFacebook.firstName,
                       apellido: dataUserFacebook.lastName,
                       correo: dataUserFacebook.email,
@@ -129,6 +142,7 @@ const LoginUsuario = ({setOpen = () => {}}) => {
                     setUsuario(usuarioFacebook.id)
                     setOpen(false)
                     nuevoMensaje(tiposAlertas.success, 'Inicio de sesión correcto');
+                    EvBiLoginSucceeded(provider, usuarioFacebook.id)
                   })
                   
                   break;
@@ -141,12 +155,14 @@ const LoginUsuario = ({setOpen = () => {}}) => {
           })
        }
       }).catch((err) => {
+        EvBiLoginFailed(provider, err?.message || 'auth_provider_error')
         console.log(err)
       })
 
 
 
     } catch (error) {
+      EvBiLoginFailed(provider, error?.message || 'auth_exception')
       console.warn(error)
     }
 
@@ -249,6 +265,4 @@ const LoginUsuario = ({setOpen = () => {}}) => {
 
 
 export default LoginUsuario;
-
-
 

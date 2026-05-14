@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { EvBiVisita } from "../../../../components/Inicialized/Bitacora";
 import PerfilUno from "../../../../components/Home/Empresas/Perfiles/PerfilUno/PerfilUno";
 import { getEmpresa, getListaMunicipios, getSlides } from '@/components/Inicialized/data/helpersGetDB';
+import { incrementarVisitaEmpresa } from '@/components/Inicialized/data/helpersSetDB';
 import useDataStore from '@/components/Stores/useDataStore';
 
 const Empresa = ({ empresa: empresaSSR, municipios, empresas, slides }) => {
@@ -33,6 +34,7 @@ const Empresa = ({ empresa: empresaSSR, municipios, empresas, slides }) => {
       if (nuevaEmpresa?.[0]) {
         setEmpresa(nuevaEmpresa[0]);
         EvBiVisita(nuevaEmpresa[0].codigo);
+        incrementarVisitaEmpresa(nuevaEmpresa[0].codigo).catch(() => {});
       }
     };
 

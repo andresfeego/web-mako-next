@@ -103,6 +103,17 @@ export async function getFlujosNavegacion() {
   return data;
 }
 
+export async function getBitacoraEventos(limit = 50, offset = 0) {
+  const data = await getDB(`/bitacora/eventos?limit=${limit}&offset=${offset}`, { method: 'GET' });
+  return data;
+}
+
+export async function getBitacoraEventosBySession(sessionId) {
+  const safe = encodeURIComponent(sessionId);
+  const data = await getDB(`/bitacora/eventos/session/${safe}`, { method: 'GET' });
+  return data;
+}
+
 export async function getCategoriasCompletas(cat) {
   const data = await getDB('/categoriasCompletas/' + cat, { method: 'GET' });
   return data;

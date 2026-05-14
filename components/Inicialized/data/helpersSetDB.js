@@ -1,4 +1,5 @@
 import { setDB } from './SetDb';
+import { getOrCreateTelemetrySessionId } from '@/components/Inicialized/TelemetrySession';
 
 
 export async function crearEmpresaBasica(data) {
@@ -19,10 +20,23 @@ export async function nuevoUsuario(nombre, apellido, correo, pass, genero, tkgoo
   return response;
 }
 
-export async function saveBit(data) {
-  console.log(data);
-  const response = await setDB('/bitacora/nuevoEvento', data);
+export async function trackEvent(data) {
+  const payload = {
+    ...data,
+    session_id: data?.session_id || getOrCreateTelemetrySessionId(),
+  };
+  const response = await setDB('/bitacora/trackEvent', payload);
   return response;
+}
+
+export async function incrementarVisitaEmpresa(codigoEmpresa, options = {}) {
+  const codigo = String(codigoEmpresa || '').trim();
+  if (!codigo) return null;
+
+  return await setDB(`/empresas/${encodeURIComponent(codigo)}/incrementarVisita`, {
+    method: 'POST',
+    body: {},
+  });
 }
 
 export async function logoutUsuario() {
