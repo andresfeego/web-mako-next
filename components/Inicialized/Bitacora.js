@@ -1,118 +1,161 @@
-import request from "superagent"
-import {generaCodigo} from './GlobalFunctions'
-import { saveBit } from "@/components/Inicialized/data/helpersSetDB";
+import { trackEvent } from '@/components/Inicialized/data/helpersSetDB'
+import { EVENT_CATALOG, EVENT_SCHEMA_VERSION } from './EventCatalog'
+import { getOrCreateTelemetrySessionId } from './TelemetrySession'
+
+function generateSessionId() {
+  if (process.env.DEV_ENV) return 'SuperAdmin'
+  return getOrCreateTelemetrySessionId()
+}
+
+function getPlatform() {
+  if (typeof window === 'undefined') return 'web_desktop'
+  return window.innerWidth <= 768 ? 'web_mobile' : 'web_desktop'
+}
+
+function parseBrowser() {
+  const ua = navigator.userAgent
+  let match = ua.match(/(edg|edge|chrome|safari|firefox|opr)\/?\s*(\d+)/i)
+  if (!match) return { name: 'unknown', version: '' }
+  let name = match[1].toLowerCase()
+  if (name === 'opr') name = 'opera'
+  if (name === 'edg') name = 'edge'
+  return { name, version: match[2] }
+}
+
+function detectOS() {
+  const platform = navigator.platform
+  if (platform.includes('Win')) return 'Windows'
+  if (platform.includes('Mac')) return 'macOS'
+  if (platform.includes('Linux')) return 'Linux'
+  if (platform.includes('iPhone')) return 'iOS'
+  if (platform.includes('Android')) return 'Android'
+  return 'Unknown'
+}
+
+function buildBaseEvent({ eventName, eventCategory, eventAction, eventLabel, properties }) {
+  const browser = parseBrowser()
+  const isProd = process.env.NODE_ENV === 'production'
+
+  return {
+    event_name: eventName,
+    event_category: eventCategory,
+    event_action: eventAction,
+    event_label: eventLabel ?? null,
+    event_value: null,
+    occurred_at: new Date().toISOString(),
+    source_channel: 'web',
+    platform: getPlatform(),
+    app_version: null,
+    web_build: process.env.NEXT_PUBLIC_BUILD_ID || null,
+    session_id: generateSessionId(),
+    user_id: null,
+    is_authenticated: false,
+    request_id: `web-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+    page_url: window.location?.href || null,
+    referrer_url: document.referrer || null,
+    screen_name: null,
+    device_model: null,
+    os_name: detectOS(),
+    os_version: null,
+    browser_name: browser.name,
+    browser_version: browser.version,
+    locale: navigator.language || null,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || null,
+    country_code: 'COL',
+    city: null,
+    ip_mode: isProd ? 'hashed' : 'raw',
+    ip_value: null,
+    user_agent_raw: isProd ? null : navigator.userAgent,
+    user_agent_hash: null,
+    properties: properties || {},
+    schema_version: EVENT_SCHEMA_VERSION,
+  }
+}
 
 export const EvBiClickButton = (flujo, etiqueta) => {
-
-    const data = {
-        tipoAccion: 4,
-        flujo: flujo,
-        etiqueta: etiqueta,
-        hashSession: generateHashSession(),
-        authenticated: false,
-        usuario: 0,
-        dispositivo: 'NA',
-        navegador: 2,
-        plataforma: 2,
-        pais: 'COL'   //cambiar en base de datos => ubicacion()
-    }
-
-     saveBit(data)
+  const def = EVENT_CATALOG.CTA_CLICKED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: flujo || def.default_action,
+    eventLabel: etiqueta,
+    properties: { legacy_tipoAccion: 4, legacy_flujo: flujo, legacy_etiqueta: etiqueta },
+  })
+  trackEvent(event)
 }
 
 export const EvBiVisita = (idComercio) => {
-
-    const data = {
-        tipoAccion: 2,
-        flujo: 'Apertura local',
-        etiqueta: idComercio,
-        hashSession: generateHashSession(),
-        authenticated: false,
-        usuario: 0,
-        dispositivo: 'NA',
-        navegador: 2,
-        plataforma: 2,
-        pais: 'COL'   //cambiar en base de datos => ubicacion()
-    }
-
-     saveBit(data)
+  const def = EVENT_CATALOG.PROFILE_VIEWED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: def.default_action,
+    eventLabel: idComercio,
+    properties: { legacy_tipoAccion: 2, legacy_flujo: def.default_action, legacy_etiqueta: idComercio },
+  })
+  trackEvent(event)
 }
 
 export const EvBiBusqueda = (flujo, busqueda) => {
-console.log('okokokok');
-    const data = {
-        tipoAccion: 1,
-        flujo: flujo,
-        etiqueta: busqueda,
-        hashSession: generateHashSession(),
-        authenticated: false,
-        usuario: 0,
-        dispositivo: 'NA',
-        navegador: 2,
-        plataforma: 2,
-        pais: 'COL'   //cambiar en base de datos => ubicacion()
-    }
-
-     saveBit(data)
+  const def = EVENT_CATALOG.SEARCH_SUBMITTED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: flujo || def.default_action,
+    eventLabel: busqueda,
+    properties: { legacy_tipoAccion: 1, legacy_flujo: flujo, legacy_etiqueta: busqueda },
+  })
+  trackEvent(event)
 }
 
-function generateHashSession(){
-    const DataHashSession = window.sessionStorage.getItem('hashSession');
-    if (DataHashSession) {
-        return DataHashSession
-    } else {
-        const hashSession = process.env.DEV_ENV ? 'SuperAdmin' : generaCodigo(60, true)
-        window.sessionStorage.setItem('hashSession', hashSession)
-        return hashSession
-
-    }
-
+export const EvBiLoginStarted = (provider = 'mako_form') => {
+  const def = EVENT_CATALOG.LOGIN_STARTED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: provider || def.default_action,
+    eventLabel: null,
+    properties: { auth_provider: provider },
+  })
+  trackEvent(event)
 }
 
-
-function getBrowserType() {
-
-    var ua = navigator.userAgent, tem,
-        M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if (/trident/i.test(M[1])) {
-        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return 'IE ' + (tem[1] || '');
-    }
-    if (M[1] === 'Chrome') {
-        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
-        if (tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-    }
-    M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-    if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
-    return M.join(' ');
+export const EvBiLoginSucceeded = (provider = 'mako_form', userId = null) => {
+  const def = EVENT_CATALOG.LOGIN_SUCCEEDED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: provider || def.default_action,
+    eventLabel: null,
+    properties: { auth_provider: provider },
+  })
+  event.user_id = Number.isFinite(Number(userId)) ? Number(userId) : null
+  event.is_authenticated = true
+  trackEvent(event)
 }
 
-
-function detectOS() {
-    const platform = navigator.platform;
-    if (platform.indexOf('Win') !== -1) return 'Windows';
-    if (platform.indexOf('Mac') !== -1) return 'Mac OS';
-    if (platform.indexOf('Linux') !== -1) return 'Linux';
-    if (platform.indexOf('iPhone') !== -1) return 'iOS';
-    if (platform.indexOf('Android') !== -1) return 'Android';
-    if (platform.indexOf('iPad') !== -1) return 'iPad';
-    return 'Unknown';
+export const EvBiLoginFailed = (provider = 'mako_form', reason = 'unknown') => {
+  const def = EVENT_CATALOG.LOGIN_FAILED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: provider || def.default_action,
+    eventLabel: String(reason || 'unknown').slice(0, 120),
+    properties: { auth_provider: provider, auth_error: reason || 'unknown' },
+  })
+  trackEvent(event)
 }
-function ubicacion() {
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error);
-    } else {
-        alert("Geolocation not supported");
-    }
-
-    function success(position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        return (latitude + ' ' + longitude);
-    }
-
-    function error() {
-        alert("Unable to retrieve your location");
-    }
+export const EvBiLogoutSucceeded = (provider = 'app', userId = null) => {
+  const def = EVENT_CATALOG.LOGOUT_SUCCEEDED
+  const event = buildBaseEvent({
+    eventName: def.event_name,
+    eventCategory: def.event_category,
+    eventAction: provider || def.default_action,
+    eventLabel: null,
+    properties: { auth_provider: provider },
+  })
+  event.user_id = Number.isFinite(Number(userId)) ? Number(userId) : null
+  event.is_authenticated = false
+  trackEvent(event)
 }
